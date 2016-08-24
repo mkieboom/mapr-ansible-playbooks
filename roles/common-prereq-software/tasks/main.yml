@@ -30,16 +30,13 @@
     failed_when: "command_result|failed and 'could not find' not in command_result.msg"
     when: ansible_lsb.major_release|int == 7
 
-#  - name: Install EPEL
-#    yum: name=epel-release state=installed
-
   - name: Install EPEL on CentOS v6.x
     yum: name=http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=installed
-    when: ansible_distribution == 'CentOS' and ansible_lsb.major_release|int == 6
+    when: ansible_lsb.major_release|int == 6
 
   - name: Install EPEL on CentOS v7.x
     yum: name=http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm state=installed
-    when: ansible_distribution == 'CentOS' and ansible_lsb.major_release|int == 7
+    when: ansible_lsb.major_release|int == 7
 
   - name: Install NTP
     yum: name=ntp state=present
