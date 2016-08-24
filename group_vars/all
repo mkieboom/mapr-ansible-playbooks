@@ -1,0 +1,31 @@
+mapr_release_url:    http://package.mapr.com/releases/{{mapr_version}}
+mapr_mep_url:        http://package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
+mapr_ecosystem_url:  http://package.mapr.com/releases/ecosystem-5.x
+mapr_gpg_url:        http://package.mapr.com/releases/pub/maprgpg.key
+
+#mapr_release_url:   http://192.168.8.1/package.mapr.com/releases/{{mapr_version}}
+#mapr_mep_url:       http://192.168.8.1/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
+#mapr_ecosystem_url: http://192.168.8.1/package.mapr.com/releases/ecosystem-5.x
+
+# Version information
+mapr_version: v5.2.0
+mapr_mep_version: 1.0.0
+
+# Eco-sysem version information
+hadoop_version: 2.7.0
+spark_version: 1.6.1
+hbase_version: 1.1.1
+oozie_version: 4.2.0
+hive_version: 1.2
+
+cluster_name: demo.mapr.com
+
+disks: /dev/sdb
+#disks: /dev/xvdb,/dev/xvdc,/dev/xvdd
+
+# MapR User & Group details
+mapr_group: mapr
+mapr_group_gid: 5000
+mapr_user: mapr
+mapr_user_uid: 5000
+mapr_passwd: $6$GzlcP5ei$E6P9QM40O6KJFLZ3wMcg3jzQBNxGXrf8yc77CbCmf0KtFSxK0mpCParhc3WVNEAm4fHKPAqyRV9rsiF6DAFlW0

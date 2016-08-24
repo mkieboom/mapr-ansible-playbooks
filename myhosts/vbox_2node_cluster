@@ -1,0 +1,123 @@
+# Cluster Node definition
+[managementnode]
+192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
+[controlnodes]
+192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
+[datanodes]
+192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
+192.168.168.2 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
+
+# Core
+[mapr-core:children]
+managementnode
+controlnodes
+datanodes
+
+# Zookeeper
+[mapr-zookeeper:children]
+controlnodes
+
+# Container Location Database
+[mapr-cldb:children]
+controlnodes
+
+# MapR Control System
+[mapr-mcs:children]
+controlnodes
+
+# MapR Fileserver
+[mapr-fileserver:children]
+managementnode
+controlnodes
+datanodes
+
+# NFS
+[mapr-nfs:children]
+managementnode
+controlnodes
+datanodes
+
+# Apache Drill
+[mapr-drill:children]
+#controlnodes
+#datanodes
+
+
+###############################################################
+
+
+# Gateway for Streams and MapR-DB
+[mapr-gateway:children]
+managementnode
+
+# YARN resource manager
+[mapr-resourcemanager:children]
+managementnode
+
+# YARN Node Manager
+[mapr-nodemanager:children]
+controlnodes
+datanodes
+
+# Job History Server, IMPORTANT: only one
+[mapr-historyserver:children]
+
+# MySQL, required for Hive MetaStore and Oozie, IMPORTANT: only one
+[ext-mysql:children]
+
+# Spark on YARN
+[mapr-spark-yarn:children]
+
+# Spark HistoryServer
+[mapr-spark-historyserver:children]
+
+# Flume
+[mapr-flume:children]
+
+# Hcontrolnodes CLI
+[mapr-hcontrolnodes-cli:children]
+
+# Hcontrolnodes REST and Thrift
+[mapr-hcontrolnodes-thrift-rest:children]
+
+# Hive CLI
+[mapr-hive-cli:children]
+
+# Hive Meta Store
+[mapr-hive-metastore:children]
+
+# Hive Server2
+[mapr-hive-server2:children]
+
+# Hive HCatalog
+[mapr-hive-hcatalog:children]
+
+# Hive WebHCat
+[mapr-hive-webhcat:children]
+
+# HttpFS
+[mapr-httpfs:children]
+
+# Hue, not yet supported
+[mapr-hue:children]
+
+# Mahout
+[mapr-mahout:children]
+
+# Sqoop2 Server
+[mapr-sqoop2-server:children]
+
+# Sqoop2 Client
+[mapr-sqoop2-client:children]
+
+# Pig
+[mapr-pig:children]
+
+# Oozie
+[mapr-oozie:children]
+
+# HttpFS
+[mapr-httpfs:children]

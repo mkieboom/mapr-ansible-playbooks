@@ -1,0 +1,9 @@
+---
+# Install Open JDK
+
+  - name: Install Java 1.8
+    yum: name={{item}} state=present
+    with_items:
+      - java-1.8.0-openjdk
+      - java-1.8.0-openjdk-devel
+

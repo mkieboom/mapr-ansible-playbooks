@@ -1,0 +1,4 @@
+---
+# Add the MapR Package key (GPG)
+  - name: Add MapR Package Key (GPG)
+    rpm_key: state=present key="{{ mapr_gpg_url }}"

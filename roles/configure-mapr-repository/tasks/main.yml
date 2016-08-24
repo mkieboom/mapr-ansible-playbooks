@@ -1,0 +1,33 @@
+---
+# MapR Repository
+- name: Create MapR Releases Repository for RedHat
+  yum_repository:
+    name: maprtech
+    description: MapR Technologies
+    file: maprtech
+    baseurl: "{{ mapr_release_url }}/redhat/"
+    gpgcheck: no
+    gpgkey: "{{ mapr_gpg_url }}"
+  when: ansible_os_family == 'RedHat'
+
+# MapR Ecosystem Package Repository (MapR version <= 5.1.0)
+- name: Create MapR Ecosystem Repository for RedHat
+  yum_repository:
+    name: maprecosystem
+    description: MapR Technologies
+    file: maprecosystem
+    baseurl: "{{ mapr_ecosystem_url }}/redhat/"
+    gpgcheck: no
+    gpgkey: "{{ mapr_gpg_url }}"
+  when: ansible_os_family == 'RedHat' and ((mapr_version == "v5.0.0") or (mapr_version == 'v5.1.0'))
+
+# MapR Ecosystem Package Repository (MapR version >= 5.2.0)
+- name: Create MapR Ecosystem Repository for RedHat
+  yum_repository:
+    name: maprecosystem
+    description: MapR Technologies
+    file: maprecosystem
+    baseurl: "{{ mapr_mep_url }}/redhat/"
+    gpgcheck: no
+    gpgkey: "{{ mapr_gpg_url }}"
+  when: ansible_os_family == 'RedHat' and ((not mapr_version == "v5.0.0") and (not mapr_version == 'v5.1.0'))
