@@ -58,11 +58,10 @@
   hosts: mapr-resourcemanager
   roles:
     - mapr-resourcemanager
-- name: YARN Node Manager
-  hosts: mapr-datanode
+- name: Install YARN Node Manager(s)
+  hosts: mapr-nodemanager
   roles:
     - mapr-nodemanager
-#    - mapr-mapreduce2
 - name: Install Spark on YARN
   hosts: mapr-spark-yarn
   roles:
