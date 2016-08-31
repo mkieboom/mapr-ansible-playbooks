@@ -1,14 +1,14 @@
 # Cluster Node definition
-[managementnode]
-10.10.10.179 ansible_user=root ansible_become=yes ansible_become_method=sudo
+#[managementnode]
+#10.10.10.179 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
-[controlnodes]
-10.10.10.179 ansible_user=root ansible_become=yes ansible_become_method=sudo
+#[controlnodes]
+#10.10.10.179 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
-[datanodes]
-10.10.10.179 ansible_user=root ansible_become=yes ansible_become_method=sudo
-10.10.10.180 ansible_user=root ansible_become=yes ansible_become_method=sudo
-10.10.10.181 ansible_user=root ansible_become=yes ansible_become_method=sudo
+#[datanodes]
+#10.10.10.179 ansible_user=root ansible_become=yes ansible_become_method=sudo
+#10.10.10.180 ansible_user=root ansible_become=yes ansible_become_method=sudo
+#10.10.10.181 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 
 # Core
@@ -71,9 +71,12 @@ datanodes
 
 # Spark on YARN
 [mapr-spark-yarn:children]
+controlnodes
+datanodes
 
 # Spark HistoryServer
 [mapr-spark-historyserver:children]
+managementnode
 
 # Flume
 [mapr-flume:children]
