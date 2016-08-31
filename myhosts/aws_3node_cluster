@@ -2,10 +2,10 @@
 [managementnode]
 10.10.10.34 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
-#[controlnodes]
-#10.10.10.34 ansible_user=root ansible_become=yes ansible_become_method=sudo
+[controlnodes]
+10.10.10.34 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
-#[datanodes]
+[datanodes]
 10.10.10.34 ansible_user=root ansible_become=yes ansible_become_method=sudo
 10.10.10.35 ansible_user=root ansible_become=yes ansible_become_method=sudo
 10.10.10.36 ansible_user=root ansible_become=yes ansible_become_method=sudo
