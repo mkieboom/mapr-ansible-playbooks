@@ -34,25 +34,8 @@
   roles:
     - mapr-nfs
 
-# Configure and Start Zookeeper & Warden
-- name: Configure and start
-  hosts: all
-  roles:
-    - mapr-configure-unsecure
-- name: Restarting mapr-zookeeper
-  hosts: mapr-zookeeper
-  roles:
-    - mapr-configure-zookeeper-restart
-- name: Restarting mapr-warden
-  hosts: all
-  roles:
-    - mapr-configure-warden-restart
 
 
-# - name: Install Drill
-#   hosts: mapr-drill
-#   roles:
-#     - mapr-drill
 
 
 # - name: Install Elasticsearch
@@ -60,28 +43,40 @@
 #   roles:
 #     - mapr-elasticsearch
 
-
 # - name: Install Kibana
 #   hosts: mapr-kibana
 #   roles:
 #     - mapr-kibana
 
 
+# Install MapR Eco-system components
+- name: Install Drill
+  hosts: mapr-drill
+  roles:
+    - mapr-drill
+- name: Install YARN Resource Manager
+  hosts: mapr-resourcemanager
+  roles:
+    - mapr-resourcemanager
+- name: YARN Node Manager
+  hosts: mapr-datanode
+  roles:
+    - mapr-nodemanager
+#    - mapr-mapreduce2
+- name: Install Spark on YARN
+  hosts: mapr-spark-yarn
+  roles:
+    - mapr-spark-yarn
+- name: Install Spark History Server
+  hosts: mapr-spark-historyserver
+  roles:
+    - mapr-spark-historyserver
 
 
 # - name: Install Gateway
 #   hosts: mapr-gateway
 #   roles:
 #     - mapr-gateway
-# - name: MapReduce2, YARN Node Manager
-#   hosts: mapr-datanode
-#   roles:
-#     - mapr-mapreduce2
-#     - mapr-nodemanager
-# - name: Install YARN Resource Manager
-#   hosts: mapr-resourcemanager
-#   roles:
-#     - mapr-resourcemanager
 # - name: Install MySQL
 #   hosts: ext-mysql
 #   roles:
@@ -146,19 +141,23 @@
 #   hosts: mapr-httpfs
 #   roles:
 #     - mapr-httpfs
-# - name: Install Spark on YARN
-#   hosts: mapr-spark-yarn
-#   roles:
-#     - mapr-spark-yarn
-# - name: Install Spark History Server
-#   hosts: mapr-spark-historyserver
-#   roles:
-#     - mapr-spark-historyserver
-# - name: Restarting mapr-warden
-#   hosts: all
-#   roles:
-#     - mapr-configure-warden-restart
+
+# Install 3rd party components
 # - name: Install Zeppelin
 #   hosts: ext-zeppelin
 #   roles:
 #     - ext-zeppelin
+
+# Configure and Start Zookeeper & Warden
+- name: Configure and start
+  hosts: all
+  roles:
+    - mapr-configure-unsecure
+- name: Restarting mapr-zookeeper
+  hosts: mapr-zookeeper
+  roles:
+    - mapr-configure-zookeeper-restart
+- name: Restarting mapr-warden
+  hosts: all
+  roles:
+    - mapr-configure-warden-restart
