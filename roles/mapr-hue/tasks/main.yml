@@ -1,0 +1,9 @@
+---
+# Install Hue
+- name: Install mapr-hue
+  yum: name={{ item }} state=present
+  with_items:
+  - mapr-hue-base
+  - mapr-hue
+  - mapr-hue-livy
+  when: ansible_os_family == 'RedHat'

@@ -1,0 +1,39 @@
+---
+# Redhat / CentOS
+# Install HBase REST
+- name: Install mapr-hbase-rest (Redhat / CentOS)
+  yum: name=mapr-hbase-rest state=present
+  when: ansible_os_family == 'RedHat'
+# Install HBase Thrift
+- name: Install mapr-hbasethrift (Redhat / CentOS)
+  yum: name=mapr-hbasethrift state=present
+  when: ansible_os_family == 'RedHat'
+# Debian / Ubuntu
+# Install HBase REST
+- name: Install mapr-hbase-rest (Debian / Ubuntu)
+  apt: name=mapr-hbase-rest state=present allow_unauthenticated=true
+  when: ansible_os_family == 'Debian'
+# Install HBase Thrift
+- name: Install mapr-hbasethrift (Debian / Ubuntu)
+  apt: name=mapr-hbasethrift state=present allow_unauthenticated=yes
+  when: ansible_os_family == 'Debian'
+# Suse
+# Install HBase REST
+- name: Install mapr-hbase-rest (Suse)
+  zypper: name=mapr-hbase-rest state=present
+  when: ansible_os_family == 'Suse'
+# Install HBase Thrift
+- name: Install mapr-hbasethrift (Suse)
+  zypper: name=mapr-hbasethrift state=present
+  when: ansible_os_family == 'Suse'
+
+# Other actions
+- name: Get Zookeeper FQDNs
+  set_fact: zoo_item={{ hostvars[item]['ansible_fqdn'] }}
+  with_items:
+    - "{{ groups['mapr-zookeeper'] }}"
+  register: zookeeper_hosts
+- name: Make Zookeeper String
+  set_fact: zookeeper_string={{ zookeeper_hosts.results | map(attribute='ansible_facts.zoo_item') | list | join(',')}}
+- name: Configure hbase-site.xml
+  template: src=hbase-site.unsecure.xml dest=/opt/mapr/hbase/hbase-{{ hbase_version }}/conf/hbase-site.xml
