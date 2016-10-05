@@ -3,11 +3,12 @@ mapr_version: v5.2.0
 mapr_mep_version: 1.0.0
 
 # Eco-sysem version information
-hadoop_version: 2.7.0
-spark_version: 1.6.1
-hbase_version: 1.1.1
-oozie_version: 4.2.0
-hive_version: 1.2
+# Not specifying versions will per default use the latest eco-system components
+# hadoop_version: 2.7.0
+# spark_version: 1.6.1
+# hbase_version: 1.1.1
+# oozie_version: 4.2.0
+# hive_version: 1.2
 
 # MapR Cluster Name
 cluster_name: demo.mapr.com
