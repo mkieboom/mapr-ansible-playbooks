@@ -1,6 +1,6 @@
 # Version information
 mapr_version: v5.2.0
-mapr_mep_version: 1.0.0
+mapr_mep_version: 1.1.0
 
 # Eco-sysem version information
 # Not specifying versions will per default use the latest eco-system components
