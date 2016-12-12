@@ -1,6 +1,6 @@
 # Version information
 mapr_version: v5.2.0
-mapr_mep_version: 1.1.0
+mapr_mep_version: 2.0.0
 
 # Eco-sysem version information
 # Not specifying versions will per default use the latest eco-system components
@@ -23,9 +23,9 @@ mapr_mep_url:        http://package.mapr.com/releases/MEP/MEP-{{mapr_mep_version
 mapr_ecosystem_url:  http://package.mapr.com/releases/ecosystem-5.x
 mapr_gpg_url:        http://package.mapr.com/releases/pub/maprgpg.key
 
-#mapr_release_url:   http://192.168.8.1/package.mapr.com/releases/{{mapr_version}}
-#mapr_mep_url:       http://192.168.8.1/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
-#mapr_ecosystem_url: http://192.168.8.1/package.mapr.com/releases/ecosystem-5.x
+#mapr_release_url:   http://192.168.2.1/package.mapr.com/releases/{{mapr_version}}
+#mapr_mep_url:       http://192.168.2.1/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
+#mapr_ecosystem_url: http://192.168.2.1/package.mapr.com/releases/ecosystem-5.x
 
 
 # MapR User & Group details
