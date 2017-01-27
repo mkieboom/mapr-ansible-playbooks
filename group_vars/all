@@ -1,5 +1,5 @@
 # Version information
-mapr_version: v5.2.0
+mapr_version: 5.2.0
 mapr_mep_version: 2.0.0
 mapr_patch_ebf_version: 39122.GA-40967
 
@@ -19,14 +19,14 @@ disks: /dev/sdb
 #disks: /dev/xvdb,/dev/xvdc,/dev/xvdd
 
 # MapR Repository
-mapr_release_url:    http://package.mapr.com/releases/{{mapr_version}}
+mapr_release_url:    http://package.mapr.com/releases/v{{mapr_version}}
 mapr_mep_url:        http://package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
 mapr_ecosystem_url:  http://package.mapr.com/releases/ecosystem-5.x
 mapr_gpg_url:        http://package.mapr.com/releases/pub/maprgpg.key
 
-mapr_patch_ebf_url:  https://package.mapr.com/patches/releases/{{mapr_version}}/redhat/mapr-patch-{{mapr_version}}.{{mapr_patch_ebf_version}}.x86_64.rpm
+mapr_patch_ebf_url:  http://package.mapr.com/patches/releases/{{mapr_version}}/redhat/mapr-patch-{{mapr_version}}.{{mapr_patch_ebf_version}}.x86_64.rpm
 
-#mapr_release_url:   http://192.168.2.1/package.mapr.com/releases/{{mapr_version}}
+#mapr_release_url:   http://192.168.2.1/package.mapr.com/releases/v{{mapr_version}}
 #mapr_mep_url:       http://192.168.2.1/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
 #mapr_ecosystem_url: http://192.168.2.1/package.mapr.com/releases/ecosystem-5.x
 
