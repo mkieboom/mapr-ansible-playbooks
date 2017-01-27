@@ -1,0 +1,17 @@
+---
+# Deploy latest MapR EBF Patch from package.mapr.com/patches/
+
+- name: Stop MapR Warden Service
+  service: name=mapr-warden state=stopped enabled=yes
+
+- name: Stop MapR Zookeeper Service
+  service: name=mapr-zookeeper state=stopped enabled=yes
+
+- name: Install MapR EBF Patch
+  yum: name=mapr_patch_ebf_url state=installed
+
+- name: Start MapR Zookeeper Service
+  service: name=mapr-zookeeper state=restarted enabled=yes
+
+- name: Start MapR Warden Service
+  service: name=mapr-warden state=restarted enabled=yes

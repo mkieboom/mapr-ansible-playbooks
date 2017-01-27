@@ -176,3 +176,10 @@
   hosts: all
   roles:
     - mapr-configure-warden-restart
+
+# Install latest MapR Patch EBF
+- name: Install latest MapR Patch EBF
+  hosts: all
+  roles:
+    - mapr-patch-ebf
+
