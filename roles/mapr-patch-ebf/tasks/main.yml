@@ -8,7 +8,7 @@
   service: name=mapr-zookeeper state=stopped enabled=yes
 
 - name: Install MapR EBF Patch
-  yum: name=mapr_patch_ebf_url state=installed
+  yum: name={{mapr_patch_ebf_url}} state=installed
 
 - name: Start MapR Zookeeper Service
   service: name=mapr-zookeeper state=restarted enabled=yes
