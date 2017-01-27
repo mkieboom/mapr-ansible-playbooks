@@ -65,6 +65,20 @@
 #     - mapr-collectd
 
 
+# Configure and Start Zookeeper & Warden
+- name: Configure and start
+  hosts: all
+  roles:
+    - mapr-configure-unsecure
+- name: Restarting mapr-zookeeper
+  hosts: mapr-zookeeper
+  roles:
+    - mapr-configure-zookeeper-restart
+- name: Restarting mapr-warden
+  hosts: all
+  roles:
+    - mapr-configure-warden-restart
+
 ## Install MapR Eco-system components
 - name: Install Drill
   hosts: mapr-drill
@@ -86,7 +100,9 @@
   hosts: mapr-spark-historyserver
   roles:
     - mapr-spark-historyserver
-
+- name: Run configure.sh -R for Eco-system component configuration
+  hosts: mapr-spark-historyserver
+  roles: mapr-configure-components
 
 # - name: Install Gateway
 #   hosts: mapr-gateway
@@ -163,19 +179,6 @@
 #   roles:
 #     - ext-zeppelin
 
-# Configure and Start Zookeeper & Warden
-- name: Configure and start
-  hosts: all
-  roles:
-    - mapr-configure-unsecure
-- name: Restarting mapr-zookeeper
-  hosts: mapr-zookeeper
-  roles:
-    - mapr-configure-zookeeper-restart
-- name: Restarting mapr-warden
-  hosts: all
-  roles:
-    - mapr-configure-warden-restart
 
 # Install latest MapR Patch EBF
 - name: Install latest MapR Patch EBF

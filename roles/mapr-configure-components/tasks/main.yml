@@ -1,0 +1,7 @@
+---
+# Configure Eco-system component changes (configure.sh -R)
+
+- name: Configure.sh -R
+  shell: /opt/mapr/server/configure.sh -R
+
+
