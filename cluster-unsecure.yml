@@ -101,7 +101,7 @@
   roles:
     - mapr-spark-historyserver
 - name: Run configure.sh -R for Eco-system component configuration
-  hosts: mapr-spark-historyserver
+  hosts: all
   roles:
     - mapr-configure-components
 
