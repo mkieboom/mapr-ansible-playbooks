@@ -1,5 +1,5 @@
 ---
 # Deploy latest MapR EBF Patch from package.mapr.com/patches/
 - name: Install MapR EBF Patch
-  yum: name=mapr_patch state=installed
+  yum: name=mapr-patch state=installed
   when: ansible_os_family == 'RedHat'
