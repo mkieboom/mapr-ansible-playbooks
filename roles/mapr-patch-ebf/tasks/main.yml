@@ -1,4 +1,15 @@
 ---
+# MapR Patch Repository
+- name: Create MapR Patch Repository for RedHat
+  yum_repository:
+    name: maprpatch
+    description: MapR Technologies
+    file: maprpatch
+    baseurl: "{{ mapr_patch_url }}/redhat/"
+    gpgcheck: no
+    gpgkey: "{{ mapr_gpg_url }}"
+  when: ansible_os_family == 'RedHat'
+
 # Deploy latest MapR EBF Patch from package.mapr.com/patches/
 - name: Install MapR EBF Patch
   yum: name=mapr-patch state=installed
