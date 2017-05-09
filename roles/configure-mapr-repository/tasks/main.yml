@@ -31,14 +31,4 @@
     gpgcheck: no
     gpgkey: "{{ mapr_gpg_url }}"
   when: ansible_os_family == 'RedHat' and ((not mapr_version == "v5.0.0") and (not mapr_version == 'v5.1.0'))
-
-# MapR Patch Repository
-- name: Create MapR Patch Repository for RedHat
-  yum_repository:
-    name: maprpatch
-    description: MapR Technologies
-    file: maprpatch
-    baseurl: "{{ mapr_patch_url }}/redhat/"
-    gpgcheck: no
-    gpgkey: "{{ mapr_gpg_url }}"
-  when: ansible_os_family == 'RedHat'
+  
