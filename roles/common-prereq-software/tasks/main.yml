@@ -11,6 +11,9 @@
   - name: Selinux to permissive now
     command: setenforce permissive
     when: ansible_distribution not in ('Amazon')
+    register: command_result
+    failed_when: "command_result|failed and 'setenforce: SELinux is disabled' in command_result.msg"
+    ignore_errors: yes
 
   - name: Install redhat-lsb-core
     yum: name=redhat-lsb-core state=present
