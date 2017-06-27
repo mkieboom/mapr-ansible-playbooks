@@ -1,0 +1,4 @@
+---
+# Install MapR fluentd
+- name: Install mapr-fluentd
+  package: name=mapr-fluentd state=present

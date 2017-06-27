@@ -1,0 +1,5 @@
+---
+# Install MapR elasticsearch
+
+- name: Install mapr-elasticsearch
+  package: name=mapr-elasticsearch state=present

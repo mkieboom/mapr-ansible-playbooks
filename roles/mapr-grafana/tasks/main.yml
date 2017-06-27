@@ -1,0 +1,4 @@
+---
+# Install MapR grafana
+- name: Install mapr-grafana
+  package: name=mapr-grafana state=present
