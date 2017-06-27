@@ -46,6 +46,33 @@ datanodes
 controlnodes
 datanodes
 
+# CollectD
+[mapr-collectd:children]
+managementnode
+controlnodes
+datanodes
+
+# OpenTSDB
+[mapr-opentsdb:children]
+managementnode
+
+# Grafana
+[mapr-grafana:children]
+managementnode
+
+# FluentD
+[mapr-fluentd:children]
+managementnode
+controlnodes
+datanodes
+
+# ElasticSearch
+[mapr-elasticsearch:children]
+managementnode
+
+# Kibana
+[mapr-kibana:children]
+managementnode
 
 ###############################################################
 
