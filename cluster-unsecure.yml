@@ -75,15 +75,15 @@
   hosts: mapr-spark-historyserver
   roles:
     - mapr-spark-historyserver
+- name: Install Gateway
+  hosts: mapr-gateway
+  roles:
+    - mapr-gateway
 - name: Run configure.sh -R for Eco-system component configuration
   hosts: all
   roles:
     - mapr-configure-components
 
-# - name: Install Gateway
-#   hosts: mapr-gateway
-#   roles:
-#     - mapr-gateway
 # - name: Install MySQL
 #   hosts: ext-mysql
 #   roles:
