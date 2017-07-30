@@ -43,6 +43,7 @@ datanodes
 
 # Apache Drill
 [mapr-drill:children]
+managementnode
 controlnodes
 datanodes
 
