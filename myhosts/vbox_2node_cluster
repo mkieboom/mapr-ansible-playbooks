@@ -42,8 +42,9 @@ datanodes
 
 # Apache Drill
 [mapr-drill:children]
-#controlnodes
-#datanodes
+managementnode
+controlnodes
+datanodes
 
 # CollectD
 [mapr-collectd:children]
