@@ -1,9 +1,9 @@
 # Version information
-mapr_version: 5.2.1
-mapr_mep_version: 3.0.0
+mapr_version: 5.2.2
+mapr_mep_version: 3.0.1
 
-# Latest EBF patch for MapR v5.2.1
-#mapr_patch_ebf_version: <no patch for 5.2.1>
+# Latest EBF patch
+#mapr_patch_ebf_version: <no patch for 5.2.2>
 
 # Latest EBF patch for MapR v5.2.0
 #mapr_patch_ebf_version: 39122.GA-40967
