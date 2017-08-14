@@ -1,7 +1,8 @@
 - name: Apply MapR pre-requisite configuration to all nodes
   hosts: all
   roles:
-    - common-open-jdk
+    - {role: common-open-jdk, when: jdk == 'open-jdk'}
+    - {role: common-oracle-jdk, when: jdk == 'oracle-jdk'}
     - common-prereq-software
 - name: Create MapR Repository and MapR Group and User
   hosts: all

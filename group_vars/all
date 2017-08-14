@@ -8,20 +8,17 @@ mapr_mep_version: 3.0.1
 # Latest EBF patch for MapR v5.2.0
 #mapr_patch_ebf_version: 39122.GA-40967
 
-# Eco-sysem version information
-# Not specifying versions will per default use the latest eco-system components
-# hadoop_version: 2.7.0
-# spark_version: 1.6.1
-# hbase_version: 1.1.1
-# oozie_version: 4.2.0
-# hive_version: 1.2
-
 # MapR Cluster Name
 cluster_name: demo.mapr.com
 
 # MapR Filesystem disks
 disks: /dev/sdb
 #disks: /dev/xvdb,/dev/xvdc,/dev/xvdd
+
+# JDK choose: open-jdk or oracle-jdk
+jdk: open-jdk
+oracle_jdk_folder: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64
+oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.tar.gz
 
 # MapR Repository
 mapr_release_url:    http://package.mapr.com/releases/v{{mapr_version}}
@@ -31,10 +28,6 @@ mapr_ecosystem_url:  http://package.mapr.com/releases/ecosystem-5.x
 mapr_gpg_url:        http://package.mapr.com/releases/pub/maprgpg.key
 
 mapr_patch_ebf_url:  http://package.mapr.com/patches/releases/v{{mapr_version}}/redhat/mapr-patch-{{mapr_version}}.{{mapr_patch_ebf_version}}.x86_64.rpm
-
-#mapr_release_url:   http://192.168.2.1/package.mapr.com/releases/v{{mapr_version}}
-#mapr_mep_url:       http://192.168.2.1/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
-#mapr_ecosystem_url: http://192.168.2.1/package.mapr.com/releases/ecosystem-5.x
 
 
 # MapR User & Group details
