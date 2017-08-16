@@ -6,16 +6,18 @@
        timeout: 900
 
    - name: Extract Streamsets
-     unarchive: src={{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz dest={{streamsets_download_location}} copy=no
+     unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz" dest="{{streamsets_download_location}}"" copy=no
 
    - name: Remove all non-relevant Streamsets origins and destinations
      file: path="{{item}}" state=absent
      with_fileglob:
-     - {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-cdh*.rpm
-     - {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-hdp*.rpm
-     - {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kafka*.rpm
-     - {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kudu*.rpm
-     - {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-cdh*.rpm"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-hdp*.rpm"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
+
+
 
 
 
