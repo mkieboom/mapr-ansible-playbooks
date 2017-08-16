@@ -1,7 +1,7 @@
 ---
 # Install Oracle JDK
-  - name: Downloading Java JDK
+  - name: Downloading Oracle JDK
     get_url: url={{ oracle_jdk_url }} force=yes mode=0440 headers="Cookie:oraclelicense=accept-securebackup-cookie" dest=/tmp/oracle-jdk.rpm timeout=120
 
-  - name: Installing Java JDK
+  - name: Installing Oracle JDK
     yum: name=/tmp/oracle-jdk.rpm state=present
