@@ -19,7 +19,6 @@ disks: /dev/sdb
 jdk: open-jdk
 oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm
 
-
 # MapR Repository
 mapr_release_url:    http://package.mapr.com/releases/v{{mapr_version}}
 mapr_patch_url:      http://package.mapr.com/patches/releases/v{{mapr_version}}
@@ -36,3 +35,10 @@ mapr_group_gid: 5000
 mapr_user: mapr
 mapr_user_uid: 5000
 mapr_passwd: $6$GzlcP5ei$E6P9QM40O6KJFLZ3wMcg3jzQBNxGXrf8yc77CbCmf0KtFSxK0mpCParhc3WVNEAm4fHKPAqyRV9rsiF6DAFlW0
+
+# Streamsets
+streamsets_version: 2.6.0.1
+streamsets_port: 18630
+streamsets_download_location: /tmp/
+streamsets_install_location: /opt/
+streamsets_download_url: https://archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz

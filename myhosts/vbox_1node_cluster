@@ -148,3 +148,11 @@ datanodes
 
 # HttpFS
 [mapr-httpfs:children]
+
+#############################################
+###          Third Party Solutions        ###
+#############################################
+
+# Streamsets
+[thirdparty-streamsets:children]
+managementnode

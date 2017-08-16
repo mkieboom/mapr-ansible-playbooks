@@ -76,7 +76,6 @@ managementnode
 
 ###############################################################
 
-
 # Gateway for Streams and MapR-DB
 [mapr-gateway:children]
 managementnode
@@ -149,3 +148,11 @@ datanodes
 
 # HttpFS
 [mapr-httpfs:children]
+
+#############################################
+###          Third Party Solutions        ###
+#############################################
+
+# Streamsets
+[thirdparty-streamsets:children]
+managementnode
