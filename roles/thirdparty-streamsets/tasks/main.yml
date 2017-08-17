@@ -1,14 +1,34 @@
 ---
-   - name: Download Streamsets
-     get_url:
-       url: "{{streamsets_download_url}}"
-       dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
-       timeout: 900
+   # Set pre-requisites for Streamsets
+   - name: Set hard ulimit for open files to 63536
+     vars:
+       ulimit: '* hard nofile 63536'
+     lineinfile: dest=/etc/security/limits.conf line='{{ulimit}}' state=present
+
+   - name: Set soft ulimit for open files to 63536
+     vars:
+       ulimit: '* soft nofile 63536'
+     lineinfile: dest=/etc/security/limits.conf line='{{ulimit}}' state=present
+
+   - name: Set ulimit in sysctl
+     sysctl:
+      name: fs.file-max
+      value: 63536
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+   # Download and install Streamsets
+#   - name: Download Streamsets (might take some time as it is a 3GB download)
+#     get_url:
+#       url: "{{streamsets_download_url}}"
+#       dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
+#       timeout: 900
 
    - name: Extract Streamsets
-     unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz" dest="{{streamsets_download_location}}"" copy=no
+     unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz" dest="{{streamsets_download_location}}" copy=no
 
-   - name: Remove all non-relevant Streamsets origins and destinations
+   - name: Remove all non-relevant Streamsets origins/destinations
      file: path="{{item}}" state=absent
      with_fileglob:
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-cdh*.rpm"
@@ -17,7 +37,46 @@
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
 
+   - name: Install Streamsets Datacollector and origins/destinations
+     yum: name="{{item}}" state=present
+     with_fileglob:
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/*.rpm"
+
+   - name: Configure Streamsets for use with MapR v{{mapr_version}}
+     shell: "streamsets setup-mapr"
+     args:
+       chdir: /opt/streamsets-datacollector/bin/
+     environment:
+       SDC_HOME: "/opt/streamsets-datacollector/"
+       SDC_DIST: "/opt/streamsets-datacollector/"
+       SDC_CONF: "/etc/sdc/"
+       MAPR_VERSION: "{{mapr_version}}"
+       MAPR_HOME: "/opt/mapr"
+
+   - name: Start the Streamsets Datacollector service (sdc)
+     service:
+       name: sdc
+       state: restarted
+       enabled: yes
+
+
+# TODO:
+# - fix redownloading of oracle JDK
 
 
 
+# # Setup Streamsets
+# export SDC_HOME=/opt/streamsets-datacollector/
+# export SDC_DIST=/opt/streamsets-datacollector/
+# export SDC_CONF=/etc/sdc/
+# export MAPR_VERSION=5.2.0
+# export MAPR_HOME=/opt/mapr
+# export SDC_ALLOW_UNSUPPORTED_JDK=true
+
+# # Configure Streamsets for MapR
+# /opt/streamsets-datacollector/bin/streamsets setup-mapr
+
+# # Launch
+# systemctl enable sdc
+# systemctl start sdc
 
