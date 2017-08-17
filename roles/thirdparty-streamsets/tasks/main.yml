@@ -19,11 +19,11 @@
       reload: yes
 
    # Download and install Streamsets
-#   - name: Download Streamsets (might take some time as it is a 3GB download)
-#     get_url:
-#       url: "{{streamsets_download_url}}"
-#       dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
-#       timeout: 900
+   - name: Download Streamsets (might take some time as it is a 3GB download)
+     get_url:
+       url: "{{streamsets_download_url}}"
+       dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
+       timeout: 900
 
    - name: Extract Streamsets
      unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz" dest="{{streamsets_download_location}}" copy=no
@@ -58,25 +58,3 @@
        name: sdc
        state: restarted
        enabled: yes
-
-
-# TODO:
-# - fix redownloading of oracle JDK
-
-
-
-# # Setup Streamsets
-# export SDC_HOME=/opt/streamsets-datacollector/
-# export SDC_DIST=/opt/streamsets-datacollector/
-# export SDC_CONF=/etc/sdc/
-# export MAPR_VERSION=5.2.0
-# export MAPR_HOME=/opt/mapr
-# export SDC_ALLOW_UNSUPPORTED_JDK=true
-
-# # Configure Streamsets for MapR
-# /opt/streamsets-datacollector/bin/streamsets setup-mapr
-
-# # Launch
-# systemctl enable sdc
-# systemctl start sdc
-
