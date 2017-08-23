@@ -50,14 +50,14 @@
   hosts: all
   roles:
     - mapr-configure-unsecure
-- name: Restarting mapr-zookeeper
-  hosts: mapr-zookeeper
-  roles:
-    - mapr-configure-zookeeper-restart
-- name: Restarting mapr-warden
-  hosts: all
-  roles:
-    - mapr-configure-warden-restart
+# - name: Restarting mapr-zookeeper
+#   hosts: mapr-zookeeper
+#   roles:
+#     - mapr-configure-zookeeper-restart
+# - name: Restarting mapr-warden
+#   hosts: all
+#   roles:
+#     - mapr-configure-warden-restart
 
 ## Install MapR Eco-system components
 - name: Install YARN Resource Manager
