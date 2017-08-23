@@ -1,0 +1,193 @@
+- name: Apply MapR pre-requisite configuration to all nodes
+  hosts: all
+  roles:
+    - {role: common-open-jdk, when: jdk == 'open-jdk' and streamsets != 'yes'}
+    - {role: common-oracle-jdk, when: jdk == 'oracle-jdk' or streamsets == 'yes'}
+    - common-prereq-software
+- name: Create MapR Repository and MapR Group and User
+  hosts: all
+  roles:
+    - configure-mapr-repository
+    - configure-mapr-user
+    - configure-mapr-gpgkey
+- name: Install MapR Core
+  hosts: mapr-core
+  roles:
+    - mapr-core
+- name: Install Zookeeper
+  hosts: mapr-zookeeper
+  roles:
+    - mapr-zookeeper
+- name: Install CLDB
+  hosts: mapr-cldb
+  roles:
+    - mapr-cldb
+- name: Install Filesystem
+  hosts: mapr-fileserver
+  roles:
+    - mapr-fileserver
+- name: Install MCS
+  hosts: managementnode
+  roles:
+    - mapr-mcs
+- name: Install NFS
+  hosts: mapr-nfs
+  roles:
+    - mapr-nfs
+- name: Install Gateway
+  hosts: mapr-gateway
+  roles:
+    - mapr-gateway
+
+# Install latest MapR Patch EBF
+- name: Install latest MapR Patch EBF
+  hosts: all
+  roles:
+    - mapr-patch-ebf
+
+# Configure and Start Zookeeper & Warden
+- name: Configure and start
+  hosts: all
+  roles:
+    - mapr-configure-unsecure
+- name: Restarting mapr-zookeeper
+  hosts: mapr-zookeeper
+  roles:
+    - mapr-configure-zookeeper-restart
+- name: Restarting mapr-warden
+  hosts: all
+  roles:
+    - mapr-configure-warden-restart
+
+## Install MapR Eco-system components
+- name: Install YARN Resource Manager
+  hosts: mapr-resourcemanager
+  roles:
+    - mapr-resourcemanager
+- name: Install YARN Node Manager(s)
+  hosts: mapr-nodemanager
+  roles:
+    - mapr-nodemanager
+- name: Install Spark on YARN
+  hosts: mapr-spark-yarn
+  roles:
+    - mapr-spark-yarn
+- name: Install Spark History Server
+  hosts: mapr-spark-historyserver
+  roles:
+    - mapr-spark-historyserver
+# - name: Install Drill
+#   hosts: mapr-drill
+#   roles:
+#     - mapr-drill
+- name: Run configure.sh -R for Eco-system component configuration
+  hosts: all
+  roles:
+    - mapr-configure-components
+
+
+## Install MapR Monitoring
+
+# - name: Install Elasticsearch
+#   hosts: mapr-elasticsearch
+#   roles:
+#     - mapr-elasticsearch
+# - name: Install Kibana
+#   hosts: mapr-kibana
+#   roles:
+#     - mapr-kibana
+# - name: Install Fluentd
+#   hosts: mapr-fluentd
+#   roles:
+#     - mapr-fluentd
+
+# - name: Install OpenTSDB
+#   hosts: mapr-opentsdb
+#   roles:
+#     - mapr-opentsdb
+# - name: Install Grafana
+#   hosts: mapr-grafana
+#   roles:
+#     - mapr-grafana
+# - name: Install Collectd
+#   hosts: mapr-collectd
+#   roles:
+#     - mapr-collectd
+
+# - name: Install MySQL
+#   hosts: ext-mysql
+#   roles:
+#     - ext-mysql-install
+# - name: Install Flume
+#   hosts: mapr-flume
+#   roles:
+#     - mapr-flume
+# - name: Install HBase CLI
+#   hosts: mapr-hbase-cli
+#   roles:
+#     - mapr-hbase-cli
+# - name: Install HBase REST and Thrift Server
+#   hosts: mapr-hbase-thrift-rest
+#   roles:
+#     - mapr-hbase-thrift-rest
+# - name: Install History Server
+#   hosts: mapr-historyserver
+#   roles:
+#     - mapr-historyserver
+# - name: Install Hive CLI
+#   hosts: mapr-hive-cli
+#   roles:
+#     - mapr-hive-cli
+# - name: Install Hive MetaStore
+#   hosts: mapr-hive-metastore
+#   roles:
+#     - mapr-hive-metastore
+# - name: Install Hive Server 2
+#   hosts: mapr-hive-server2
+#   roles:
+#     - mapr-hive-server2
+# - name: Install Hive WebHCat
+#   hosts: mapr-hive-webhcat
+#   roles:
+#     - mapr-hive-webhcat
+# - name: Install Mahout
+#   hosts: mapr-mahout
+#   roles:
+#     - mapr-mahout
+# - name: Install Pig
+#   hosts: mapr-pig
+#   roles:
+#     - mapr-pig
+# - name: Install Sqoop 2 Server
+#   hosts: mapr-sqoop2-server
+#   roles:
+#     - mapr-sqoop2-server
+# - name: Install Sqoop 2 Client
+#   hosts: mapr-sqoop2-client
+#   roles:
+#     - mapr-sqoop2-client
+# - name: Install Hue
+#   hosts: mapr-hue
+#   roles:
+#     - mapr-hue
+# - name: Install Oozie
+#   hosts: mapr-oozie
+#   roles:
+#     - mapr-oozie
+# - name: Install HttpFS
+#   hosts: mapr-httpfs
+#   roles:
+#     - mapr-httpfs
+
+
+# Install 3rd party components
+
+# - name: Install Zeppelin
+#   hosts: ext-zeppelin
+#   roles:
+#     - ext-zeppelin
+
+- name: Install StreamSets
+  hosts: thirdparty-streamsets
+  roles:
+    - {role: thirdparty-streamsets, when: streamsets == 'yes'}
