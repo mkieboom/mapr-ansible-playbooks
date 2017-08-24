@@ -1,21 +1,17 @@
 ---
    # Set pre-requisites for Streamsets
    - name: Set ulimit for open files to 63536 for current session
-    shell: ulimit -n 63536
+     shell: ulimit -n 63536
 
-   - name: Set hard ulimit for open files to 63536 to survive reboots
-     pam_limits:
-       domain: *
-       limit_type: hard
-       limit_item: nofile
-       value: 63536
+   - name: Set hard ulimit for open files to 63536
+     vars:
+       ulimit: '* hard nofile 63536'
+     lineinfile: dest=/etc/security/limits.conf line='{{ulimit}}' state=present
 
-   - name: Set soft ulimit for open files to 63536 to survive reboots
-     pam_limits:
-       domain: *
-       limit_type: soft
-       limit_item: nofile
-       value: 63536
+   - name: Set soft ulimit for open files to 63536
+     vars:
+       ulimit: '* soft nofile 63536'
+     lineinfile: dest=/etc/security/limits.conf line='{{ulimit}}' state=present
 
    - name: Set ulimit in sysctl
      sysctl:
@@ -36,7 +32,8 @@
      when: streamsets_repo_url != 'empty'
 
    - name: Gather list of Streamsets packages available
-     shell: yum repo-pkgs reponame list
+     yum:
+       list: streamsets
      register: streamsets_packages
      when: streamsets_repo_url != 'empty'
 
