@@ -35,6 +35,10 @@
     when: ansible_lsb.major_release|int == 7
     ignore_errors: yes
 
+  - name: Check if running on Amazon EC2 machines
+    shell: grep -s -o 'ec2' /sys/hypervisor/uuid | wc -l
+    register: amazon_ec2_node
+
   - name: Install EPEL for non Amazon EC2 nodes
     yum: name=epel-release state=present
     when: amazon_ec2_node.stdout == '0'
