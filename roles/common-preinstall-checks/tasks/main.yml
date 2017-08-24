@@ -4,3 +4,13 @@
     mapr_release_url: "{{mapr_release_url_local}}"
     mapr_mep_url: "{{mapr_mep_url_local}}"
   when: ansible_hostname | search("MAPRN0") and inventory_hostname | search ("192.168.168.")
+
+- name: Set proxy when running on AWS in MapR SE VPN
+  shell: |
+    echo "proxy=http://172.16.4.20:3128" >> /etc/yum.conf
+    echo "export HTTP_PROXY=http://172.16.4.20:3128" >> ~/.bash_profile
+    echo "export HTTPS_PROXY=http://172.16.4.20:3128" >> ~/.bash_profile
+    echo "export http_proxy=http://172.16.4.20:3128" >> ~/.bash_profile
+    echo "export https_proxy=http://172.16.4.20:3128" >> ~/.bash_profile
+    source ~/.bash_profile
+  when: inventory_hostname | search ("172.16.4")
