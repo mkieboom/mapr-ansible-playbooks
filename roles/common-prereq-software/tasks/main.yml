@@ -35,21 +35,17 @@
     when: ansible_lsb.major_release|int == 7
     ignore_errors: yes
 
-  - name: Check if running on Amazon EC2 machines
-    shell: test -f /sys/hypervisor/uuid -a `head -c 3 /sys/hypervisor/uuid` == ec2 && echo yes
-    register: amazon_ec2_node
-
   - name: Install EPEL for non Amazon EC2 nodes
     yum: name=epel-release state=present
-    when: amazon_ec2_node.stdout != 'yes'
+    when: amazon_ec2_node.stdout == '0'
 
   - name: Install EPEL on CentOS v6.x on Amazon EC2
     yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm state=installed
-    when: ansible_lsb.major_release|int == 6 and amazon_ec2_node.stdout == 'yes'
+    when: ansible_lsb.major_release|int == 6 and amazon_ec2_node.stdout == '1'
 
   - name: Install EPEL on CentOS v7.x on Amazon EC2
     yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=installed
-    when: ansible_lsb.major_release|int == 7 and amazon_ec2_node.stdout == 'yes'
+    when: ansible_lsb.major_release|int == 7 and amazon_ec2_node.stdout == '1'
 
   - name: Install NTP
     yum: name=ntp state=present
