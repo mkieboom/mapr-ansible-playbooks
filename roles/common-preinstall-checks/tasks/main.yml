@@ -1,8 +1,6 @@
 ---
-# Validate if we're installing on local virtualbox so we can use local repository
-
-  - name: Use local repository when installing on virtualbox on local machine
-    mapr_release_url: {{mapr_release_url_local}}
-    when: inventory_hostname | search("MAPRN0")
-
-    #- debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+- name: Use local repository when installing on local VBox images (MAPRN0#, 192.168.168.#)
+  set_fact:
+    mapr_release_url: "{{mapr_release_url_local}}"
+    mapr_mep_url: "{{mapr_mep_url_local}}"
+  when: ansible_hostname | search("MAPRN0") and inventory_hostname | search ("192.168.168.")

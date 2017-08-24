@@ -40,7 +40,7 @@ mapr_user: mapr
 mapr_user_uid: 5000
 mapr_passwd: $6$GzlcP5ei$E6P9QM40O6KJFLZ3wMcg3jzQBNxGXrf8yc77CbCmf0KtFSxK0mpCParhc3WVNEAm4fHKPAqyRV9rsiF6DAFlW0
 
-# Streamsets (not installing Streamsets by default. To install set streamsets to yes)
+# Streamsets (not installing Streamsets by default. To install set 'streamsets' to yes)
 streamsets: no
 streamsets_version: 2.7.0.0
 streamsets_port: 18630
