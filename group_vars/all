@@ -47,3 +47,6 @@ streamsets_port: 18630
 streamsets_download_location: /tmp/
 streamsets_install_location: /opt/
 streamsets_download_url: https://archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz
+
+streamsets_repo_url: empty
+streamsets_repo_url_local: http://192.168.168.254:1234/archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-all-rpms/

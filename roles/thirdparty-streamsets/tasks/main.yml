@@ -1,14 +1,21 @@
 ---
    # Set pre-requisites for Streamsets
-   - name: Set hard ulimit for open files to 63536
-     vars:
-       ulimit: '* hard nofile 63536'
-     lineinfile: dest=/etc/security/limits.conf line='{{ulimit}}' state=present
+   - name: Set ulimit for open files to 63536 for current session
+    shell: ulimit -n 63536
 
-   - name: Set soft ulimit for open files to 63536
-     vars:
-       ulimit: '* soft nofile 63536'
-     lineinfile: dest=/etc/security/limits.conf line='{{ulimit}}' state=present
+   - name: Set hard ulimit for open files to 63536 to survive reboots
+     pam_limits:
+       domain: *
+       limit_type: hard
+       limit_item: nofile
+       value: 63536
+
+   - name: Set soft ulimit for open files to 63536 to survive reboots
+     pam_limits:
+       domain: *
+       limit_type: soft
+       limit_item: nofile
+       value: 63536
 
    - name: Set ulimit in sysctl
      sysctl:
@@ -18,15 +25,36 @@
       state: present
       reload: yes
 
-   # Download and install Streamsets
+   # Download and install Streamsets from local repo
+   - name: Create Streamsets Repository
+     yum_repository:
+       name: streamsets
+       description: Streamsets
+       file: streamsets
+       baseurl: "{{ streamsets_repo_url }}"
+       gpgcheck: no
+     when: streamsets_repo_url != 'empty'
+
+   - name: Gather list of Streamsets packages available
+     shell: yum repo-pkgs reponame list
+     register: streamsets_packages
+     when: streamsets_repo_url != 'empty'
+
+   - name: Install all Streamsets packages
+     yum: name={{streamsets_packages.stdout_lines|join(',')}} state=latest
+     when: streamsets_repo_url != 'empty'
+
+   # Download and install Streamsets using tarbal
    - name: Download Streamsets (might take some time as it is a 3GB download)
      get_url:
        url: "{{streamsets_download_url}}"
        dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
        timeout: 900
+     when: streamsets_repo_url == 'empty'
 
    - name: Extract Streamsets
      unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz" dest="{{streamsets_download_location}}" copy=no
+     when: streamsets_repo_url == 'empty'
 
    - name: Remove all non-relevant Streamsets origins/destinations
      file: path="{{item}}" state=absent
@@ -36,12 +64,16 @@
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
+     when: streamsets_repo_url == 'empty'
 
    - name: Install Streamsets Datacollector and origins/destinations
      yum: name="{{item}}" state=present
      with_fileglob:
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/*.rpm"
+     when: streamsets_repo_url == 'empty'
 
+
+   # Once installed, configure Streamsets for use with MapR
    - name: Configure Streamsets for use with MapR v{{mapr_version}}
      shell: "streamsets setup-mapr"
      args:
@@ -52,6 +84,7 @@
        SDC_CONF: "/etc/sdc/"
        MAPR_VERSION: "{{mapr_version}}"
        MAPR_HOME: "/opt/mapr"
+       SDC_ALLOW_UNSUPPORTED_JDK: "true"
 
    - name: Start the Streamsets Datacollector service (sdc)
      service:
