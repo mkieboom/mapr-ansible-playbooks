@@ -21,12 +21,16 @@ oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda
 
 # MapR Repository
 mapr_release_url:    http://package.mapr.com/releases/v{{mapr_version}}
-mapr_patch_url:      http://package.mapr.com/patches/releases/v{{mapr_version}}
 mapr_mep_url:        http://package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
+mapr_patch_url:      http://package.mapr.com/patches/releases/v{{mapr_version}}
 mapr_ecosystem_url:  http://package.mapr.com/releases/ecosystem-5.x
 mapr_gpg_url:        http://package.mapr.com/releases/pub/maprgpg.key
 
 mapr_patch_ebf_url:  http://package.mapr.com/patches/releases/v{{mapr_version}}/redhat/mapr-patch-{{mapr_version}}.{{mapr_patch_ebf_version}}.x86_64.rpm
+
+# Local MapR Repository
+mapr_release_url_local:    http://192.168.168.254:1234/package.mapr.com/releases/v{{mapr_version}}
+mapr_mep_url_local:        http://192.168.168.254:1234/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
 
 
 # MapR User & Group details
