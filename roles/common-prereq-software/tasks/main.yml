@@ -35,16 +35,16 @@
     when: ansible_lsb.major_release|int == 7
     ignore_errors: yes
 
-#  - name: Install EPEL
-#    yum: name=epel-release state=present
+  - name: Install EPEL
+    yum: name=epel-release state=present
 
-  - name: Install EPEL on CentOS v6.x
-    yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm state=installed
-    when: ansible_lsb.major_release|int == 6
+#  - name: Install EPEL on CentOS v6.x
+#    yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm state=installed
+#    when: ansible_lsb.major_release|int == 6
 
-  - name: Install EPEL on CentOS v7.x
-    yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=installed
-    when: ansible_lsb.major_release|int == 7
+#  - name: Install EPEL on CentOS v7.x
+#    yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=installed
+#    when: ansible_lsb.major_release|int == 7
 
   - name: Install NTP
     yum: name=ntp state=present
