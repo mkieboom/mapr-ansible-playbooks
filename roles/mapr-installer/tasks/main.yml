@@ -12,7 +12,11 @@
      shell: bash /tmp/mapr-setup.sh -y -r {{mapr_repository_url}}
 
    - name: Probe & import installed cluster
-     shell: /opt/mapr/installer/bin/mapr-installer-cli probe -n -o config.ssh_id=root config.ssh_password=mapr_passwd config.hosts='["maprn01"]' > /tmp/myprobedcluster.yaml
+     shell: /opt/mapr/installer/bin/mapr-installer-cli probe -n -o config.ssh_id=root config.ssh_password={{mapr_passwd}} config.hosts='["maprn01"]' > /tmp/myprobedcluster.yaml
+     become: true
+     become_user: mapr
 
    - name: Import the probed cluster into the MapR Installer
-     shell: /opt/mapr/installer/bin/mapr-installer-cli import -n -t /tmp/myprobedcluster.yaml
+     shell: /opt/mapr/installer/bin/mapr-installer-cli import -n -t /tmp/myprobedcluster.yaml --force
+     become: true
+     become_user: mapr
