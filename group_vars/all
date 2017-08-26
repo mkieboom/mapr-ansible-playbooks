@@ -20,6 +20,7 @@ jdk: open-jdk
 oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm
 
 # MapR Repository
+mapr_repository_url: http://package.mapr.com/releases
 mapr_release_url:    http://package.mapr.com/releases/v{{mapr_version}}
 mapr_mep_url:        http://package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
 mapr_patch_url:      http://package.mapr.com/patches/releases/v{{mapr_version}}
@@ -29,6 +30,7 @@ mapr_gpg_url:        http://package.mapr.com/releases/pub/maprgpg.key
 mapr_patch_ebf_url:  http://package.mapr.com/patches/releases/v{{mapr_version}}/redhat/mapr-patch-{{mapr_version}}.{{mapr_patch_ebf_version}}.x86_64.rpm
 
 # Local MapR Repository
+mapr_repository_url_local: http://192.168.168.254:1234/package.mapr.com/releases
 mapr_release_url_local:    http://192.168.168.254:1234/package.mapr.com/releases/v{{mapr_version}}
 mapr_mep_url_local:        http://192.168.168.254:1234/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
 
