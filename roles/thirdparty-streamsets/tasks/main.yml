@@ -23,7 +23,7 @@
 
    # Download Streamsets from local repo (using wget as get_url doesn't support recursive downloads)
    - name: Download Streamsets RPM's from local repo
-     shell: wget -r -nc --no-parent {{ streamsets_repo_url }} -P {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/
+     shell: wget -r -nc --no-parent -nH --cut-dirs=100 {{ streamsets_repo_url }} -P {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/
      when: streamsets_repo_url != 'empty'
 
    # Download Streamsets tarbal

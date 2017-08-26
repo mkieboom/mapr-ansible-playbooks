@@ -38,7 +38,8 @@ mapr_group: mapr
 mapr_group_gid: 5000
 mapr_user: mapr
 mapr_user_uid: 5000
-mapr_passwd: $6$GzlcP5ei$E6P9QM40O6KJFLZ3wMcg3jzQBNxGXrf8yc77CbCmf0KtFSxK0mpCParhc3WVNEAm4fHKPAqyRV9rsiF6DAFlW0
+#mapr_passwd: $6$GzlcP5ei$E6P9QM40O6KJFLZ3wMcg3jzQBNxGXrf8yc77CbCmf0KtFSxK0mpCParhc3WVNEAm4fHKPAqyRV9rsiF6DAFlW0
+mapr_passwd: mapr
 
 # Streamsets (not installing Streamsets by default. To install set 'streamsets' to yes)
 streamsets: no
