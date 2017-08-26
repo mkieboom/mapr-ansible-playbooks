@@ -21,27 +21,12 @@
       state: present
       reload: yes
 
-   # Download and install Streamsets from local repo
-   - name: Create Streamsets Repository
-     yum_repository:
-       name: streamsets
-       description: Streamsets
-       file: streamsets
-       baseurl: "{{ streamsets_repo_url }}"
-       gpgcheck: no
+   # Download Streamsets from local repo (using wget as get_url doesn't support recursive downloads)
+   - name: Download Streamsets RPM's from local repo
+     shell: wget -r -nc --no-parent {{ streamsets_repo_url }} -P {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/
      when: streamsets_repo_url != 'empty'
 
-   - name: Gather list of Streamsets packages available
-     yum:
-       list: streamsets
-     register: streamsets_packages
-     when: streamsets_repo_url != 'empty'
-
-   - name: Install all Streamsets packages
-     yum: name={{streamsets_packages.stdout_lines|join(',')}} state=latest
-     when: streamsets_repo_url != 'empty'
-
-   # Download and install Streamsets using tarbal
+   # Download Streamsets tarbal
    - name: Download Streamsets (might take some time as it is a 3GB download)
      get_url:
        url: "{{streamsets_download_url}}"
@@ -61,13 +46,11 @@
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
-     when: streamsets_repo_url == 'empty'
 
    - name: Install Streamsets Datacollector and origins/destinations
      yum: name="{{item}}" state=present
      with_fileglob:
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/*.rpm"
-     when: streamsets_repo_url == 'empty'
 
 
    # Once installed, configure Streamsets for use with MapR
@@ -83,8 +66,8 @@
        MAPR_HOME: "/opt/mapr"
        SDC_ALLOW_UNSUPPORTED_JDK: "true"
 
-   - name: Start the Streamsets Datacollector service (sdc)
-     service:
-       name: sdc
-       state: restarted
-       enabled: yes
+#   - name: Start the Streamsets Datacollector service (sdc)
+#     service:
+#       name: sdc
+#       state: restarted
+#       enabled: yes
