@@ -3,3 +3,8 @@
 
 - name: Install mapr-elasticsearch
   package: name=mapr-elasticsearch state=present
+
+- name: Open Elasticsearch to listen to all ports
+  vars:
+    networkbindhost: 'network.bind_host: 0.0.0.0'
+  lineinfile: dest=/opt/mapr/elasticsearch/elasticsearch-2.3.3/etc/elasticsearch/elasticsearch.yml line='{{ networkbindhost }}' state=present
