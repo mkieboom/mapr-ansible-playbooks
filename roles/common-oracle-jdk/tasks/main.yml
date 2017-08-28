@@ -1,7 +1,14 @@
 ---
 # Install Oracle JDK
+
+  - name: Fetch Java version
+    shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g' | cut -c-3
+    register: java_version
+
   - name: Downloading Oracle JDK
     get_url: url={{ oracle_jdk_url }} mode=0440 headers="Cookie:oraclelicense=accept-securebackup-cookie" dest=/tmp/oracle-jdk.rpm timeout=120
+    when: java_version.stdout | version_compare('1.8', '<')
 
   - name: Installing Oracle JDK
     yum: name=/tmp/oracle-jdk.rpm state=present
+    when: java_version.stdout | version_compare('1.8', '<')
