@@ -104,6 +104,10 @@
 #   hosts: mapr-fluentd
 #   roles:
 #     - mapr-fluentd
+# - name: Configure MapR Monitoring - Elasticsearch
+#   hosts: all
+#   roles:
+#     - mapr-configure-monitoring-elasticsearch
 # - name: Install OpenTSDB
 #   hosts: mapr-opentsdb
 #   roles:
@@ -116,10 +120,10 @@
 #   hosts: mapr-collectd
 #   roles:
 #     - mapr-collectd
-# - name: Configure MapR Monitoring
+# - name: Configure MapR Monitoring - OpenTSDB
 #   hosts: all
 #   roles:
-#     - mapr-configure-monitoring
+#     - mapr-configure-monitoring-opentsdb
 
 
 # - name: Install MySQL
