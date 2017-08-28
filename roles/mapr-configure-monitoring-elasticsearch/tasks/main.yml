@@ -10,25 +10,9 @@
 - name: Make ElasticSearch String
   set_fact: elasticsearch_string={{ elasticsearch_hosts.results | map(attribute='ansible_facts.elasticsearch_item') | list | join(',')}}
 - name: Configure.sh for ElasticSearch
-  shell: /opt/mapr/server/configure.sh -R -ES {{ elasticsearch_string }}
+  shell: /opt/mapr/server/configure.sh -R -ES {{ elasticsearch_string }} -ESDB /opt/mapr/es_db
 #  environment:
 #    MAPR_TICKETFILE_LOCATION: /opt/mapr/conf/mapruserticket
 # Fix for OTSDB-4
 - name: Set owner mapr-system user / OTSDB-4
   file: path=/opt/mapr/kibana owner={{ mapr_user }} group={{ mapr_group }} state=directory recurse=yes
-
-
-# Install MapR OpenTSDB configure
-
-# Configure OpenTSDB
-- name: Get OpenTSDB FQDNs
-  set_fact: opentsdb_item={{ hostvars[item]['ansible_fqdn'] }}
-  with_items:
-    - "{{ groups['mapr-opentsdb'] }}"
-  register: opentsdb_hosts
-- name: Make OpenTSDB String
-  set_fact: opentsdb_string={{ opentsdb_hosts.results | map(attribute='ansible_facts.opentsdb_item') | list | join(',')}}
-- name: Configure.sh
-  shell: /opt/mapr/server/configure.sh -R -OT {{ opentsdb_string }} -ESDB /opt/mapr/es_db
-#  environment:
-#    MAPR_TICKETFILE_LOCATION: /opt/mapr/conf/mapruserticket
