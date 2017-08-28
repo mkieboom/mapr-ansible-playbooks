@@ -8,6 +8,9 @@
 [datanodes]
 192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
+# MapR Installer - probe
+[mapr-installer:children]
+managementnode
 
 # Core
 [mapr-core:children]

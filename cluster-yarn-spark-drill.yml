@@ -1,5 +1,5 @@
 ## Run minimum playbook first
-- include: cluster-minimum.yml
+- include: cluster-yarn-spark.yml
 
 ## Install MapR Eco-system components
 - name: Install Drill

@@ -1,5 +1,5 @@
 - name: check local
-  hosts: all
+  hosts: managementnode
   roles:
     - common-preinstall-checks
 - name: Apply MapR pre-requisite configuration to all nodes
@@ -31,7 +31,7 @@
   roles:
     - mapr-fileserver
 - name: Install MCS
-  hosts: managementnode
+  hosts: mapr-mcs
   roles:
     - mapr-mcs
 - name: Install NFS
@@ -92,39 +92,44 @@
 
 ## Install MapR Monitoring
 
-# - name: Install Elasticsearch
-#   hosts: mapr-elasticsearch
-#   roles:
-#     - mapr-elasticsearch
-# - name: Install Kibana
-#   hosts: mapr-kibana
-#   roles:
-#     - mapr-kibana
-# - name: Install Fluentd
-#   hosts: mapr-fluentd
-#   roles:
-#     - mapr-fluentd
-# - name: Configure MapR Monitoring - Elasticsearch
-#   hosts: all
-#   roles:
-#     - mapr-configure-monitoring-elasticsearch
-# - name: Install OpenTSDB
-#   hosts: mapr-opentsdb
-#   roles:
-#     - mapr-opentsdb
-# - name: Install Grafana
-#   hosts: mapr-grafana
-#   roles:
-#     - mapr-grafana
-# - name: Install Collectd
-#   hosts: mapr-collectd
-#   roles:
-#     - mapr-collectd
-# - name: Configure MapR Monitoring - OpenTSDB
-#   hosts: all
-#   roles:
-#     - mapr-configure-monitoring-opentsdb
+#- name: Install Elasticsearch
+#  hosts: mapr-elasticsearch
+#  roles:
+#    - mapr-elasticsearch
+#- name: Install Kibana
+#  hosts: mapr-kibana
+#  roles:
+#    - mapr-kibana
+#- name: Install Fluentd
+#  hosts: mapr-fluentd
+#  roles:
+#    - mapr-fluentd
+#- name: Configure MapR Monitoring - Elasticsearch
+#  hosts: all
+#  roles:
+#    - mapr-configure-monitoring-elasticsearch
+#- name: Install OpenTSDB
+#  hosts: mapr-opentsdb
+#  roles:
+#    - mapr-opentsdb
+#- name: Install Grafana
+#  hosts: mapr-grafana
+#  roles:
+#    - mapr-grafana
+#- name: Install Collectd
+#  hosts: mapr-collectd
+#  roles:
+#    - mapr-collectd
+#- name: Configure MapR Monitoring - OpenTSDB
+#  hosts: all
+#  roles:
+#    - mapr-configure-monitoring-opentsdb
 
+## Import the cluster into the MapR web installer (mapr-setup.sh probe)
+#- name: Probe cluster into MapR Installer
+#  hosts: mapr-installer
+#  roles:
+#    - mapr-installer
 
 # - name: Install MySQL
 #   hosts: ext-mysql
