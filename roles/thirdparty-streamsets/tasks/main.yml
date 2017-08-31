@@ -45,7 +45,7 @@
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-hdp*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
-     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
+     #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
 
    - name: Install Streamsets Datacollector and origins/destinations
      yum: name="{{item}}" state=present
