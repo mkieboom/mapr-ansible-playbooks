@@ -1,0 +1,35 @@
+#- name: check local
+#  hosts: mapr-client
+#  roles:
+#    - common-preinstall-checks
+- name: Apply MapR pre-requisite configuration to all nodes
+  hosts: mapr-client
+  roles:
+    - {role: common-open-jdk, when: jdk == 'open-jdk' and streamsets != 'yes'}
+    - {role: common-oracle-jdk, when: jdk == 'oracle-jdk' or streamsets == 'yes'}
+    - common-prereq-software
+- name: Create MapR Repository and MapR Group and User
+  hosts: mapr-client
+  roles:
+    - configure-mapr-repository
+    - configure-mapr-user
+    - configure-mapr-gpgkey
+- name: Install MapR Client
+  hosts: mapr-client
+  roles:
+    - mapr-client
+
+# Configure MapR Client
+- name: Setup global vars
+  hosts: all
+  roles:
+    - mapr-configure-vars
+- name: Configure and start
+  hosts: mapr-client
+  roles:
+    - mapr-client-configure-unsecure
+
+- name: Install mapr-posix-client-basic (FUSE)
+  hosts: mapr-client
+  roles:
+    - mapr-posix-client-basic-install

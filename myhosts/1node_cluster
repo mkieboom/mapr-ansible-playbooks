@@ -1,4 +1,8 @@
 # Cluster Node definition
+
+[clients]
+192.168.168.3 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
 [managementnode]
 192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
@@ -7,6 +11,10 @@
 
 [datanodes]
 192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
+# Clients
+[mapr-client:children]
+clients
 
 # MapR Installer - probe
 [mapr-installer:children]
@@ -100,9 +108,11 @@ datanodes
 
 # Spark on YARN
 [mapr-spark-yarn:children]
+datanodes
 
 # Spark HistoryServer
 [mapr-spark-historyserver:children]
+managementnode
 
 # Flume
 [mapr-flume:children]

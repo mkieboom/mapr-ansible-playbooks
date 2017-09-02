@@ -1,0 +1,17 @@
+---
+# Install mapr-posix-client-basic
+- name: Install mapr-posix-client-basic
+  package: name={{ item }} state=present
+  with_items:
+  - mapr-posix-client-basic
+  - rpcbind
+#- name: Set /opt/mapr/conf/mapruserticket in fuse.conf
+#  lineinfile: dest=/opt/mapr/conf/fuse.conf regexp="^fuse\.ticketfile\.location" line="fuse.ticketfile.location=/opt/mapr/conf/mapruserticket"
+
+# Create the /mapr mountpoint
+- name: Create /mapr dir
+  file: path=/mapr state=directory
+
+# Start the MapR POSIX Client
+- name: Start the mapr-posix-client-basic service
+  service: name=mapr-posix-client-basic state=restarted enabled=yes

@@ -1,4 +1,7 @@
 # Cluster Node definition
+[clients]
+10.10.10.37 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
 [managementnode]
 10.10.10.34 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
@@ -10,6 +13,9 @@
 10.10.10.35 ansible_user=root ansible_become=yes ansible_become_method=sudo
 10.10.10.36 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
+# Clients
+[mapr-client:children]
+clients
 
 # MapR Installer - probe
 [mapr-installer:children]

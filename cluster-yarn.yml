@@ -13,6 +13,6 @@
 
 ## Run configure.sh
 - name: Run configure.sh -R for Eco-system component configuration
-  hosts: all
+  hosts: all:!clients
   roles:
     - mapr-configure-components
