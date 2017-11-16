@@ -47,39 +47,17 @@
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
      #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
 
-   - name: Install Streamsets Datacollector and origins/destinations
-     yum: name="{{item}}" state=present
-     with_items:
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-solr_6_1_0-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-aws-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-azure-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-basic-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-bigtable-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-cassandra_3-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-elasticsearch_5-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-google-cloud-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-groovy_2_4-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-influxdb_0_9-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-jdbc-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-jks-credentialstore-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-jms-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-jython_2_7-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-mapr_5_0-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-mapr_5_1-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-mapr_5_2-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-mapr_spark_2_1_mep_3_0-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-mongodb_3-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-mysql-binlog-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-omniture-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-rabbitmq-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-redis-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-salesforce-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-stats-lib-2.7.1.0-1.noarch.rpm"
-      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-vault-credentialstore-lib-2.7.1.0-1.noarch.rpm"
-#      - "find /tmp/streamsets-datacollector-2.7.1.0-all-rpms/ -type f -name '*.rpm'"
-#     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/*.rpm"
+   - name: Install Streamsets Datacollector and origins/destinations - make a list of all RPM's
+     find:
+       paths: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/"
+       patterns: "*.rpm"
+     register: rpm_result
 
+   - name: Install Streamsets Datacollector and origins/destinations - install all RPM's
+     yum:
+       name: "{{ item.path }}"
+       state: present
+     with_items: "{{ rpm_result.files }}"
 
    # Once installed, configure Streamsets for use with MapR
    - name: Configure Streamsets for use with MapR v{{mapr_version}}
