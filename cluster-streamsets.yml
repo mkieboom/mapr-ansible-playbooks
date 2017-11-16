@@ -1,0 +1,14 @@
+- name: check local
+  hosts: managementnode
+  roles:
+    - common-preinstall-checks
+- name: Apply MapR pre-requisite configuration to all nodes
+  hosts: all:!clients
+  roles:
+    - {role: common-open-jdk, when: jdk == 'open-jdk' and streamsets != 'yes'}
+    - {role: common-oracle-jdk, when: jdk == 'oracle-jdk' or streamsets == 'yes'}
+    - common-prereq-software
+- name: Install StreamSets
+  hosts: thirdparty-streamsets
+  roles:
+    - {role: thirdparty-streamsets, when: streamsets == 'yes'}
