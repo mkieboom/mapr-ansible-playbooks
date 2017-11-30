@@ -73,34 +73,34 @@
        MAPR_HOME: "/opt/mapr"
        SDC_ALLOW_UNSUPPORTED_JDK: "true"
 
-   # Make changes to run Streamsets as the MapR user
-   - name: Change SDC_USER from sdc to mapr
-     lineinfile:
-       path: /opt/streamsets-datacollector/libexec/sdcd-env.sh
-       regexp: '^export SDC_USER='
-       line: 'export SDC_USER=mapr'
+#   # Make changes to run Streamsets as the MapR user
+#   - name: Change SDC_USER from sdc to mapr
+#     lineinfile:
+#       path: /opt/streamsets-datacollector/libexec/sdcd-env.sh
+#       regexp: '^export SDC_USER='
+#       line: 'export SDC_USER=mapr'
 
-   - name: Change SDC_GROUP from sdc to mapr
-     lineinfile:
-       path: /opt/streamsets-datacollector/libexec/sdcd-env.sh
-       regexp: '^export SDC_GROUP='
-       line: 'export SDC_GROUP=mapr'
+#   - name: Change SDC_GROUP from sdc to mapr
+#     lineinfile:
+#       path: /opt/streamsets-datacollector/libexec/sdcd-env.sh
+#       regexp: '^export SDC_GROUP='
+#       line: 'export SDC_GROUP=mapr'
 
-   - name: Change owner of files in /etc/sdc/ to mapr:mapr
-     file:
-       dest: /etc/sdc/
-       owner: mapr
-       group: mapr
-       recurse: yes
+#   - name: Change owner of files in /etc/sdc/ to mapr:mapr
+#     file:
+#       dest: /etc/sdc/
+#       owner: mapr
+#       group: mapr
+#       recurse: yes
 
-   - name: Change owner of files in /opt/streamsets-datacollector/ to mapr:mapr
-     file:
-       dest: /opt/streamsets-datacollector/
-       owner: mapr
-       group: mapr
-       recurse: yes
+#   - name: Change owner of files in /opt/streamsets-datacollector/ to mapr:mapr
+#     file:
+#       dest: /opt/streamsets-datacollector/
+#       owner: mapr
+#       group: mapr
+#       recurse: yes
 
-   # Make changes to run Streamsets as the MapR user
+   # Launch Streamsets service sdc
    - name: Start the Streamsets Datacollector service (sdc)
      service:
        name: sdc
