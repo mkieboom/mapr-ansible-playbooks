@@ -45,15 +45,20 @@
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-hdp*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
-     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
+     #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
 
-   - name: Install Streamsets Datacollector and origins/destinations - make a list of all RPM's
+   - name: Install Streamsets Datacollector
+     yum:
+       name: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-{{streamsets_version}}*.rpm"
+       state: present
+
+   - name: Install Streamsets Datacollector origins/destinations - make a list of all RPM's
      find:
        paths: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/"
        patterns: "*.rpm"
      register: rpm_result
 
-   - name: Install Streamsets Datacollector and origins/destinations - install all RPM's
+   - name: Install Streamsets Datacollector origins/destinations - install all RPM's
      yum:
        name: "{{ item.path }}"
        state: present
