@@ -49,7 +49,7 @@
 
    - name: Install Streamsets Datacollector
      yum:
-       name: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-{{streamsets_version}}*.rpm"
+       name: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-{{streamsets_version}}-1.noarch.rpm"
        state: present
 
    - name: Install Streamsets Datacollector origins/destinations - make a list of all RPM's
