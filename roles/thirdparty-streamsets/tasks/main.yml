@@ -23,33 +23,33 @@
 
    # Download Streamsets from local repo (using wget as get_url doesn't support recursive downloads)
    - name: Download Streamsets RPM's from local repo
-     shell: wget -r -nc --no-parent -nH --cut-dirs=100 {{ streamsets_repo_url }} -P {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/
+     shell: wget -r -nc --no-parent -nH --cut-dirs=100 {{ streamsets_repo_url }} -P {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/
      when: streamsets_repo_url != 'empty'
 
    # Download Streamsets tarbal
    - name: Download Streamsets (might take some time as it is a 3GB download)
      get_url:
        url: "{{streamsets_download_url}}"
-       dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
+       dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
        timeout: 900
      when: streamsets_repo_url == 'empty'
 
    - name: Extract Streamsets
-     unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz" dest="{{streamsets_download_location}}" copy=no
+     unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz" dest="{{streamsets_download_location}}" copy=no
      when: streamsets_repo_url == 'empty'
 
    - name: Remove all non-relevant Streamsets origins/destinations
      file: path="{{item}}" state=absent
      with_fileglob:
-     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-cdh*.rpm"
-     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-hdp*.rpm"
-     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
-     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
-     #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms.tgz"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-cdh*.rpm"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-hdp*.rpm"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
+     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
 
    - name: Install Streamsets Datacollector and origins/destinations - make a list of all RPM's
      find:
-       paths: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-all-rpms/"
+       paths: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/"
        patterns: "*.rpm"
      register: rpm_result
 
