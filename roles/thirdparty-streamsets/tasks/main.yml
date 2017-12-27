@@ -74,7 +74,7 @@
        SDC_DIST: "/opt/streamsets-datacollector"
        SDC_CONF: "/etc/sdc"
        MAPR_VERSION: "{{mapr_version}}"
-       MAPR_MEP_VERSION: "{{mapr_mep_version}}"
+       MAPR_MEP_VERSION: "{{mapr_mep_version[:1]}}"
        MAPR_HOME: "/opt/mapr"
        SDC_ALLOW_UNSUPPORTED_JDK: "true"
 
