@@ -43,7 +43,7 @@
      with_fileglob:
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-cdh*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-hdp*.rpm"
-     - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
+     #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
      #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
 
