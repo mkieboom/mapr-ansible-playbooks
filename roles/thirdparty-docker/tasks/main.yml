@@ -1,7 +1,7 @@
 ---
   # Set pre-requisites for Streamsets
   - name: Install Docker
-    package: name={{items}} state=present
+    package: name={{item}} state=present
     with_items:
       - docker
       - docker-compose
