@@ -5,6 +5,7 @@
        name: streamsets-datacollector-{{streamsets_version}}-1
        state: present
      check_mode: true
+     ignore_errors: yes
      register: streamsets_installed
 
    # Set pre-requisites for Streamsets
