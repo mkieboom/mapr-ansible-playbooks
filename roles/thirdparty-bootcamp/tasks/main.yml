@@ -1,13 +1,13 @@
 ---
-  - name: Clone mapr-pacc-minio-docker repository
-    git:
-      repo: https://github.com/mkieboom/mapr-pacc-minio-docker
-      dest: ~/mapr-pacc-minio-docker/
+  # - name: Clone mapr-pacc-minio-docker repository
+  #   git:
+  #     repo: https://github.com/mkieboom/mapr-pacc-minio-docker
+  #     dest: ~/mapr-pacc-minio-docker/
 
-  - name: Build the Docker image
-    docker_image:
-      path: ~/mapr-pacc-minio-docker/
-      name: mkieboom/mapr-pacc-minio-docker
+  # - name: Build the Docker image
+  #   docker_image:
+  #     path: ~/mapr-pacc-minio-docker/
+  #     name: mkieboom/mapr-pacc-minio-docker
 
   - name: Remove the mapr-pacc-minio-docker container if it is already running
     docker_container:
@@ -27,12 +27,12 @@
       recreate: yes
       force_kill: yes
       env:
-        MAPR_CLUSTER=demo.mapr.com
+        MAPR_CLUSTER={{cluster_name}}
         MAPR_CLDB_HOSTS={{ansible_default_ipv4.address}}
-        MAPR_CONTAINER_USER=mapr
-        MAPR_CONTAINER_GROUP=mapr
-        MAPR_CONTAINER_UID=5000
-        MAPR_CONTAINER_GID=5000
+        MAPR_CONTAINER_USER={{mapr_user}}
+        MAPR_CONTAINER_GROUP={{mapr_group}}
+        MAPR_CONTAINER_UID={{mapr_user_uid}}
+        MAPR_CONTAINER_GID={{mapr_group_gid}}
         MAPR_MOUNT_PATH=/mapr
         MINIO_ACCESS_KEY=myminioaccesskey
         MINIO_SECRET_KEY=myminiosecretkey
@@ -43,3 +43,4 @@
         - SYS_RESOURCE
       ports:
         - "9000:9000"
+
