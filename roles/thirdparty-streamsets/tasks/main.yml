@@ -2,7 +2,7 @@
 
    - name: check if Streamsets is already installed, if so skip the installation
      package:
-       name: streamsets-datacollector-{{streamsets_version}}-1.noarch
+       name: streamsets-datacollector-{{streamsets_version}}-1
        state: present
      check_mode: true
      register: streamsets-is-installed
@@ -10,6 +10,7 @@
    # Set pre-requisites for Streamsets
    - name: Set ulimit for open files to 63536 for current session
      shell: ulimit -n 63536
+     when: streamsets-is-installed.changed
 
    - name: Set hard ulimit for open files to 63536
      vars:
