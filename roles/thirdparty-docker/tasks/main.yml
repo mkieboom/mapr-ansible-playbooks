@@ -1,4 +1,4 @@
 ---
    # Set pre-requisites for Streamsets
 - name: Install Docker
-  yum: name=Docker state=present
+  yum: name=docker state=present
