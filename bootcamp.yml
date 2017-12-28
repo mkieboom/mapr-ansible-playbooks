@@ -1,12 +1,6 @@
 ## Install MapR with YARN, Spark and Drill
 - import_playbook: cluster-yarn-spark-drill.yml
 
-
-# Todo: Docker Containers:
-# minio
-# filebrowser
-# portainer
-
 ## Install Streamsets
 - name: Install StreamSets
   hosts: thirdparty-streamsets
@@ -30,5 +24,3 @@
   hosts: all:!clients
   roles:
     - mapr-configure-components
-
-
