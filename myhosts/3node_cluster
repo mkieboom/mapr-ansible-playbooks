@@ -171,3 +171,9 @@ managementnode
 # Streamsets
 [thirdparty-streamsets:children]
 managementnode
+
+# Docker
+[thirdparty-docker:children]
+managementnode
+controlnodes
+datanodes
