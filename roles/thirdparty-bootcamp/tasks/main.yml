@@ -45,6 +45,7 @@
       ports:
         - "9000:9000"
 
+
   # Install the Portainer Docker container
   - name: Remove the Portainer container if it is already running
     docker_container:
@@ -69,4 +70,26 @@
       ports:
         - "9001:9000"
 
-  
+
+  # Install the Portainer Docker container
+  - name: Remove the Portainer container if it is already running
+    docker_container:
+      image: ruediste/elfinder
+      name: elfinder
+      restart_policy: always
+      state: present
+      recreate: yes
+      force_kill: yes
+
+  - name: Launch the Portainer container
+    docker_container:
+      image: ruediste/elfinder
+      name: elfinder
+      restart_policy: always
+      state: started
+      recreate: yes
+      force_kill: yes
+      volumes:
+        - "/mapr/:/data"
+      ports:
+        - "8080:80"
