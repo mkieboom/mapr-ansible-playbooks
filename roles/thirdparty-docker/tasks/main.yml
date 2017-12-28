@@ -19,7 +19,7 @@
 
   - name: Create the docker group
     group:
-      name: somegroup
+      name: docker
       state: present
 
   - name: Make user 'root' part of the 'docker' group
