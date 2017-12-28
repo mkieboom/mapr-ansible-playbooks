@@ -6,7 +6,7 @@
   # Launch Streamsets service sdc
   - name: Start the Docker service
     service:
-    name: docker
+      name: docker
       state: started
       enabled: yes
       use: service
