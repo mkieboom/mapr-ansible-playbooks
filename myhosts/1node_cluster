@@ -176,3 +176,6 @@ managementnode
 controlnodes
 datanodes
 
+# Docker
+[thirdparty-bootcamp:children]
+managementnode

@@ -1,5 +1,11 @@
-
+## Install MapR with YARN, Spark and Drill
 - import_playbook: cluster-yarn-spark-drill.yml
+
+
+# Todo: Docker Containers:
+# minio
+# filebrowser
+# portainer
 
 ## Install Streamsets
 - name: Install StreamSets
@@ -13,8 +19,16 @@
   roles:
     - thirdparty-docker
 
+## Install Bootcamp specific items
+- name: Install Bootcamp specific items
+  hosts: thirdparty-bootcamp
+  roles:
+    - thirdparty-bootcamp
+
 ## Run configure.sh
 - name: Run configure.sh -R for Eco-system component configuration
   hosts: all:!clients
   roles:
     - mapr-configure-components
+
+
