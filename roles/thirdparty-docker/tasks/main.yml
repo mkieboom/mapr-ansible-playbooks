@@ -17,6 +17,11 @@
 # TODO: When behind proxy, fix proxy config
 # https://docs.docker.com/engine/admin/systemd/#httphttps-proxy
 
+  - name: Create the docker group
+    group:
+      name: somegroup
+      state: present
+
   - name: Make user 'root' part of the 'docker' group
     user:
       name: root
