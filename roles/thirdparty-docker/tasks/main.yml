@@ -35,7 +35,7 @@
       groups: docker
       append: yes
 
-   - name: Allow user 'sdc' (Streamsets) to sudo for docker
-     vars:
-       sudoers: 'sdc ALL = NOPASSWD: /usr/bin/docker'
-     lineinfile: dest=/etc/sudoers line='{{sudoers}}' state=present
+  - name: Allow user 'sdc' (Streamsets) to sudo for docker
+    vars:
+      sudoers: 'sdc ALL = NOPASSWD: /usr/bin/docker'
+    lineinfile: dest=/etc/sudoers line='{{sudoers}}' state=present
