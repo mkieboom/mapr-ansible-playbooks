@@ -1,17 +1,7 @@
 ---
-
-   - name: check if Streamsets is already installed, if so skip the installation
-     package:
-       name: streamsets-datacollector-{{streamsets_version}}-1
-       state: present
-     check_mode: true
-     ignore_errors: yes
-     register: streamsets_installed
-
    # Set pre-requisites for Streamsets
    - name: Set ulimit for open files to 63536 for current session
      shell: ulimit -n 63536
-     when: streamsets_installed.changed
 
    - name: Set hard ulimit for open files to 63536
      vars:
@@ -34,7 +24,7 @@
    # Download Streamsets from local repo (using wget as get_url doesn't support recursive downloads)
    - name: Download Streamsets RPM's from local repo
      shell: wget -r -nc --no-parent -nH --cut-dirs=100 {{ streamsets_repo_url }} -P {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/
-     when: streamsets_repo_url != 'empty' and streamsets_installed.changed
+     when: streamsets_repo_url != 'empty'
 
    # Download Streamsets tarbal
    - name: Download Streamsets (might take some time as it is a 3GB download)
@@ -42,11 +32,11 @@
        url: "{{streamsets_download_url}}"
        dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
        timeout: 900
-     when: streamsets_repo_url == 'empty' and streamsets_installed.changed
+     when: streamsets_repo_url == 'empty'
 
    - name: Extract Streamsets
      unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz" dest="{{streamsets_download_location}}" copy=no
-     when: streamsets_repo_url == 'empty' and streamsets_installed.changed
+     when: streamsets_repo_url == 'empty'
 
    - name: Remove all non-relevant Streamsets origins/destinations
      file: path="{{item}}" state=absent
@@ -56,27 +46,23 @@
      #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
      - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
      #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
-     when: streamsets_installed.changed
 
    - name: Install Streamsets Datacollector
      yum:
        name: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-{{streamsets_version}}-1.noarch.rpm"
        state: present
-     when: streamsets_installed.changed
 
    - name: Install Streamsets Datacollector origins/destinations - make a list of all RPM's
      find:
        paths: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/"
        patterns: "*.rpm"
      register: rpm_result
-     when: streamsets_installed.changed
 
    - name: Install Streamsets Datacollector origins/destinations - install all RPM's
      yum:
        name: "{{ item.path }}"
        state: present
      with_items: "{{ rpm_result.files }}"
-     when: streamsets_installed.changed
 
    # Once installed, configure Streamsets for use with MapR
    - name: Configure Streamsets for use with MapR v{{mapr_version}}
