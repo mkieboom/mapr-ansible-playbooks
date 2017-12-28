@@ -1,8 +1,12 @@
 ---
   # Set pre-requisites for Streamsets
   - name: Install Docker
-    package: name=docker state=present
+    package: name={{items}} state=present
+    with_items:
+      - docker
+      - docker-compose
 
+docker-compose
   # Launch Streamsets service sdc
   - name: Start the Docker service
     service:
