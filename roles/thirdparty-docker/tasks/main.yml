@@ -13,3 +13,29 @@
       state: started
       enabled: yes
       use: service
+
+# TODO: When behind proxy, fix proxy config
+# https://docs.docker.com/engine/admin/systemd/#httphttps-proxy
+
+  - name: Make user 'root' part of the 'docker' group
+    user:
+      name: root
+      groups: docker
+      append: yes
+
+  - name: Make user '{{mapr_user}}' part of the 'docker' group
+    user:
+      name: "{{mapr_user}}"
+      groups: docker
+      append: yes
+
+  - name: Make user 'sdc' (Streamsets) part of the 'docker' group
+    user:
+      name: sdc
+      groups: docker
+      append: yes
+
+   - name: Allow user 'sdc' (Streamsets) to sudo for docker
+     vars:
+       sudoers: 'sdc ALL = NOPASSWD: /usr/bin/docker'
+     lineinfile: dest=/etc/sudoers line='{{sudoers}}' state=present
