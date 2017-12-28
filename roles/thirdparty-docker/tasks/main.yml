@@ -6,7 +6,6 @@
       - docker
       - docker-compose
 
-docker-compose
   # Launch Streamsets service sdc
   - name: Start the Docker service
     service:
