@@ -66,13 +66,13 @@
       force_kill: yes
       volumes:
         - "/var/run/docker.sock:/var/run/docker.sock"
-        - "/mapr/demo.mapr.com/portainer:/data"
+        - "/portainer:/data"
       ports:
         - "9001:9000"
 
 
-  # Install the Portainer Docker container
-  - name: Remove the Portainer container if it is already running
+  # Install the Web-Filebrowser (elfinder) Docker container
+  - name: Remove the Web-Filebrowser (elfinder) container if it is already running
     docker_container:
       image: ruediste/elfinder
       name: elfinder
@@ -81,7 +81,7 @@
       recreate: yes
       force_kill: yes
 
-  - name: Launch the Portainer container
+  - name: Launch the Web-Filebrowser (elfinder) container
     docker_container:
       image: ruediste/elfinder
       name: elfinder
