@@ -1,4 +1,12 @@
 ---
-   # Set pre-requisites for Streamsets
-- name: Install Docker
-  yum: name=docker state=present
+  # Set pre-requisites for Streamsets
+  - name: Install Docker
+    package: name=docker state=present
+
+  # Launch Streamsets service sdc
+  - name: Start the Docker service
+    service:
+    name: docker
+      state: started
+      enabled: yes
+      use: service
