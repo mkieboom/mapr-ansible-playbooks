@@ -78,11 +78,11 @@
        MAPR_HOME: "/opt/mapr"
        SDC_ALLOW_UNSUPPORTED_JDK: "true"
 
-  - name: Make user 'sdc' (Streamsets) part of the 'wheel' group
-    user:
-      name: "sdc"
-      groups: wheel
-      append: yes
+   - name: Make user 'sdc' (Streamsets) part of the 'wheel' group
+     user:
+       name: "sdc"
+       groups: wheel
+       append: yes
 
    # Launch Streamsets service sdc
    - name: Start the Streamsets Datacollector service (sdc)
