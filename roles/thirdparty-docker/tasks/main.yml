@@ -38,11 +38,11 @@
 
   # Launch Docker service
   - name: Start the Docker service
-    service:
+    systemd:
       name: docker
-      state: started
+      state: restarted
       enabled: yes
-      use: service
+      daemon_reload: yes
 
   - name: Create the docker group
     group:
