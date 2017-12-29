@@ -7,14 +7,17 @@
       - docker-compose
   
   # Configure http proxy for Docker if required
-  -name: Configure http proxy for Docker
-   lineinfile:
-     dest: /etc/systemd/system/docker.service.d/http-proxy.conf
-     line: "{{ item.line }}"
-   with_items:
-   - { line: '[Service]' }
-   - { line: 'Environment="HTTP_PROXY={{proxy_http_url}}"' }
-
+  - blockinfile: |
+    dest=/etc/systemd/system/docker.service.d/http-proxy.conf
+    content='[Service]
+        Environment="HTTP_PROXY={{proxy_http_url}}"'
+  
+  #-name: Configure http proxy for Docker
+  # lineinfile: dest=/etc/systemd/system/docker.service.d/http-proxy.conf line="{{ item.line }}"
+  # with_items:
+  # - '[Service]' }
+  # - { line: 'Environment="HTTP_PROXY={{proxy_http_url}}"' }
+  # when: "{{proxy}}" == 'yes'
 
   # Launch Streamsets service sdc
   - name: Start the Docker service
