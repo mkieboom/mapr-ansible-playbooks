@@ -7,12 +7,14 @@
       - docker-compose
   
   # Configure http proxy for Docker if required
-  - blockinfile: |
-    dest=/etc/systemd/system/docker.service.d/http-proxy.conf
-    content='[Service]
-        Environment="HTTP_PROXY={{proxy_http_url}}"'
+  - name: Configure http proxy for Docker
+    blockinfile:
+      dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+      block: |
+        [Service]
+        Environment="HTTP_PROXY={{proxy_http_url}}"
   
-  #-name: Configure http proxy for Docker
+  #- name: Configure http proxy for Docker
   # lineinfile: dest=/etc/systemd/system/docker.service.d/http-proxy.conf line="{{ item.line }}"
   # with_items:
   # - '[Service]' }
