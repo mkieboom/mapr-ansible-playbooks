@@ -79,12 +79,11 @@
        SDC_ALLOW_UNSUPPORTED_JDK: "true"
 
    # Configure http proxy if required
-    when: proxy == True
-   - name: Open Elasticsearch to listen to all ports
+   - name: Configure http proxy if required
      vars:
        streamsets_proxy_config: 'export SDC_JAVA_OPTS=" -Dhttp.proxyHost={{proxy_url}} -Dhttp.proxyPort={{proxy_port}} ${SDC_JAVA_OPTS}"'
      lineinfile: path=/opt/streamsets-datacollector/libexec/sdcd-env.sh line='{{ streamsets_proxy_config }}' state=present
-
+     when: proxy == True
 
    - name: Make user 'sdc' (Streamsets) part of the 'wheel' group
      user:
