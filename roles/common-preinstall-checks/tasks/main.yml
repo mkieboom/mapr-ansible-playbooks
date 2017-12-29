@@ -11,7 +11,7 @@
     streamsets_repo_url: "{{streamsets_repo_url_local}}"
   when: ansible_hostname | search("MAPRN0") and inventory_hostname | search ("192.168.168.")
 
-- name: Enable proxy when installing on MapR SE AWS VPN environment (ip-172-, 172.)
+- name: Enable proxy when installing on MapR SE AWS VPN environment (ip-172-)
   set_fact:
     proxy: yes
-  when: ansible_hostname | search("ip-172-") and inventory_hostname | search ("172.")
+  when: ansible_hostname | search("ip-172-")
