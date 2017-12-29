@@ -1,5 +1,8 @@
 ## Install MapR with YARN, Spark and Drill
-- import_playbook: cluster-yarn-spark-drill.yml
+
+## Need to fix Drill memory consumption first
+#- import_playbook: cluster-yarn-spark-drill.yml
+- import_playbook: cluster-yarn-spark.yml
 
 ## Install Streamsets
 - name: Install StreamSets
