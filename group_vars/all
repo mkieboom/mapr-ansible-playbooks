@@ -5,9 +5,6 @@ mapr_mep_version: 4.0.0
 # Latest EBF patch
 #mapr_patch_ebf_version: <no patch for 5.2.2>
 
-# Latest EBF patch
-#mapr_patch_ebf_version: 39122.GA-40967
-
 # MapR Cluster Name
 cluster_name: demo.mapr.com
 
@@ -34,6 +31,10 @@ mapr_repository_url_local: http://192.168.168.254:1234/package.mapr.com/releases
 mapr_release_url_local:    http://192.168.168.254:1234/package.mapr.com/releases/v{{mapr_version}}
 mapr_mep_url_local:        http://192.168.168.254:1234/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
 
+# Are we behind a proxy
+proxy: no
+proxy_http_url: http://172.16.4.20:3128
+proxy_https_url: {{proxy_http_url}}
 
 # MapR User & Group details
 mapr_group: mapr
