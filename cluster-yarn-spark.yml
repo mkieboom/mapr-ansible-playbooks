@@ -1,5 +1,5 @@
 ## Run yarn playbook first
-- include: cluster-yarn.yml
+- import_playbook: cluster-yarn.yml
 
 
 ## Install MapR Eco-system components
