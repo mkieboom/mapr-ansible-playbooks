@@ -5,6 +5,17 @@
     with_items:
       - docker
       - docker-compose
+  
+  # Configure http proxy for Docker if required
+  -name: Configure http proxy for Docker
+   lineinfile:
+     dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+     line: "{{ item.line }}"
+   #lineinfile: dest=/etc/systemd/system/docker.service.d/http-proxy.conf line='[Service]' state=present
+   with_items:
+    - { line: '[Service]' }
+    - { line: 'Environment="HTTP_PROXY={{proxy_http_url}}"' }
+
 
   # Launch Streamsets service sdc
   - name: Start the Docker service
@@ -13,9 +24,6 @@
       state: started
       enabled: yes
       use: service
-
-# TODO: When behind proxy, fix proxy config
-# https://docs.docker.com/engine/admin/systemd/#httphttps-proxy
 
   - name: Create the docker group
     group:
