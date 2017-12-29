@@ -10,9 +10,12 @@
   - name: Configure http proxy for Docker
     blockinfile:
       dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+      state: present
+      create: yes
       block: |
         [Service]
         Environment="HTTP_PROXY={{proxy_http_url}}"
+    when: "{{proxy}}" == 'yes'
   
   #- name: Configure http proxy for Docker
   # lineinfile: dest=/etc/systemd/system/docker.service.d/http-proxy.conf line="{{ item.line }}"
