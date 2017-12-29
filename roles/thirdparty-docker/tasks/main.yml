@@ -5,6 +5,14 @@
     with_items:
       - docker
       - docker-compose
+
+  # Configure http proxy for Docker if required
+  - name: Creates directory
+    file:
+      path: /etc/systemd/system/docker.service.d/
+      state: directory
+      recurse: yes
+    when: proxy == True
   
   # Configure http proxy for Docker if required
   - name: Configure http proxy for Docker
@@ -15,16 +23,20 @@
       block: |
         [Service]
         Environment="HTTP_PROXY={{proxy_http_url}}"
-    when: "{{proxy}}" == 'yes'
-  
-  #- name: Configure http proxy for Docker
-  # lineinfile: dest=/etc/systemd/system/docker.service.d/http-proxy.conf line="{{ item.line }}"
-  # with_items:
-  # - '[Service]' }
-  # - { line: 'Environment="HTTP_PROXY={{proxy_http_url}}"' }
-  # when: "{{proxy}}" == 'yes'
+    when: proxy == True
 
-  # Launch Streamsets service sdc
+  # Configure https proxy for Docker if required
+  - name: Configure https proxy for Docker
+    blockinfile:
+      dest: /etc/systemd/system/docker.service.d/https-proxy.conf
+      state: present
+      create: yes
+      block: |
+        [Service]
+        Environment="HTTPS_PROXY={{proxy_https_url}}"
+    when: proxy == True
+
+  # Launch Docker service
   - name: Start the Docker service
     service:
       name: docker
