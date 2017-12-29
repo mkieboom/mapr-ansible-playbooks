@@ -20,6 +20,11 @@
 - name: Install Bootcamp specific items
   hosts: thirdparty-bootcamp
   roles:
+    - mapr-kafka-rest
+    - mapr-httpfs
+    - mapr-collectd
+    - mapr-opentsdb
+    - mapr-configure-monitoring-opentsdb
     - thirdparty-bootcamp
 
 ## Run configure.sh
