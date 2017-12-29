@@ -1,0 +1,14 @@
+---
+# Install Kafka REST API
+# Redhat / CentOS
+- name: Install mapr-kafka-rest (Redhat / CentOS)
+  yum: name=mapr-kafka-rest state=present
+  when: ansible_os_family == 'RedHat'
+# Debian / Ubuntu
+- name: Install mapr-kafka-rest (Debian / Ubuntu)
+  apt: name=mapr-kafka-rest state=present allow_unauthenticated=yes
+  when: ansible_os_family == 'Debian'
+# Suse
+- name: Install mapr-kafka-rest (Suse)
+  zypper: name=mapr-kafka-rest state=present
+  when: ansible_os_family == 'Suse'
