@@ -7,6 +7,7 @@
       - docker-compose
 
   # Configure http proxy for Docker if required
+  # doc: https://docs.docker.com/engine/admin/systemd/#httphttps-proxy
   - name: Creates directory
     file:
       path: /etc/systemd/system/docker.service.d/
@@ -15,6 +16,7 @@
     when: proxy == True
   
   # Configure http proxy for Docker if required
+  # doc: https://docs.docker.com/engine/admin/systemd/#httphttps-proxy
   - name: Configure http proxy for Docker
     blockinfile:
       dest: /etc/systemd/system/docker.service.d/http-proxy.conf
@@ -26,6 +28,7 @@
     when: proxy == True
 
   # Configure https proxy for Docker if required
+  # doc: https://docs.docker.com/engine/admin/systemd/#httphttps-proxy
   - name: Configure https proxy for Docker
     blockinfile:
       dest: /etc/systemd/system/docker.service.d/https-proxy.conf
