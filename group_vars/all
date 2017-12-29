@@ -33,8 +33,11 @@ mapr_mep_url_local:        http://192.168.168.254:1234/package.mapr.com/releases
 
 # Are we behind a proxy
 proxy: no
-proxy_http_url: http://172.16.4.20:3128
+proxy_url: 172.16.4.20
+proxy_port: 3128
+proxy_http_url: http://{{proxy_url}}:{{proxy_port}}
 proxy_https_url: "{{proxy_http_url}}"
+
 
 # MapR User & Group details
 mapr_group: mapr
