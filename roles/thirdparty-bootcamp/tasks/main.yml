@@ -9,6 +9,13 @@
   #     path: ~/mapr-pacc-minio-docker/
   #     name: mkieboom/mapr-pacc-minio-docker
 
+  # Download the MapR PACC the Minio Docker container
+  - name: Download the mapr-pacc-image-classification container
+    docker_image:
+      name: mkieboom/mapr-pacc-image-classification
+      state: present
+      force: yes
+
   # Install the Minio Docker container
   - name: Remove the mapr-pacc-minio-docker container if it is already running
     docker_container:
