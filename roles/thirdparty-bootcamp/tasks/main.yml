@@ -100,3 +100,25 @@
         - "/mapr/:/data"
       ports:
         - "8080:80"
+
+
+  # Download the yolo image classification files and store the on MapR-FS
+  - name: Download yolo image classification files
+    get_url:
+      url: "{{item}}"
+      path: "/tmp/"
+      timeout: 900
+    with_items:
+    - https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/tiny-yolo-voc.cfg
+    - https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/tiny-yolo-voc.weights
+    - https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.cfg
+    - https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.weights
+
+  - name: Upload the yolo files to MapR-FS
+    shell: hadoop fs -put {{item}} /
+    with_items:
+    - /tmp/tiny-yolo-voc.cfg
+    - /tmp/tiny-yolo-voc.weights
+    - /tmp/yolo.cfg
+    - /tmp/yolo.weights
+
