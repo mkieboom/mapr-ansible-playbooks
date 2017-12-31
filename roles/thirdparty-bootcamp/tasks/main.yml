@@ -113,9 +113,13 @@
     - "https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.cfg"
     - "https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.weights"
 
+  # Create yolo folder using (using hadoop put as at this point in time /mapr/ might not be available yet)
+  - name: Create the yolo folder on MapR-FS
+    shell: hadoop fs -mkdir -p /yolo
+
   # Upload the files to MapR-FS (using hadoop put as at this point in time /mapr/ might not be available yet)
   - name: Upload the yolo files to MapR-FS
-    shell: hadoop fs -put -f {{item}} /
+    shell: hadoop fs -put -f {{item}} /yolo/
     with_items:
     - /tmp/tiny-yolo-voc.cfg
     - /tmp/tiny-yolo-voc.weights
