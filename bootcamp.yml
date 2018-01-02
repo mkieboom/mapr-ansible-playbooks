@@ -1,8 +1,8 @@
 ## Install MapR with YARN, Spark and Drill
 
 ## Need to fix Drill memory consumption first
-#- import_playbook: cluster-yarn-spark-drill.yml
-- import_playbook: cluster-yarn-spark.yml
+- import_playbook: cluster-yarn-spark-drill.yml
+#- import_playbook: cluster-yarn-spark.yml
 
 ## Configure warden and drill for limited memory consumption
 - name: Configure warden and drill for limited memory consumption and restart warden
