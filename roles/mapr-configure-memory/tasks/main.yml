@@ -38,7 +38,7 @@
 
 - name: Modify drill-env.sh for limited memory usage
   lineinfile:
-    dest: /opt/mapr/drill/drill-*/conf/drill-env.sh
+    dest: /opt/mapr/drill/drill-1.11.0/conf/drill-env.sh
     line: "{{ item }}"
   with_items:
     - 'export DRILL_HEAP="1G"'
