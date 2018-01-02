@@ -32,9 +32,9 @@
     - { regexp: 'service.command.nfs4.heapsize.min=', line: '64' }
     - { regexp: 'service.command.nfs4.heapsize.max=', line: '1024' }
 
-- name: Modify drill-env.sh for limited memory usage
-  stat: path=/opt/mapr/drill/drill-*/conf/drill-env.sh
-  register: drill_env_sh
+#- name: Modify drill-env.sh for limited memory usage
+#  stat: path=/opt/mapr/drill/drill-*/conf/drill-env.sh
+#  register: drill_env_sh
 
 - name: Modify drill-env.sh for limited memory usage
   lineinfile:
@@ -44,4 +44,4 @@
     - 'export DRILL_HEAP="1G"'
     - 'export DRILL_MAX_DIRECT_MEMORY="1G"'
     - 'export DRILLBIT_CODE_CACHE_SIZE="1G"'
-  when: drill_env_sh.stat.exists
+#  when: drill_env_sh.stat.exists
