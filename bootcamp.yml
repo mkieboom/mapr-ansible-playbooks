@@ -4,6 +4,13 @@
 #- import_playbook: cluster-yarn-spark-drill.yml
 - import_playbook: cluster-yarn-spark.yml
 
+## Configure warden and drill for limited memory consumption
+- name: Configure warden and drill for limited memory consumption and restart warden
+  hosts: all:!clients
+  roles:
+    - mapr-configure-memory
+    - mapr-configure-warden-restart
+
 ## Install Streamsets
 - name: Install StreamSets
   hosts: thirdparty-streamsets
@@ -32,10 +39,3 @@
   hosts: all:!clients
   roles:
     - mapr-configure-components
-
-## Run configure.sh
-- name: Configure warden for limited memory consumption and restart warden
-  hosts: all:!clients
-  roles:
-    - mapr-configure-memory
-    - mapr-configure-warden-restart
