@@ -26,4 +26,4 @@
 - name: Create maprfs:///user/mapr
   shell: hadoop fs -mkdir -p /user/mapr
 - name: Owner maprfs:///user/mapr
-  shell: hadoop fs -chown mapr:mapr user/mapr
+  shell: hadoop fs -chown mapr:mapr /user/mapr
