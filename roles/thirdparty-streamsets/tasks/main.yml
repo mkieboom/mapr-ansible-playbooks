@@ -87,7 +87,8 @@
 
    - name: Make user 'sdc' (Streamsets) part of the 'wheel' group
      user:
-       name: "sdc"
+       name: sdc
+       shell: /bin/bash
        groups: wheel
        append: yes
 
