@@ -22,3 +22,8 @@
   shell: /opt/mapr/server/configure.sh -R
 - name: Set owner mapr-system user
   file: path=/opt/mapr/spark owner={{ mapr_user }} group={{ mapr_group }} state=directory recurse=yes
+
+- name: Create maprfs:///user/mapr
+  shell: hadoop fs -mkdir -p /user/mapr
+- name: Owner maprfs:///user/mapr
+  shell: hadoop fs -chown mapr:mapr user/mapr
