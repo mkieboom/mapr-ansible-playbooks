@@ -31,3 +31,12 @@
     - { regexp: 'service.command.nfs4.heapsize.percent=', line: '3' }
     - { regexp: 'service.command.nfs4.heapsize.min=', line: '64' }
     - { regexp: 'service.command.nfs4.heapsize.max=', line: '1024' }
+
+- name: Modify drill-env.sh for limited memory usage
+  lineinfile:
+    dest: /opt/mapr/drill/drill-1.11.0/conf/drill-env.sh
+    line: "{{ item }}"
+  with_items:
+    - 'export DRILL_HEAP="1G"'
+    - 'export DRILL_MAX_DIRECT_MEMORY="1G"'
+    - 'export DRILLBIT_CODE_CACHE_SIZE="1G"'
