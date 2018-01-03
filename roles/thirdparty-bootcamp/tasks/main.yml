@@ -81,23 +81,21 @@
   # Install the Web-Filebrowser (elfinder) Docker container
   - name: Remove the Web-Filebrowser (elfinder) container if it is already running
     docker_container:
-      image: ruediste/elfinder
+      image: mkieboom/mapr-pacc-finder-docker
       name: elfinder
       restart_policy: always
       state: present
       recreate: yes
       force_kill: yes
 
-  - name: Launch the Web-Filebrowser (elfinder) container
+  - name: Launch the Web-Filebrowser (mapr-pacc-finder-docker) container
     docker_container:
-      image: ruediste/elfinder
+      image: mkieboom/mapr-pacc-finder-docker
       name: elfinder
       restart_policy: always
       state: started
       recreate: yes
       force_kill: yes
-      volumes:
-        - "/mapr/:/data"
       ports:
         - "8080:80"
 
