@@ -39,9 +39,9 @@
     - "https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.cfg"
     - "https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.weights"
 
-  # Create yolo volume using maprcli
-  - name: Create the yolo folder on MapR-FS
-    shell: maprcli volume create -name yolo -path /yolo
+  # Create yolo folder (using hadoop fs as /mapr might not be there)
+  - name: Create the /yolo folder on MapR-FS (using hadoop fs as /mapr might not be there)
+    shell: hadoop fs -mkdir -p /yolo
 
   # Upload the files to MapR-FS (using hadoop put as at this point in time /mapr/ might not be available yet)
   - name: Upload the yolo files to MapR-FS
@@ -52,10 +52,6 @@
     - /tmp/yolo.cfg
     - /tmp/yolo.weights
 
-  # Create zeppelin volume using maprcli
-  - name: Create the yolo folder on MapR-FS
-    shell: maprcli volume create -name zeppelin -path /zeppelin
-
-  # Create shared-notebooks folder in the zeppelin volume using hadoop fs (as /mapr might not be available yet)
-  - name: Create the yolo folder on MapR-FS
+  # Create /zeppelin/shared-notebooks folder (using hadoop fs as /mapr might not be there)
+  - name: Create /zeppelin/shared-notebooks folder (using hadoop fs as /mapr might not be there)
     shell: hadoop fs -mkdir /zeppelin/shared-notebooks
