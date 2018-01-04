@@ -1,6 +1,25 @@
 ---
   ## Instal bootcamp cluster for ATTENDEES
 
+  # Set the clustername to demo.mapr.com
+  - name: Change MapR Cluster Name to demo.mapr.com
+     shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'"
+     register: clustername
+
+   - shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $2}'"
+     register: clustersecure
+
+   - shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'"
+     register: clustercldbnodes
+
+   - debug:
+       msg: "Current content of mapr-clusters.conf: {{clustername.stdout}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
+
+   - debug:
+       msg: "New content of mapr-clusters.conf: demo.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
+
+   - shell: echo demo.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}  > /opt/mapr/conf/mapr-clusters.conf
+
   # Download the MapR Data Science Refinery Container
   - name: Download the data-science-refinery container
     docker_image:

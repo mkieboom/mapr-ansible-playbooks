@@ -1,6 +1,25 @@
 ---
   ## Instal bootcamp cluster for TRAINER
 
+  # Set the clustername to trainer.mapr.com
+  - name: Change MapR Cluster Name to trainer.mapr.com
+    shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'"
+    register: clustername
+
+  - shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $2}'"
+    register: clustersecure
+
+  - shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'"
+    register: clustercldbnodes
+
+  - debug:
+      msg: "Current content of mapr-clusters.conf: {{clustername.stdout}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
+
+  - debug:
+      msg: "New content of mapr-clusters.conf: trainer.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
+
+  - shell: echo trainer.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}  > /opt/mapr/conf/mapr-clusters.conf
+
   # Download the MapR PACC Image Classification Docker container
   - name: Download the mapr-pacc-image-classification container
     docker_image:

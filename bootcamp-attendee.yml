@@ -3,13 +3,6 @@
 ## Install MapR with YARN, Spark and Drill
 - import_playbook: cluster-yarn-spark-drill.yml
 
-## Configure warden and drill for limited memory consumption
-- name: Configure warden and drill for limited memory consumption and restart warden
-  hosts: all:!clients
-  roles:
-    - mapr-configure-memory
-    - mapr-configure-warden-restart
-
 ## Install Streamsets
 - name: Install StreamSets
   hosts: thirdparty-streamsets
@@ -33,8 +26,10 @@
     - mapr-configure-monitoring-opentsdb
     - bootcamp-attendee
 
-## Run configure.sh
-- name: Run configure.sh -R for Eco-system component configuration
+## Configure warden and drill for limited memory consumption
+- name: Configure warden and drill for limited memory consumption and restart warden
   hosts: all:!clients
   roles:
+    - mapr-configure-memory
     - mapr-configure-components
+    - mapr-configure-warden-restart
