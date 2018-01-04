@@ -3,13 +3,13 @@
 
   # Set the clustername to demo.mapr.com
   - name: Change MapR Cluster Name to demo.mapr.com
-    shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'"
+    shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'"
     register: clustername
 
-  - shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $2}'"
+  - shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $2}'"
     register: clustersecure
 
-  - shell: "cat /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'"
+  - shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'"
     register: clustercldbnodes
 
   - debug:
