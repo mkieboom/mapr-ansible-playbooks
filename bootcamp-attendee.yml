@@ -1,8 +1,7 @@
-## Install MapR with YARN, Spark and Drill
+## Instal bootcamp cluster for ATTENDEES
 
-## Need to fix Drill memory consumption first
+## Install MapR with YARN, Spark and Drill
 - import_playbook: cluster-yarn-spark-drill.yml
-#- import_playbook: cluster-yarn-spark.yml
 
 ## Configure warden and drill for limited memory consumption
 - name: Configure warden and drill for limited memory consumption and restart warden
@@ -23,16 +22,16 @@
   roles:
     - thirdparty-docker
 
-## Install Bootcamp specific items
-- name: Install Bootcamp specific items
-  hosts: thirdparty-bootcamp
+## Install Bootcamp specific items for the attendees
+- name: Install Bootcamp specific items for the attendees
+  hosts: bootcamp-user
   roles:
-    - mapr-kafka-rest
-    - mapr-httpfs
+    #- mapr-kafka-rest        # only required on bootcamp TRAINER cluster
+    #- mapr-httpfs            # only required on bootcamp TRAINER cluster
     - mapr-collectd
     - mapr-opentsdb
     - mapr-configure-monitoring-opentsdb
-    - thirdparty-bootcamp
+    - bootcamp-attendee
 
 ## Run configure.sh
 - name: Run configure.sh -R for Eco-system component configuration

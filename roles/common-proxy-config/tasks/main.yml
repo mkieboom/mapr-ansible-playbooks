@@ -1,0 +1,12 @@
+---
+- name: Use local MapR repository when installing on local VBox images (MAPRN0#, 192.168.168.#)
+  set_fact:
+    mapr_release_url: "{{mapr_release_url_local}}"
+    mapr_mep_url: "{{mapr_mep_url_local}}"
+    mapr_repository_url: "{{mapr_repository_url_local}}"
+  when: ansible_hostname | search("MAPRN0") and inventory_hostname | search ("192.168.168.")
+
+- name: Use local Streamsets repository when installing on local VBox images (MAPRN0#, 192.168.168.#)
+  set_fact:
+    streamsets_repo_url: "{{streamsets_repo_url_local}}"
+  when: ansible_hostname | search("MAPRN0") and inventory_hostname | search ("192.168.168.")

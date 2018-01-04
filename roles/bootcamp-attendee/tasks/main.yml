@@ -1,15 +1,14 @@
 ---
-  # - name: Clone mapr-pacc-minio-docker repository
-  #   git:
-  #     repo: https://github.com/mkieboom/mapr-pacc-minio-docker
-  #     dest: ~/mapr-pacc-minio-docker/
+  ## Instal bootcamp cluster for ATTENDEES
 
-  # - name: Build the Docker image
-  #   docker_image:
-  #     path: ~/mapr-pacc-minio-docker/
-  #     name: mkieboom/mapr-pacc-minio-docker
+  # Download the MapR Data Science Refinery Container
+  - name: Download the data-science-refinery container
+    docker_image:
+      name: maprtech/data-science-refinery
+      state: present
+      force: yes
 
-  # Download the MapR PACC the Minio Docker container
+  # Download the MapR PACC Image Classification Docker container
   - name: Download the mapr-pacc-image-classification container
     docker_image:
       name: mkieboom/mapr-pacc-image-classification
@@ -79,7 +78,7 @@
 
 
   # Install the Web-Filebrowser (elfinder) Docker container
-  - name: Remove the Web-Filebrowser (elfinder) container if it is already running
+  - name: Remove the Web-Filebrowser container if it is already running
     docker_container:
       image: mkieboom/mapr-pacc-finder-docker
       name: elfinder

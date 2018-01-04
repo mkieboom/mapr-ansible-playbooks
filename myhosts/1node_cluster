@@ -176,6 +176,14 @@ managementnode
 controlnodes
 datanodes
 
-# Docker
-[thirdparty-bootcamp:children]
+#############################################
+###          Bootcamp deployments         ###
+#############################################
+
+# Bootcamp attendee nodes
+[bootcamp-attendee:children]
+managementnode
+
+# Bootcamp trainer nodes
+[bootcamp-trainer:children]
 managementnode
