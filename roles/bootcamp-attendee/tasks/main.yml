@@ -20,9 +20,9 @@
 
   - shell: echo demo.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}  > /opt/mapr/conf/mapr-clusters.conf
 
-  # Configure the demo.mapr.com cluster in mapr-clusters.conf to allow data replication
-  - name: Add demo.mapr.com to mapr-clusters.conf to allow data replication
-    lineinfile: path= line='line=demo.mapr.com secure=false {{trainer_cluster_ip}}:7222' state=present
+  # Configure the trainer.mapr.com cluster in mapr-clusters.conf to allow data replication
+  - name: Add trainer.mapr.com to mapr-clusters.conf to allow data replication
+    lineinfile: path=/opt/mapr/conf/mapr-clusters.conf line='line=trainer.mapr.com secure=false {{trainer_cluster_ip}}:7222' state=present
 
   # Download the MapR Data Science Refinery Container
   - name: Download the data-science-refinery container
