@@ -178,10 +178,6 @@ datanodes
 ###          Bootcamp deployments         ###
 #############################################
 
-# Bootcamp attendee nodes
-[bootcamp-attendee:children]
-managementnode
-
-# Bootcamp trainer nodes
-[bootcamp-trainer:children]
+# Bootcamp attendee and trainer nodes
+[bootcamp-user:children]
 managementnode
