@@ -1,19 +1,7 @@
 ## Instal bootcamp cluster for TRAINER
 
 ## Install MapR with YARN, Spark and Drill
-- import_playbook: cluster-yarn-spark-drill.yml
-
-## Install Streamsets
-- name: Install StreamSets
-  hosts: thirdparty-streamsets
-  roles:
-    - thirdparty-streamsets
-
-## Install Docker
-- name: Install Docker
-  hosts: thirdparty-docker
-  roles:
-    - thirdparty-docker
+- import_playbook: bootcamp-fundamentals.yml
 
 ## Install Bootcamp specific items for the attendees
 - name: Install Bootcamp specific items for the attendees
