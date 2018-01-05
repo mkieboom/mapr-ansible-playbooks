@@ -12,6 +12,9 @@ cluster_name: demo.mapr.com
 disks: /dev/sdb
 #disks: /dev/xvdb,/dev/xvdc,/dev/xvdd
 
+# Memory configuration in warden (options are: low/medium/normal)
+memory: normal
+
 # JDK choose: open-jdk or oracle-jdk
 jdk: open-jdk
 oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm
