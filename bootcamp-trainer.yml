@@ -30,6 +30,6 @@
 - name: Configure warden and drill for limited memory consumption and restart warden
   hosts: all:!clients
   roles:
-    - mapr-configure-memory
+    - mapr-configure-memory-medium
     - mapr-configure-components
     - mapr-configure-warden-restart

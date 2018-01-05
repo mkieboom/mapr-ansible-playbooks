@@ -1,0 +1,47 @@
+---
+# Configure warden for MEDIUM memory allocation
+- name: Modify warden.conf for MEDIUM memory usage
+  lineinfile:
+    dest: /opt/mapr/conf/warden.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.regexp }}{{ item.line }}"
+  with_items:
+    - { regexp: 'service.command.cldb.heapsize.percent=', line: '8' }
+    - { regexp: 'service.command.cldb.heapsize.max=', line: '512' }
+    - { regexp: 'service.command.cldb.heapsize.min=', line: '256' }
+    - { regexp: 'service.command.mfs.heapsize.percent=', line: '15' }
+    - { regexp: 'service.command.mfs.heapsize.maxpercent=', line: '85' }
+    - { regexp: 'service.command.mfs.heapsize.min=', line: '512' }
+    - { regexp: 'service.command.mfs.heapsize.max=', line: '2048' }
+    - { regexp: 'service.command.webserver.heapsize.percent=', line: '3' }
+    - { regexp: 'service.command.webserver.heapsize.max=', line: '128' }
+    - { regexp: 'service.command.webserver.heapsize.min=', line: '128' }
+    - { regexp: 'service.command.nfs.heapsize.percent=', line: '3' }
+    - { regexp: 'service.command.nfs.heapsize.min=', line: '64' }
+    - { regexp: 'service.command.nfs.heapsize.max=', line: '64' }
+    - { regexp: 'service.command.os.heapsize.percent=', line: '10' }
+    - { regexp: 'service.command.os.heapsize.max=', line: '1024' }
+    - { regexp: 'service.command.os.heapsize.min=', line: '256' }
+    - { regexp: 'service.command.warden.heapsize.percent=', line: '1' }
+    - { regexp: 'service.command.warden.heapsize.max=', line: '256' }
+    - { regexp: 'service.command.warden.heapsize.min=', line: '64' }
+    - { regexp: 'service.command.zk.heapsize.percent=', line: '1' }
+    - { regexp: 'service.command.zk.heapsize.max=', line: '128' }
+    - { regexp: 'service.command.zk.heapsize.min=', line: '128' }
+    - { regexp: 'service.command.nfs4.heapsize.percent=', line: '3' }
+    - { regexp: 'service.command.nfs4.heapsize.min=', line: '64' }
+    - { regexp: 'service.command.nfs4.heapsize.max=', line: '1024' }
+
+#- name: Modify drill-env.sh for limited memory usage
+#  stat: path=/opt/mapr/drill/drill-*/conf/drill-env.sh
+#  register: drill_env_sh
+
+- name: Modify drill-env.sh for MEDIUM memory usage
+  lineinfile:
+    dest: /opt/mapr/drill/drill-1.11.0/conf/drill-env.sh
+    line: "{{ item }}"
+  with_items:
+    - 'export DRILL_HEAP="1G"'
+    - 'export DRILL_MAX_DIRECT_MEMORY="1G"'
+    - 'export DRILLBIT_CODE_CACHE_SIZE="1G"'
+#  when: drill_env_sh.stat.exists

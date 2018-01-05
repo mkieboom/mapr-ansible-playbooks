@@ -49,6 +49,17 @@
   roles:
     - mapr-patch-ebf
 
+# Configure memory
+- name: Configure warden for LOW memory consumption and restart warden
+  hosts: all:!clients
+  roles:
+    - {role: mapr-configure-memory-low, when: memory == 'low'}
+
+- name: Configure warden for MEDIUM memory consumption and restart warden
+  hosts: all:!clients
+  roles:
+    - {role: mapr-configure-memory-medium, when: memory == 'medium'}
+
 # Configure and Start Zookeeper & Warden
 - name: Configure and start
   hosts: all:!clients
@@ -195,7 +206,6 @@
 #   hosts: mapr-httpfs
 #   roles:
 #     - mapr-httpfs
-
 
 # Install 3rd party components
 
