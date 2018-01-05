@@ -24,6 +24,10 @@
   - name: Add trainer.mapr.com to mapr-clusters.conf to allow data replication
     lineinfile: path=/opt/mapr/conf/mapr-clusters.conf line='trainer.mapr.com secure=false {{trainer_cluster_ip}}:7222' state=present
 
+  # Set MAPR_SUBNETS
+  - name: Set MAPR_SUBNETS
+    lineinfile: path=/opt/mapr/conf/env.sh line='#export MAPR_SUBNETS={{ansible_default_ipv4.address}}/24' state=present
+
   # Download the MapR Data Science Refinery Container
   - name: Download the data-science-refinery container
     docker_image:
