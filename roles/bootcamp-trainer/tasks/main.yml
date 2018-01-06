@@ -19,3 +19,12 @@
       msg: "New content of mapr-clusters.conf: trainer.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
 
   - shell: echo trainer.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}  > /opt/mapr/conf/mapr-clusters.conf
+
+  ## Configure Gateway to allow table replication to ATTENDEE clusters
+  - name: Configure Gateway to allow table replication to ATTENDEE clusters
+    hosts: bootcamp-trainer
+    shell: echo "{{item}} >> /tmp/test.txt"
+    with_items:
+    - "{{ groups['bootcamp-attendee'] }}"
+
+#maprcli cluster gateway set -dstcluster demo.mapr.com -gateways "172.16.4.228"

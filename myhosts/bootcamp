@@ -1,100 +1,100 @@
 # Bootcamp Cluster Node definition
 
-[bootcamp-trainer]
-192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
+[bootcamp-trainer-nodes]
+172.16.4.146 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
-[bootcamp-attendee]
-192.168.168.2 ansible_user=root ansible_become=yes ansible_become_method=sudo
-192.168.168.3 ansible_user=root ansible_become=yes ansible_become_method=sudo
+[bootcamp-attendee-nodes]
+172.16.4.232 ansible_user=root ansible_become=yes ansible_become_method=sudo
+#192.168.168.3 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 
 # MapR Installer - probe
 [mapr-installer:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Core
 [mapr-core:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Zookeeper
 [mapr-zookeeper:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Container Location Database
 [mapr-cldb:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # MapR Control System
 [mapr-mcs:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # MapR Fileserver
 [mapr-fileserver:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # NFS
 [mapr-nfs:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Apache Drill
 [mapr-drill:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # CollectD
 [mapr-collectd:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # OpenTSDB
 [mapr-opentsdb:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Grafana
 [mapr-grafana:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # FluentD
 [mapr-fluentd:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # ElasticSearch
 [mapr-elasticsearch:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Kibana
 [mapr-kibana:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 ###############################################################
 
 
 # Gateway for Streams and MapR-DB
 [mapr-gateway:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # YARN resource manager
 [mapr-resourcemanager:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # YARN Node Manager
 [mapr-nodemanager:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Job History Server, IMPORTANT: only one
 [mapr-historyserver:children]
@@ -104,13 +104,13 @@ bootcamp-attendee
 
 # Spark on YARN
 [mapr-spark-yarn:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Spark HistoryServer
 [mapr-spark-historyserver:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Flume
 [mapr-flume:children]
@@ -138,8 +138,8 @@ bootcamp-attendee
 
 # HttpFS
 [mapr-httpfs:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Hue, not yet supported
 [mapr-hue:children]
@@ -165,13 +165,13 @@ bootcamp-attendee
 
 # Streamsets
 [thirdparty-streamsets:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Docker
 [thirdparty-docker:children]
-bootcamp-trainer
-bootcamp-attendee
+bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 #############################################
 ###          Bootcamp deployments         ###
@@ -179,8 +179,8 @@ bootcamp-attendee
 
 # Bootcamp trainer nodes
 [bootcamp-trainer:children]
-bootcamp-trainer
+bootcamp-trainer-nodes
 
-# Bootcamp attandee nodes
-[bootcamp-attandee:children]
-bootcamp-attandee
+# Bootcamp attendee nodes
+[bootcamp-attendee:children]
+bootcamp-attendee-nodes

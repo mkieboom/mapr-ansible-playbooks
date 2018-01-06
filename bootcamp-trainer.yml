@@ -14,15 +14,6 @@
     #- mapr-configure-monitoring-opentsdb # only required on bootcamp ATTENDEE clusters
     - bootcamp-trainer
 
-## Configure Gateway to allow table replication to ATTENDEE clusters
-- name: Install Bootcamp specific items for the attendees
-  hosts: bootcamp-trainer
-  shell: echo "{{item}} >> /tmp/test.txt"
-  - "{{ groups['bootcamp-attendee'] }}"
-
-#maprcli cluster gateway set -dstcluster demo.mapr.com -gateways "172.16.4.228"
-
-
 ## Configure warden and drill for limited memory consumption
 - name: Configure warden and drill for limited memory consumption and restart warden
   hosts: bootcamp-trainer
