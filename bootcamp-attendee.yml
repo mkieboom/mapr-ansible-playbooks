@@ -5,7 +5,7 @@
 
 ## Install Bootcamp specific items for the attendees
 - name: Install Bootcamp specific items for the attendees
-  hosts: bootcamp-user
+  hosts: bootcamp-attendee
   roles:
     #- mapr-kafka-rest        # only required on bootcamp TRAINER cluster
     #- mapr-httpfs            # only required on bootcamp TRAINER cluster
@@ -16,7 +16,7 @@
 
 ## Configure warden and drill for limited memory consumption
 - name: Configure warden and drill for limited memory consumption and restart warden
-  hosts: all:!clients
+  hosts: bootcamp-attendee
   roles:
     - mapr-configure-memory-medium
     - mapr-configure-components

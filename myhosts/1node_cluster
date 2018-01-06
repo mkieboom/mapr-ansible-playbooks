@@ -175,11 +175,3 @@ managementnode
 managementnode
 controlnodes
 datanodes
-
-#############################################
-###          Bootcamp deployments         ###
-#############################################
-
-# Bootcamp attendee and trainer nodes
-[bootcamp-user:children]
-managementnode

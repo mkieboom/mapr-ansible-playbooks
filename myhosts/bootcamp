@@ -1,103 +1,100 @@
-# Cluster Node definition
-[clients]
+# Bootcamp Cluster Node definition
+
+[bootcamp-trainer]
+192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
+[bootcamp-attendee]
+192.168.168.2 ansible_user=root ansible_become=yes ansible_become_method=sudo
 192.168.168.3 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
-[managementnode]
-192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
-
-[controlnodes]
-192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
-
-[datanodes]
-192.168.168.1 ansible_user=root ansible_become=yes ansible_become_method=sudo
-192.168.168.2 ansible_user=root ansible_become=yes ansible_become_method=sudo
-
-# Clients
-[mapr-client:children]
-clients
 
 # MapR Installer - probe
 [mapr-installer:children]
-managementnode
+bootcamp-trainer
+bootcamp-attendee
 
 # Core
 [mapr-core:children]
-managementnode
-controlnodes
-datanodes
+bootcamp-trainer
+bootcamp-attendee
 
 # Zookeeper
 [mapr-zookeeper:children]
-controlnodes
+bootcamp-trainer
+bootcamp-attendee
 
 # Container Location Database
 [mapr-cldb:children]
-controlnodes
+bootcamp-trainer
+bootcamp-attendee
 
 # MapR Control System
 [mapr-mcs:children]
-controlnodes
+bootcamp-trainer
+bootcamp-attendee
 
 # MapR Fileserver
 [mapr-fileserver:children]
-managementnode
-controlnodes
-datanodes
+bootcamp-trainer
+bootcamp-attendee
 
 # NFS
 [mapr-nfs:children]
-managementnode
-controlnodes
-datanodes
+bootcamp-trainer
+bootcamp-attendee
 
 # Apache Drill
 [mapr-drill:children]
-managementnode
-controlnodes
-datanodes
+bootcamp-trainer
+bootcamp-attendee
 
 # CollectD
 [mapr-collectd:children]
-managementnode
-controlnodes
-datanodes
+bootcamp-trainer
+bootcamp-attendee
 
 # OpenTSDB
 [mapr-opentsdb:children]
-managementnode
+bootcamp-trainer
+bootcamp-attendee
 
 # Grafana
 [mapr-grafana:children]
-managementnode
+bootcamp-trainer
+bootcamp-attendee
 
 # FluentD
 [mapr-fluentd:children]
-managementnode
-controlnodes
-datanodes
+bootcamp-trainer
+bootcamp-attendee
 
 # ElasticSearch
 [mapr-elasticsearch:children]
-managementnode
+bootcamp-trainer
+bootcamp-attendee
 
 # Kibana
 [mapr-kibana:children]
-managementnode
+bootcamp-trainer
+bootcamp-attendee
 
 ###############################################################
 
+
 # Gateway for Streams and MapR-DB
 [mapr-gateway:children]
-managementnode
+bootcamp-trainer
+bootcamp-attendee
 
 # YARN resource manager
 [mapr-resourcemanager:children]
-managementnode
+bootcamp-trainer
+bootcamp-attendee
 
 # YARN Node Manager
 [mapr-nodemanager:children]
-controlnodes
-datanodes
+bootcamp-trainer
+bootcamp-attendee
 
 # Job History Server, IMPORTANT: only one
 [mapr-historyserver:children]
@@ -107,9 +104,13 @@ datanodes
 
 # Spark on YARN
 [mapr-spark-yarn:children]
+bootcamp-trainer
+bootcamp-attendee
 
 # Spark HistoryServer
 [mapr-spark-historyserver:children]
+bootcamp-trainer
+bootcamp-attendee
 
 # Flume
 [mapr-flume:children]
@@ -137,6 +138,8 @@ datanodes
 
 # HttpFS
 [mapr-httpfs:children]
+bootcamp-trainer
+bootcamp-attendee
 
 # Hue, not yet supported
 [mapr-hue:children]
@@ -156,19 +159,28 @@ datanodes
 # Oozie
 [mapr-oozie:children]
 
-# HttpFS
-[mapr-httpfs:children]
-
 #############################################
 ###          Third Party Solutions        ###
 #############################################
 
 # Streamsets
 [thirdparty-streamsets:children]
-managementnode
+bootcamp-trainer
+bootcamp-attendee
 
 # Docker
 [thirdparty-docker:children]
-managementnode
-controlnodes
-datanodes
+bootcamp-trainer
+bootcamp-attendee
+
+#############################################
+###          Bootcamp deployments         ###
+#############################################
+
+# Bootcamp trainer nodes
+[bootcamp-trainer:children]
+bootcamp-trainer
+
+# Bootcamp attandee nodes
+[bootcamp-attandee:children]
+bootcamp-attandee
