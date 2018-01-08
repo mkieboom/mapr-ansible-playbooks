@@ -1,8 +1,8 @@
 ---
   ## Instal bootcamp cluster for TRAINER
 
-  # Set the clustername to trainer.mapr.com
-  - name: Change MapR Cluster Name to demo.mapr.com
+  ## Set the TRAINER clustername to 
+  - name: Change TRAINER MapR Cluster Name
     shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'"
     register: clustername
 
@@ -16,15 +16,12 @@
       msg: "Current content of mapr-clusters.conf: {{clustername.stdout}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
 
   - debug:
-      msg: "New content of mapr-clusters.conf: trainer.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
+      msg: "New content of mapr-clusters.conf: {{groups['bootcamp-trainer-nodes'][0]}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
 
-  - shell: echo trainer.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}  > /opt/mapr/conf/mapr-clusters.conf
+  - shell: echo {{groups['bootcamp-trainer-nodes'][0]}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}  > /opt/mapr/conf/mapr-clusters.conf
 
-  ## Configure Gateway to allow table replication to ATTENDEE clusters
-  - name: Configure Gateway to allow table replication to ATTENDEE clusters
-    hosts: bootcamp-trainer
-    shell: echo "{{item}} >> /tmp/test.txt"
+  # Create a gateway record for each ATTENDEE cluster so we can do mirroring and replication
+  - name: Run maprcli cluster gateway for each of the ATTENDEE nodes
+    shell: maprcli cluster gateway set -dstcluster {{item}} -gateways "{{hostvars[item].ansible_host}}"
     with_items:
-    - "{{ groups['bootcamp-attendee'] }}"
-
-#maprcli cluster gateway set -dstcluster demo.mapr.com -gateways "172.16.4.228"
+      -  "{{groups['bootcamp-attendee-nodes']}}"
