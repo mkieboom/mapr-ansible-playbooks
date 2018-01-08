@@ -18,10 +18,10 @@
   - debug:
       msg: "New content of mapr-clusters.conf: demo.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
 
-  - shell: echo 'demo.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}'  > /opt/mapr/conf/mapr-clusters.conf
+  - shell: echo '{{inventory_hostname}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}'  > /opt/mapr/conf/mapr-clusters.conf
 
   # Configure the trainer.mapr.com cluster in mapr-clusters.conf to allow data replication
   - name: Add trainer.mapr.com to mapr-clusters.conf to allow data replication
-    lineinfile: path=/opt/mapr/conf/mapr-clusters.conf line='trainer.mapr.com secure=false {{ item }}:7222' state=present
+    lineinfile: path=/opt/mapr/conf/mapr-clusters.conf line='{{item}} secure=false {{hostvars[item].ansible_host}}:7222' state=present
     with_inventory_hostnames:
       - bootcamp-trainer-nodes
