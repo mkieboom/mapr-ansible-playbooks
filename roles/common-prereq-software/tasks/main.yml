@@ -44,11 +44,11 @@
     when: amazon_ec2_node.stdout == '0'
 
   - name: Install EPEL on CentOS v6.x on Amazon EC2
-    yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm state=installed
+    yum: name=http://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm state=installed
     when: ansible_lsb.major_release|int == 6 and amazon_ec2_node.stdout == '1'
 
   - name: Install EPEL on CentOS v7.x on Amazon EC2
-    yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=installed
+    yum: name=http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=installed
     when: ansible_lsb.major_release|int == 7 and amazon_ec2_node.stdout == '1'
 
   - name: Install NTP
