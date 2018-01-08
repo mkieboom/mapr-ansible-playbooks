@@ -158,7 +158,7 @@ bootcamp-attendee-nodes
 
 # Bootcamp fundamental nodes
 [bootcamp-fundamentals:children]
-bootcamp-trainer-nodes
+bootcamp-attendee-nodes
 
 # Bootcamp trainer nodes
 [bootcamp-trainer:children]
