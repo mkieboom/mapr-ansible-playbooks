@@ -3,7 +3,7 @@
   roles:
     - common-preinstall-checks
 - name: Apply MapR pre-requisite configuration to all nodes
-  hosts: all:!clients
+  hosts: mapr-core
   roles:
     - {role: common-open-jdk, when: jdk == 'open-jdk' and streamsets != 'yes'}
     - {role: common-oracle-jdk, when: jdk == 'oracle-jdk' or streamsets == 'yes'}

@@ -3,13 +3,13 @@
   roles:
     - common-preinstall-checks
 - name: Apply MapR pre-requisite configuration to all nodes
-  hosts: all:!clients
+  hosts: mapr-core
   roles:
     - {role: common-open-jdk, when: jdk == 'open-jdk' and streamsets != 'yes'}
     - {role: common-oracle-jdk, when: jdk == 'oracle-jdk' or streamsets == 'yes'}
     - common-prereq-software
 - name: Create MapR Repository and MapR Group and User
-  hosts: all:!clients
+  hosts: mapr-core
   roles:
     - configure-mapr-repository
     - configure-mapr-user
@@ -45,24 +45,24 @@
 
 # Install latest MapR Patch EBF
 - name: Install latest MapR Patch EBF
-  hosts: all:!clients
+  hosts: mapr-core
   roles:
     - mapr-patch-ebf
 
 # Configure memory
 - name: Configure warden for LOW memory consumption and restart warden
-  hosts: all:!clients
+  hosts: mapr-core
   roles:
     - {role: mapr-configure-memory-low, when: memory == 'low'}
 
 - name: Configure warden for MEDIUM memory consumption and restart warden
-  hosts: all:!clients
+  hosts: mapr-core
   roles:
     - {role: mapr-configure-memory-medium, when: memory == 'medium'}
 
 # Configure and Start Zookeeper & Warden
 - name: Configure and start
-  hosts: all:!clients
+  hosts: mapr-core
   roles:
     - mapr-configure-unsecure
 # - name: Restarting mapr-zookeeper
@@ -70,7 +70,7 @@
 #   roles:
 #     - mapr-configure-zookeeper-restart
 # - name: Restarting mapr-warden
-#   hosts: all:!clients
+#   hosts: mapr-core
 #   roles:
 #     - mapr-configure-warden-restart
 
@@ -96,7 +96,7 @@
 #   roles:
 #     - mapr-drill
 # - name: Run configure.sh -R for Eco-system component configuration
-#   hosts: all:!clients
+#   hosts: mapr-core
 #   roles:
 #     - mapr-configure-components
 
@@ -116,7 +116,7 @@
 #  roles:
 #    - mapr-fluentd
 #- name: Configure MapR Monitoring - Elasticsearch
-#  hosts: all:!clients
+#  hosts: mapr-core
 #  roles:
 #    - mapr-configure-monitoring-elasticsearch
 #- name: Install OpenTSDB
@@ -132,7 +132,7 @@
 #  roles:
 #    - mapr-collectd
 #- name: Configure MapR Monitoring - OpenTSDB
-#  hosts: all:!clients
+#  hosts: mapr-core
 #  roles:
 #    - mapr-configure-monitoring-opentsdb
 
