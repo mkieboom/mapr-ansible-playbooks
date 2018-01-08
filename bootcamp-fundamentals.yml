@@ -17,6 +17,6 @@
 
 ## Install Bootcamp fundamentals
 - name: Install Bootcamp fundamentals
-  hosts: bootcamp-user
+  hosts: bootcamp-fundamentals
   roles:
     - bootcamp-fundamentals
