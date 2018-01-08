@@ -22,4 +22,6 @@
 
   # Configure the trainer.mapr.com cluster in mapr-clusters.conf to allow data replication
   - name: Add trainer.mapr.com to mapr-clusters.conf to allow data replication
-    lineinfile: path=/opt/mapr/conf/mapr-clusters.conf line='trainer.mapr.com secure=false {{trainer_cluster_ip}}:7222' state=present
+    lineinfile: path=/opt/mapr/conf/mapr-clusters.conf line='trainer.mapr.com secure=false {{ item }}:7222' state=present
+    with_inventory_hostnames:
+      - bootcamp-trainer-nodes
