@@ -5,6 +5,13 @@
   - name: Set MAPR_SUBNETS
     lineinfile: path=/opt/mapr/conf/env.sh line='export MAPR_SUBNETS={{ansible_default_ipv4.address}}/24' state=present
 
+  # Restart mapr-kafka-rest due to bug PACC-22 (https://maprdrill.atlassian.net/browse/PACC-22)
+  - name: Use a cron job to restart mapr-kafka-rest (https://maprdrill.atlassian.net/browse/PACC-22)
+    cron:
+      name: "mapr-kafka-rest restart"
+      minute: "20"
+      job: "maprcli node services -name kafka-rest -action restart -nodes $(hostname)"
+
   # Download the MapR Data Science Refinery Container
   - name: Download the data-science-refinery container
     docker_image:
@@ -109,10 +116,10 @@
       dest: "/tmp/"
       timeout: 900
     with_items:
-    - "https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/tiny-yolo-voc.cfg"
-    - "https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/tiny-yolo-voc.weights"
-    - "https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.cfg"
-    - "https://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.weights"
+    - "http://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/tiny-yolo-voc.cfg"
+    - "http://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/tiny-yolo-voc.weights"
+    - "http://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.cfg"
+    - "http://s3-eu-west-1.amazonaws.com/mkieboom/bootcamp/yolo/yolo.weights"
 
   # Create yolo folder (using hadoop fs as /mapr might not be there)
   - name: Create the /yolo folder on MapR-FS (using hadoop fs as /mapr might not be there)
