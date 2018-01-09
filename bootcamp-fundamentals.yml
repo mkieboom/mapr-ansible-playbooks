@@ -1,7 +1,7 @@
 ## Instal bootcamp cluster fundamentals
 
 ## Install MapR with YARN, Spark and Drill
-- import_playbook: cluster-yarn-spark-drill.yml
+- import_playbook: bootcamp-cluster-yarn-spark-drill.yml
 
 ## Install Streamsets
 - name: Install StreamSets

@@ -1,0 +1,114 @@
+- name: check local
+  hosts: managementnode
+  roles:
+    - common-preinstall-checks
+- name: Apply MapR pre-requisite configuration to all nodes
+  hosts: mapr-core
+  roles:
+    - {role: common-open-jdk, when: jdk == 'open-jdk' and streamsets != 'yes'}
+    - {role: common-oracle-jdk, when: jdk == 'oracle-jdk' or streamsets == 'yes'}
+    - common-prereq-software
+- name: Create MapR Repository and MapR Group and User
+  hosts: mapr-core
+  roles:
+    - configure-mapr-repository
+    - configure-mapr-user
+    - configure-mapr-gpgkey
+- name: Install MapR Core
+  hosts: mapr-core
+  roles:
+    - mapr-core
+- name: Install Zookeeper
+  hosts: mapr-zookeeper
+  roles:
+    - mapr-zookeeper
+- name: Install CLDB
+  hosts: mapr-cldb
+  roles:
+    - mapr-cldb
+- name: Install Filesystem
+  hosts: mapr-fileserver
+  roles:
+    - mapr-fileserver
+- name: Install MCS
+  hosts: mapr-mcs
+  roles:
+    - mapr-mcs
+- name: Install NFS
+  hosts: mapr-nfs
+  roles:
+    - mapr-nfs
+- name: Install Gateway
+  hosts: mapr-gateway
+  roles:
+    - mapr-gateway
+
+# Install latest MapR Patch EBF
+- name: Install latest MapR Patch EBF
+  hosts: mapr-core
+  roles:
+    - mapr-patch-ebf
+
+# Configure memory
+- name: Configure warden for LOW memory consumption and restart warden
+  hosts: mapr-core
+  roles:
+    - {role: mapr-configure-memory-low, when: memory == 'low'}
+
+- name: Configure warden for MEDIUM memory consumption and restart warden
+  hosts: mapr-core
+  roles:
+    - {role: mapr-configure-memory-medium, when: memory == 'medium'}
+
+# Configure and Start Zookeeper & Warden
+- name: Configure and start
+  hosts: mapr-core
+  roles:
+    - bootcamp-mapr-configure-unsecure
+
+
+############################################
+## cluster-yarn.yml
+############################################
+
+## Install MapR Eco-system components
+- name: Install YARN Resource Manager
+  hosts: mapr-resourcemanager
+  roles:
+    - mapr-resourcemanager
+- name: Install YARN Node Manager(s)
+  hosts: mapr-nodemanager
+  roles:
+    - mapr-nodemanager
+
+
+############################################
+## cluster-yarn-spark.yml
+############################################
+
+## Install MapR Eco-system components
+- name: Install Spark on YARN
+  hosts: mapr-spark-yarn
+  roles:
+    - mapr-spark-yarn
+- name: Install Spark History Server
+  hosts: mapr-spark-historyserver
+  roles:
+    - mapr-spark-historyserver
+
+
+############################################
+## cluster-yarn-spark-drill.yml
+############################################
+
+## Install MapR Eco-system components
+- name: Install Drill
+  hosts: mapr-drill
+  roles:
+    - mapr-drill
+
+## Run configure.sh
+- name: Run configure.sh -R for Eco-system component configuration
+  hosts: mapr-core
+  roles:
+    - mapr-configure-components
