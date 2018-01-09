@@ -14,10 +14,10 @@
 
 ## MARTIJN ##
 [bootcamp-trainer-nodes]
-trainer.mapr.com ansible_host=34.242.138.155 ansible_user=root ansible_become=yes ansible_become_method=sudo
+trainer.mapr.com ansible_host=ip-172-31-16-20 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 [bootcamp-attendee-nodes]
-demo01.mapr.com ansible_host=34.252.157.210 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo01.mapr.com ansible_host=ip-172-31-25-119 ansible_user=root ansible_become=yes ansible_become_method=sudo
 #demo02.mapr.com ansible_host=172.16.4.240 ansible_user=root ansible_become=yes ansible_become_method=sudo
 #demo03.mapr.com ansible_host=172.16.4.95 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
