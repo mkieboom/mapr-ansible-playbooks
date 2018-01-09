@@ -1,24 +1,24 @@
 ---
   ## Instal bootcamp cluster for TRAINER
 
-  ## Set the TRAINER clustername to 
-  - name: Change TRAINER MapR Cluster Name
-    shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'"
-    register: clustername
+  # ## Set the TRAINER clustername to 
+  # - name: Change TRAINER MapR Cluster Name
+  #   shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'"
+  #   register: clustername
 
-  - shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $2}'"
-    register: clustersecure
+  # - shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $2}'"
+  #   register: clustersecure
 
-  - shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'"
-    register: clustercldbnodes
+  # - shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'"
+  #   register: clustercldbnodes
 
-  - debug:
-      msg: "Current content of mapr-clusters.conf: {{clustername.stdout}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
+  # - debug:
+  #     msg: "Current content of mapr-clusters.conf: {{clustername.stdout}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
 
-  - debug:
-      msg: "New content of mapr-clusters.conf: {{groups['bootcamp-trainer-nodes'][0]}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
+  # - debug:
+  #     msg: "New content of mapr-clusters.conf: {{groups['bootcamp-trainer-nodes'][0]}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
 
-  - shell: echo {{groups['bootcamp-trainer-nodes'][0]}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}  > /opt/mapr/conf/mapr-clusters.conf
+  # - shell: echo {{groups['bootcamp-trainer-nodes'][0]}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}  > /opt/mapr/conf/mapr-clusters.conf
 
   # Create a gateway record for each ATTENDEE cluster so we can do mirroring and replication
   - name: Run maprcli cluster gateway for each of the ATTENDEE nodes

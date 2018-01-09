@@ -1,25 +1,6 @@
 ---
   ## Instal bootcamp cluster for ATTENDEES
 
-  # Set the clustername to demo.mapr.com
-  - name: Change MapR Cluster Name to demo.mapr.com
-    shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'"
-    register: clustername
-
-  - shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $2}'"
-    register: clustersecure
-
-  - shell: "head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'"
-    register: clustercldbnodes
-
-  - debug:
-      msg: "Current content of mapr-clusters.conf: {{clustername.stdout}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
-
-  - debug:
-      msg: "New content of mapr-clusters.conf: demo.mapr.com {{clustersecure.stdout}} {{clustercldbnodes.stdout}}"
-
-  - shell: echo '{{inventory_hostname}} {{clustersecure.stdout}} {{clustercldbnodes.stdout}}'  > /opt/mapr/conf/mapr-clusters.conf
-
   # Configure the trainer.mapr.com cluster in mapr-clusters.conf to allow data replication
   - name: Add trainer.mapr.com to mapr-clusters.conf to allow data replication
     lineinfile: path=/opt/mapr/conf/mapr-clusters.conf line='{{item}} secure=false {{hostvars[item].ansible_host}}:7222' state=present
