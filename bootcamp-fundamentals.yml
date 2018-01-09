@@ -1,7 +1,7 @@
 ## Instal bootcamp cluster fundamentals
 
 ## Install MapR with YARN, Spark and Drill
-#- import_playbook: bootcamp-cluster-yarn-spark-drill.yml
+- import_playbook: bootcamp-cluster-yarn-spark-drill.yml
 
 ## Install Streamsets
 - name: Install StreamSets
@@ -10,13 +10,13 @@
     - thirdparty-streamsets
 
 ## Install Docker
-# - name: Install Docker
-#   hosts: thirdparty-docker
-#   roles:
-#     - thirdparty-docker
+- name: Install Docker
+  hosts: thirdparty-docker
+  roles:
+    - thirdparty-docker
 
-# ## Install Bootcamp fundamentals
-# - name: Install Bootcamp fundamentals
-#   hosts: bootcamp-fundamentals
-#   roles:
-#     - bootcamp-fundamentals
+## Install Bootcamp fundamentals
+- name: Install Bootcamp fundamentals
+  hosts: bootcamp-fundamentals
+  roles:
+    - bootcamp-fundamentals
