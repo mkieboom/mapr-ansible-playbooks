@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # Disclaimer
 Not for production use and not officially supported by MapR Technologies.
 Ansible scripts work on Redhat/CentOS only.
@@ -19,14 +18,14 @@ Define the cluster layout by adding the various nodes as well as compontents to 
 
 4. Execute the ansibple playbook. For example:
 ansible-playbook -i myhosts/vbox_1node_cluster cluster-unsecure.yml
-=======
-# This a collection of Ansible scripts for deploying MapR v5.x
+
+# This a collection of Ansible scripts for deploying MapR v5.2.x and v6.x
 # As this is my own creation, this is not supported by MapR
 
 ## Supported OS
 
-* Redhat 6 or higher
-* CentOS 6 or higher
+* Redhat 7 or higher
+* CentOS 7 or higher
 
 Please validate the MapR OS Support Matrix prior to deployment:
 http://maprdocs.mapr.com/home/InteropMatrix/r_os_matrix.html

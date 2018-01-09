@@ -1,6 +1,11 @@
 ---
 # Install MapR Pre-requisites software packages
 
+  # Enable extra repo for Docker installation on AWS
+  - name: Enable extra repo for Docker installation on AWS
+    shell: "yum-config-manager --enable rhui-REGION-rhel-server-extras"
+    ignore_errors: yes
+
   - name: Install libselinux-python tools
     yum: name=libselinux-python state=present
 

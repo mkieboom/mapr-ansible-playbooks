@@ -9,7 +9,7 @@ mapr_mep_version: 4.0.0
 cluster_name: demo.mapr.com
 
 # MapR Filesystem disks
-disks: /dev/sdb
+disks: /dev/xvdb
 #disks: /dev/xvdb,/dev/xvdc,/dev/xvdd
 
 # Memory configuration in warden (options are: low/medium/normal)
@@ -41,6 +41,9 @@ proxy_port: 3128
 proxy_http_url: http://{{proxy_url}}:{{proxy_port}}
 proxy_https_url: "{{proxy_http_url}}"
 
+proxy_env:
+  http_proxy: "{{proxy_http_url}}"
+  https_proxy: "{{proxy_https_url}}"
 
 # MapR User & Group details
 mapr_group: mapr
@@ -55,7 +58,7 @@ streamsets_version: 3.0.0.0
 streamsets_port: 18630
 streamsets_download_location: /tmp/
 streamsets_install_location: /opt/
-streamsets_download_url: https://archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz
+streamsets_download_url: http://archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz
 
 streamsets_repo_url: empty
 streamsets_repo_url_local: http://192.168.168.254:1234/archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/
