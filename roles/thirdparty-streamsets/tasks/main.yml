@@ -45,8 +45,11 @@
      with_items:
        - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-cdh*.rpm"
        - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-hdp*.rpm"
-       #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
        - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kudu*.rpm"
+       - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka_0_10-lib-3.0.0.0-1.noarch.rpm"
+       - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka_0_11-lib-3.0.0.0-1.noarch.rpm"
+       - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka_1*.rpm"
+       #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
        #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
 
    - name: Install Streamsets Datacollector
@@ -67,8 +70,8 @@
      with_items: "{{ rpm_result.files }}"
 
    # Once installed, configure Streamsets for use with MapR
-   - name: Configure Streamsets for use with MapR v{{mapr_version}}
-     shell: "streamsets setup-mapr"
+   - name: Configure Streamsets for use with MapR v{{mapr_version}} and MEP v{{mapr_mep_version[:1]}}
+     shell: "streamsets setup-mapr > /tmp/streamsets-setup-mapr.log"
      args:
        chdir: /opt/streamsets-datacollector/bin/
      environment:
@@ -80,12 +83,12 @@
        MAPR_HOME: "/opt/mapr"
        SDC_ALLOW_UNSUPPORTED_JDK: "true"
 
-   # Configure http proxy if required
-   - name: Configure http proxy if required
-     vars:
-       streamsets_proxy_config: 'export SDC_JAVA_OPTS=" -Dhttp.proxyHost={{proxy_url}} -Dhttp.proxyPort={{proxy_port}} ${SDC_JAVA_OPTS}"'
-     lineinfile: path=/opt/streamsets-datacollector/libexec/sdcd-env.sh line='{{ streamsets_proxy_config }}' state=present
-     when: proxy == True
+   # # Configure http proxy if required
+   # - name: Configure http proxy if required
+   #   vars:
+   #     streamsets_proxy_config: 'export SDC_JAVA_OPTS=" -Dhttp.proxyHost={{proxy_url}} -Dhttp.proxyPort={{proxy_port}} ${SDC_JAVA_OPTS}"'
+   #   lineinfile: path=/opt/streamsets-datacollector/libexec/sdcd-env.sh line='{{ streamsets_proxy_config }}' state=present
+   #   when: proxy == True
 
    - name: Make user 'sdc' (Streamsets) part of the 'wheel' group
      user:
