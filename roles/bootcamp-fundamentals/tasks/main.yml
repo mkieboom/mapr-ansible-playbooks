@@ -46,8 +46,8 @@
       recreate: yes
       force_kill: yes
       env:
-        MAPR_CLUSTER={{cluster_name}}
-        MAPR_CLDB_HOSTS={{ansible_default_ipv4.address}}
+        MAPR_CLUSTER={{inventory_hostname}}
+        MAPR_CLDB_HOSTS={{ansible_hostname}}
         MAPR_CONTAINER_USER={{mapr_user}}
         MAPR_CONTAINER_GROUP={{mapr_group}}
         MAPR_CONTAINER_UID={{mapr_user_uid}}
@@ -93,7 +93,7 @@
   - name: Remove the Web-Filebrowser container if it is already running
     docker_container:
       image: mkieboom/mapr-pacc-finder-docker
-      name: elfinder
+      name: mapr-pacc-finder-docker
       restart_policy: always
       state: present
       recreate: yes
@@ -102,11 +102,22 @@
   - name: Launch the Web-Filebrowser (mapr-pacc-finder-docker) container
     docker_container:
       image: mkieboom/mapr-pacc-finder-docker
-      name: elfinder
+      name: mapr-pacc-finder-docker
       restart_policy: always
       state: started
       recreate: yes
       force_kill: yes
+      env:
+        MAPR_CLUSTER={{inventory_hostname}}
+        MAPR_CLDB_HOSTS={{ansible_hostname}}
+        MAPR_CONTAINER_USER={{mapr_user}}
+        MAPR_CONTAINER_GROUP={{mapr_group}}
+        MAPR_CONTAINER_UID={{mapr_user_uid}}
+        MAPR_CONTAINER_GID={{mapr_group_gid}}
+        MAPR_MOUNT_PATH=/mapr
+        MINIO_ACCESS_KEY=myminioaccesskey
+        MINIO_SECRET_KEY=myminiosecretkey
+
       ports:
         - "8080:80"
 
