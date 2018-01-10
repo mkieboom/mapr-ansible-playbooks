@@ -15,4 +15,4 @@
   ignore_errors: True # TODO error result should be handeled
 
 - name: Configure.sh
-  shell: /opt/mapr/server/configure.sh -N {{ inventory_hostname }} -Z {{ zookeeper_string }} -C {{ cldb_string }}
+  shell: /opt/mapr/server/configure.sh -N {{ inventory_hostname }} -Z {{ansible_hostname}} -C {{ansible_hostname}}
