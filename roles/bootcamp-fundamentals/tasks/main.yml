@@ -116,6 +116,11 @@
         MAPR_CONTAINER_UID={{mapr_user_uid}}
         MAPR_CONTAINER_GID={{mapr_group_gid}}
         MAPR_MOUNT_PATH=/mapr
+      devices:
+        - "/dev/fuse"
+      capabilities:
+        - SYS_ADMIN
+        - SYS_RESOURCE
       ports:
         - "8080:80"
 
