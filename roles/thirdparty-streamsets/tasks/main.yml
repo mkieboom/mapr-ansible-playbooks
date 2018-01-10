@@ -83,6 +83,10 @@
        MAPR_HOME: "/opt/mapr"
        SDC_ALLOW_UNSUPPORTED_JDK: "true"
 
+   # Once installed, configure Streamsets for use with MapR
+   - name: Configure Streamsets for use with MapR v{{mapr_version}} and MEP v{{mapr_mep_version[:1]}}
+     shell: "export SDC_HOME=/opt/streamsets-datacollector/ && export SDC_DIST=/opt/streamsets-datacollector/ && export SDC_CONF=/etc/sdc/ && export MAPR_VERSION={{mapr_version}} && export MAPR_MEP_VERSION={{mapr_mep_version[:1]}} && export MAPR_HOME=/opt/mapr && export SDC_ALLOW_UNSUPPORTED_JDK=true && /opt/streamsets-datacollector/bin/streamsets setup-mapr"
+
    # # Configure http proxy if required
    # - name: Configure http proxy if required
    #   vars:
