@@ -2,24 +2,12 @@
 
 ## MAPRSE ##
 [bootcamp-trainer-nodes]
-trainer.mapr.com ansible_host=172.16.4.108 ansible_user=root ansible_become=yes ansible_become_method=sudo
+trainer.mapr.com ansible_host=172.16.4.49 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 [bootcamp-attendee-nodes]
-demo01.mapr.com ansible_host=172.16.4.158 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo01.mapr.com ansible_host=172.16.4.87 ansible_user=root ansible_become=yes ansible_become_method=sudo
 demo02.mapr.com ansible_host=172.16.4.176 ansible_user=root ansible_become=yes ansible_become_method=sudo
-#demo03.mapr.com ansible_host=172.16.4.95 ansible_user=root ansible_become=yes ansible_become_method=sudo
-
-
-
-## MARTIJN ##
-#[bootcamp-trainer-nodes]
-#trainer.mapr.com ansible_host=34.242.138.155 ansible_user=root ansible_become=yes ansible_become_method=sudo
-
-#[bootcamp-attendee-nodes]
-#demo01.mapr.com ansible_host=34.252.157.210 ansible_user=root ansible_become=yes ansible_become_method=sudo
-#demo02.mapr.com ansible_host=172.16.4.240 ansible_user=root ansible_become=yes ansible_become_method=sudo
-#demo03.mapr.com ansible_host=172.16.4.95 ansible_user=root ansible_become=yes ansible_become_method=sudo
-
+#demo03.mapr.com ansible_host=172.16.4.159 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 
 # MapR Installer - probe
