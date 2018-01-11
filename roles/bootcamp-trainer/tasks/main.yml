@@ -5,15 +5,8 @@
   - name: Use a cron job to restart mapr-kafka-rest (https://maprdrill.atlassian.net/browse/PACC-22)
     cron:
       name: "mapr-kafka-rest restart"
-      minute: "20"
+      minute: "*/15"
       job: "maprcli node services -name kafka-rest -action restart -nodes $(hostname) > /tmp/bootcamp-mapr-kafkarest-restart-cron.log"
-
-  # Restart mapr-kafka-rest due to bug PACC-22 (https://maprdrill.atlassian.net/browse/PACC-22)
-  - name: Use a cron job to restart mapr-kafka-rest (https://maprdrill.atlassian.net/browse/PACC-22)
-    cron:
-      name: "docker container cleanup"
-      minute: "2"
-      job: "docker rm $(docker ps -q -f status=exited) > /tmp/bootcamp-docker-cleanup-cron.log"
 
   # Create a gateway record for each ATTENDEE cluster so we can do mirroring and replication
   - name: Run maprcli cluster gateway for each of the ATTENDEE nodes

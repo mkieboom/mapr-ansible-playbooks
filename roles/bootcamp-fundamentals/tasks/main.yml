@@ -1,6 +1,13 @@
 ---
   ## Instal bootcamp cluster fundamentals
 
+  # Use a cron job to cleanup docker images
+  - name: Use a cron job to cleanup docker images
+    cron:
+      name: "docker container cleanup"
+      minute: "*/2"
+      job: "docker rm $(docker ps -q -f status=exited) > /tmp/bootcamp-docker-cleanup-cron.log"
+
   # Set MAPR_SUBNETS
   - name: Set MAPR_SUBNETS
     lineinfile: path=/opt/mapr/conf/env.sh line='export MAPR_SUBNETS={{ansible_default_ipv4.address}}/24' state=present
@@ -10,8 +17,8 @@
       url: http://s3-eu-west-1.amazonaws.com/mkieboom/mapr-nfs.sh
       dest: "/tmp/"
 
-#  - name: Restart NFS
-#    shell: bash /tmp/mapr-nfs.sh >> /tmp/mapr-nfs.log
+  - name: Restart NFS
+    shell: bash /tmp/mapr-nfs.sh >> /tmp/mapr-nfs.log
 
   # Download the MapR Data Science Refinery Container
   - name: Download the data-science-refinery container
