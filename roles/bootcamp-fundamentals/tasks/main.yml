@@ -96,21 +96,20 @@
       ports:
         - "9001:9000"
 
-
-  # Install the Web-Filebrowser (elfinder) Docker container
-  - name: Remove the Web-Filebrowser container if it is already running
+  # Install the Jumpbox Docker container
+  - name: Remove the mapr-bootcamp-jumpbox container if it is already running
     docker_container:
-      image: mkieboom/mapr-pacc-finder-docker
-      name: mapr-pacc-finder-docker
+      image: mkieboom/mapr-bootcamp-jumpbox
+      name: mapr-bootcamp-jumpbox
       restart_policy: always
       state: present
       recreate: yes
       force_kill: yes
 
-  - name: Launch the Web-Filebrowser (mapr-pacc-finder-docker) container
+  - name: Launch the mapr-bootcamp-jumpbox container
     docker_container:
-      image: mkieboom/mapr-pacc-finder-docker
-      name: mapr-pacc-finder-docker
+      image: mkieboom/mapr-bootcamp-jumpbox
+      name: mapr-bootcamp-jumpbox
       restart_policy: always
       state: started
       recreate: yes
@@ -123,13 +122,45 @@
         MAPR_CONTAINER_UID={{mapr_user_uid}}
         MAPR_CONTAINER_GID={{mapr_group_gid}}
         MAPR_MOUNT_PATH=/mapr
-      devices:
-        - "/dev/fuse"
       capabilities:
         - SYS_ADMIN
         - SYS_RESOURCE
       ports:
-        - "8080:80"
+        - "8080:6901"
+
+  # # Install the Web-Filebrowser (elfinder) Docker container
+  # - name: Remove the Web-Filebrowser container if it is already running
+  #   docker_container:
+  #     image: mkieboom/mapr-pacc-finder-docker
+  #     name: mapr-pacc-finder-docker
+  #     restart_policy: always
+  #     state: present
+  #     recreate: yes
+  #     force_kill: yes
+
+  # - name: Launch the Web-Filebrowser (mapr-pacc-finder-docker) container
+  #   docker_container:
+  #     image: mkieboom/mapr-pacc-finder-docker
+  #     name: mapr-pacc-finder-docker
+  #     restart_policy: always
+  #     state: started
+  #     recreate: yes
+  #     force_kill: yes
+  #     env:
+  #       MAPR_CLUSTER={{inventory_hostname}}
+  #       MAPR_CLDB_HOSTS={{ansible_hostname}}
+  #       MAPR_CONTAINER_USER={{mapr_user}}
+  #       MAPR_CONTAINER_GROUP={{mapr_group}}
+  #       MAPR_CONTAINER_UID={{mapr_user_uid}}
+  #       MAPR_CONTAINER_GID={{mapr_group_gid}}
+  #       MAPR_MOUNT_PATH=/mapr
+  #     devices:
+  #       - "/dev/fuse"
+  #     capabilities:
+  #       - SYS_ADMIN
+  #       - SYS_RESOURCE
+  #     ports:
+  #       - "8080:80"
 
   # Download the yolo image classification files and store the on MapR-FS
   - name: Download yolo image classification files
