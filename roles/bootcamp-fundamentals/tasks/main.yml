@@ -196,3 +196,16 @@
   # Create /zeppelin/shared-notebooks folder (using hadoop fs as /mapr might not be there)
   - name: Create /zeppelin/shared-notebooks folder (using hadoop fs as /mapr might not be there)
     shell: hadoop fs -mkdir -p /zeppelin/shared-notebooks
+
+  - name: Update Apache Drill DFS storage plugin
+    uri:
+      url: "http://localhost:8047/storage/dfs.json"
+      method: POST
+      body: "{{ lookup('file' , 'bootcamp-dataset/drill_storage_plugin_dfs/drill_storage_plugin_dfs.json') }}"
+      body_format: json
+      return_content: yes
+    register: drill_storage_plugin_result
+
+  - name: Check if the DFS storage plugin got created successfully in Drill
+    fail:
+    when: "'success' not in drill_storage_plugin_result.content"
