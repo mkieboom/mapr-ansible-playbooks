@@ -2,10 +2,10 @@
   "pipelineConfig" : {
     "schemaVersion" : 5,
     "version" : 7,
-    "pipelineId" : "Bootcamp1MinioS3toMapR4306a62d-1b2f-49de-b58f-fe3f8bbb0130",
+    "pipelineId" : "Bootcamp1MinioS3toMapR7f5d08f8-51df-4880-92a8-2a3185623e51",
     "title" : "Bootcamp - 1 - Minio S3 to MapR",
     "description" : "",
-    "uuid" : "16f6eecb-d4a9-467a-b27c-9588731f8574",
+    "uuid" : "9e7d43dd-b4ee-46a7-80c8-909128430ff3",
     "configuration" : [ {
       "name" : "executionMode",
       "value" : "STANDALONE"
@@ -392,7 +392,7 @@
         "value" : "OTHER"
       }, {
         "name" : "s3ConfigBean.s3Config.endpoint",
-        "value" : "http://localhost:9000"
+        "value" : "http://localhost:8080"
       }, {
         "name" : "s3ConfigBean.s3Config.commonPrefix",
         "value" : null
@@ -877,22 +877,22 @@
       "services" : [ ]
     },
     "info" : {
-      "pipelineId" : "Bootcamp1MinioS3toMapR4306a62d-1b2f-49de-b58f-fe3f8bbb0130",
+      "pipelineId" : "Bootcamp1MinioS3toMapR7f5d08f8-51df-4880-92a8-2a3185623e51",
       "title" : "Bootcamp - 1 - Minio S3 to MapR",
       "description" : "",
-      "created" : 1515754813687,
-      "lastModified" : 1515754851280,
+      "created" : 1516026243050,
+      "lastModified" : 1516026603561,
       "creator" : "admin",
       "lastModifier" : "admin",
       "lastRev" : "0",
-      "uuid" : "16f6eecb-d4a9-467a-b27c-9588731f8574",
+      "uuid" : "9e7d43dd-b4ee-46a7-80c8-909128430ff3",
       "valid" : true,
       "metadata" : {
         "labels" : [ ]
       },
-      "name" : "Bootcamp1MinioS3toMapR4306a62d-1b2f-49de-b58f-fe3f8bbb0130",
+      "name" : "Bootcamp1MinioS3toMapR7f5d08f8-51df-4880-92a8-2a3185623e51",
       "sdcVersion" : "3.0.0.0",
-      "sdcId" : "6d47206c-f6b9-11e7-bcbf-dbb20ba1be82"
+      "sdcId" : "3b3856d8-f6b9-11e7-9f4b-a17fb88459b4"
     },
     "metadata" : {
       "labels" : [ ]
@@ -954,8 +954,8 @@
     "valid" : true,
     "issues" : {
       "pipelineIssues" : [ ],
-      "issueCount" : 0,
-      "stageIssues" : { }
+      "stageIssues" : { },
+      "issueCount" : 0
     },
     "previewable" : true
   },
@@ -1020,7 +1020,7 @@
     } ],
     "dataRuleDefinitions" : [ ],
     "driftRuleDefinitions" : [ ],
-    "uuid" : "e9c98f93-3ad4-46e8-8884-e66510d4ed44",
+    "uuid" : "bd911776-82af-4119-a4a4-37df5d8eabc6",
     "configuration" : [ {
       "name" : "emailIDs",
       "value" : [ ]
