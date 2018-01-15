@@ -69,7 +69,7 @@
         - SYS_ADMIN
         - SYS_RESOURCE
       ports:
-        - "9000:9000"
+        - "8080:9000"
 
 
   # Install the Portainer Docker container
@@ -94,7 +94,7 @@
         - "/var/run/docker.sock:/var/run/docker.sock"
         - "/portainer:/data"
       ports:
-        - "9001:9000"
+        - "9000:9000"
 
   # Install the Jumpbox Docker container
   - name: Remove the mapr-bootcamp-jumpbox container if it is already running
@@ -126,7 +126,7 @@
         - SYS_ADMIN
         - SYS_RESOURCE
       ports:
-        - "8080:6901"
+        - "80:6901"
 
   # # Install the Web-Filebrowser (elfinder) Docker container
   # - name: Remove the Web-Filebrowser container if it is already running
