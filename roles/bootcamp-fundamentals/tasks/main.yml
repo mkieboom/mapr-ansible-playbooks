@@ -199,7 +199,7 @@
 
   - name: Update Apache Drill DFS storage plugin
     uri:
-      url: "http://localhost:8047/storage/dfs.json"
+      url: "http://{{ansible_default_ipv4.address}}:8047/storage/dfs.json"
       method: POST
       body: "{{ lookup('file' , 'bootcamp-dataset/drill_storage_plugin_dfs/drill_storage_plugin_dfs.json') }}"
       body_format: json
