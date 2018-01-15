@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# re-launch finder docker
+# re-launch jumpbox docker
 
 # Get the MapR Cluster name
 MAPR_CLUSTER_NAME=`head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'`
@@ -14,8 +14,8 @@ MAPR_UID=`id -u mapr`
 MAPR_GID=`id -g mapr`
 
 
-# Kill finder docker if currently running
-docker ps | awk '{ print $1,$2 }' | grep mapr-pacc-finder-docker | awk '{print $1 }' | xargs -I {} docker kill {}
+# Kill jumpbox docker if currently running
+docker ps | awk '{ print $1,$2 }' | grep mapr-bootcamp-jumpbox | awk '{print $1 }' | xargs -I {} docker kill {}
 
 
 # Launch the docker container
@@ -31,5 +31,6 @@ docker run -d \
 -e MAPR_CONTAINER_UID=$MAPR_UID \
 -e MAPR_CONTAINER_GID=$MAPR_GID \
 -e MAPR_MOUNT_PATH=/mapr \
--p 8080:80 \
-mkieboom/mapr-pacc-finder-docker
+-p 5901:5901 \
+-p 80:6901 \
+mkieboom/mapr-bootcamp-jumpbox

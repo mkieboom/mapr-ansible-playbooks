@@ -34,5 +34,5 @@ docker run -d \
 -e MINIO_PATH=/mapr/$MAPR_CLUSTER_NAME/minio \
 -e MINIO_ACCESS_KEY=myminioaccesskey \
 -e MINIO_SECRET_KEY=myminiosecretkey \
--p 9000:9000 \
+-p 8080:9000 \
 mkieboom/mapr-pacc-minio-docker
