@@ -43,9 +43,9 @@
       force_kill: yes
       interactive: yes
       env:
-        HOST_IP={{ansible_hostname}}
+        HOST_IP={{ansible_default_ipv4.address}}
         MAPR_CLUSTER={{inventory_hostname}}
-        MAPR_CLDB_HOSTS={{ansible_hostname}}
+        MAPR_CLDB_HOSTS={{ansible_default_ipv4.address}}
         MAPR_CONTAINER_USER={{mapr_user}}
         MAPR_CONTAINER_PASSWORD={{mapr_user}}
         MAPR_CONTAINER_GROUP={{mapr_group}}
@@ -98,7 +98,7 @@
       force_kill: yes
       env:
         MAPR_CLUSTER={{inventory_hostname}}
-        MAPR_CLDB_HOSTS={{ansible_hostname}}
+        MAPR_CLDB_HOSTS={{ansible_default_ipv4.address}}
         MAPR_CONTAINER_USER={{mapr_user}}
         MAPR_CONTAINER_GROUP={{mapr_group}}
         MAPR_CONTAINER_UID={{mapr_user_uid}}
@@ -160,7 +160,7 @@
       force_kill: yes
       env:
         MAPR_CLUSTER={{inventory_hostname}}
-        MAPR_CLDB_HOSTS={{ansible_hostname}}
+        MAPR_CLDB_HOSTS={{ansible_default_ipv4.address}}
         MAPR_CONTAINER_USER={{mapr_user}}
         MAPR_CONTAINER_GROUP={{mapr_group}}
         MAPR_CONTAINER_UID={{mapr_user_uid}}
@@ -192,7 +192,7 @@
   #     force_kill: yes
   #     env:
   #       MAPR_CLUSTER={{inventory_hostname}}
-  #       MAPR_CLDB_HOSTS={{ansible_hostname}}
+  #       MAPR_CLDB_HOSTS={{ansible_default_ipv4.address}}
   #       MAPR_CONTAINER_USER={{mapr_user}}
   #       MAPR_CONTAINER_GROUP={{mapr_group}}
   #       MAPR_CONTAINER_UID={{mapr_user_uid}}
