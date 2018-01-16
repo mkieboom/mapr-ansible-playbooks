@@ -19,7 +19,7 @@ docker ps | awk '{ print $1,$2 }' | grep data-science-refinery | awk '{print $1 
 
 
 # Launch the docker container
-docker run -d \
+docker run -it \
 --cap-add SYS_ADMIN \
 --cap-add SYS_RESOURCE \
 --device /dev/fuse \
@@ -35,4 +35,4 @@ docker run -d \
 -e MAPR_MOUNT_PATH=/mapr \
 -p 9995:9995 \
 -p 10000-10010:10000-10010 \
-maprtech/data-science-refinery
+maprtech/data-science-refinery &
