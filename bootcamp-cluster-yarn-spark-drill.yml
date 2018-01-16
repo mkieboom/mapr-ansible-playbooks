@@ -49,6 +49,26 @@
   roles:
     - mapr-patch-ebf
 
+############################################
+## cluster-yarn-spark-drill.yml
+############################################
+
+## Install MapR Eco-system components
+- name: Install Drill
+  hosts: mapr-core
+  roles:
+    - mapr-drill
+
+############################################
+## configure for medium memory consumption
+############################################
+
+# Configure memory
+- name: Configure warden for MEDIUM memory consumption and restart warden
+  hosts: mapr-core
+  roles:
+    - mapr-configure-memory-medium
+
 # Configure and Start Zookeeper & Warden
 - name: Configure and start
   hosts: mapr-core
@@ -87,27 +107,11 @@
 
 
 ############################################
-## cluster-yarn-spark-drill.yml
+## Run configure.sh for new services
 ############################################
-
-## Install MapR Eco-system components
-- name: Install Drill
-  hosts: mapr-drill
-  roles:
-    - mapr-drill
 
 ## Run configure.sh
 - name: Run configure.sh -R for Eco-system component configuration
   hosts: mapr-core
   roles:
     - mapr-configure-components
-
-############################################
-## configure for medium memory consumption
-############################################
-
-# Configure memory
-- name: Configure warden for MEDIUM memory consumption and restart warden
-  hosts: mapr-core
-  roles:
-    - mapr-configure-memory-medium
