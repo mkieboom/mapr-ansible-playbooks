@@ -5,7 +5,7 @@
   - name: Clone the github project for all shell scripts
     git:
       repo: "https://github.com/mkieboom/mapr-ansible-playbooks"
-      dest: /tmp/mapr-ansible-playbooks/
+      dest: /bootcamp/mapr-ansible-playbooks/
 
   # Use a cron job to cleanup docker images
   - name: Use a cron job to cleanup docker images
