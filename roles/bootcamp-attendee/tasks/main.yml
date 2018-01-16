@@ -16,4 +16,4 @@
 
   # Create a record in the 'recent table' list
   - name: Create a record in the 'recent table' list
-    shell: echo "/image-classification/output/database/image-output-table" | hadoop fs -put - /user/mapr/.recent_tables
+    shell: echo "/image-classification/output/database/image-output-table" | hadoop fs -put -f - /user/mapr/.recent_tables
