@@ -49,12 +49,6 @@
   roles:
     - mapr-patch-ebf
 
-# Configure memory
-- name: Configure warden for MEDIUM memory consumption and restart warden
-  hosts: mapr-core
-  roles:
-    - mapr-configure-memory-medium
-
 # Configure and Start Zookeeper & Warden
 - name: Configure and start
   hosts: mapr-core
@@ -107,3 +101,13 @@
   hosts: mapr-core
   roles:
     - mapr-configure-components
+
+############################################
+## configure for medium memory consumption
+############################################
+
+# Configure memory
+- name: Configure warden for MEDIUM memory consumption and restart warden
+  hosts: mapr-core
+  roles:
+    - mapr-configure-memory-medium
