@@ -50,15 +50,10 @@
     - mapr-patch-ebf
 
 # Configure memory
-- name: Configure warden for LOW memory consumption and restart warden
-  hosts: mapr-core
-  roles:
-    - {role: mapr-configure-memory-low, when: memory == 'low'}
-
 - name: Configure warden for MEDIUM memory consumption and restart warden
   hosts: mapr-core
   roles:
-    - {role: mapr-configure-memory-medium, when: memory == 'medium'}
+    - mapr-configure-memory-medium
 
 # Configure and Start Zookeeper & Warden
 - name: Configure and start
