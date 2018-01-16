@@ -3,6 +3,13 @@
 ## Install MapR with YARN, Spark and Drill
 - import_playbook: bootcamp-fundamentals.yml
 
+## Configure warden and drill for limited memory consumption
+- name: Configure warden and drill for limited memory consumption
+  hosts: bootcamp-trainer
+  roles:
+    - mapr-configure-memory-medium
+    - mapr-configure-components
+
 ## Install Bootcamp specific items for the attendees
 - name: Install Bootcamp specific items for the attendees
   hosts: bootcamp-trainer
