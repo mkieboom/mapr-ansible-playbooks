@@ -247,3 +247,7 @@
   - name: Check if the DFS storage plugin got created successfully in Drill
     fail:
     when: "'success' not in drill_storage_plugin_result.content"
+
+  # Create /minio/images folder (using hadoop fs as /mapr might not be there)
+  - name: Create the /minio/images folder (using hadoop fs as /mapr might not be there)
+    shell: hadoop fs -mkdir -p /minio/images
