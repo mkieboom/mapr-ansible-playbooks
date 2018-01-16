@@ -33,6 +33,33 @@
       state: present
       force: yes
 
+  - name: Launch the data-science-refinery container
+    docker_container:
+      image: maprtech/data-science-refinery
+      name: data-science-refinery
+      restart_policy: always
+      state: started
+      recreate: yes
+      force_kill: yes
+      env:
+        HOST_IP={{ansible_hostname}}
+        MAPR_CLUSTER={{inventory_hostname}}
+        MAPR_CLDB_HOSTS={{ansible_hostname}}
+        MAPR_CONTAINER_USER={{mapr_user}}
+        MAPR_CONTAINER_PASSWORD={{mapr_user}}
+        MAPR_CONTAINER_GROUP={{mapr_group}}
+        MAPR_CONTAINER_UID={{mapr_user_uid}}
+        MAPR_CONTAINER_GID={{mapr_group_gid}}
+        MAPR_MOUNT_PATH=/mapr
+      devices:
+        - "/dev/fuse"
+      capabilities:
+        - SYS_ADMIN
+        - SYS_RESOURCE
+      ports:
+        - "9995:9995"
+        - "10000-10010:10000-10010"
+
   # Download the MapR PACC Image Classification Docker container
   - name: Download the mapr-pacc-image-classification container
     docker_image:
