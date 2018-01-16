@@ -41,6 +41,7 @@
       state: started
       recreate: yes
       force_kill: yes
+      interactive: yes
       env:
         HOST_IP={{ansible_hostname}}
         MAPR_CLUSTER={{inventory_hostname}}
