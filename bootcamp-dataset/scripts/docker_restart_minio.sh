@@ -32,7 +32,7 @@ docker run -d \
 -e MAPR_CONTAINER_GID=$MAPR_GID \
 -e MAPR_MOUNT_PATH=/mapr \
 -e MINIO_PATH=/mapr/$MAPR_CLUSTER_NAME/minio \
--e MINIO_ACCESS_KEY=myminioaccesskey \
--e MINIO_SECRET_KEY=myminiosecretkey \
+-e MINIO_ACCESS_KEY=maprbootcamp \
+-e MINIO_SECRET_KEY=maprbootcamp \
 -p 8080:9000 \
 mkieboom/mapr-pacc-minio-docker

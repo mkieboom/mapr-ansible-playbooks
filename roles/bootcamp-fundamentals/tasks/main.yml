@@ -66,8 +66,8 @@
         MAPR_CONTAINER_UID={{mapr_user_uid}}
         MAPR_CONTAINER_GID={{mapr_group_gid}}
         MAPR_MOUNT_PATH=/mapr
-        MINIO_ACCESS_KEY=myminioaccesskey
-        MINIO_SECRET_KEY=myminiosecretkey
+        MINIO_ACCESS_KEY=maprbootcamp
+        MINIO_SECRET_KEY=maprbootcamp
         MINIO_PATH=/mapr/{{inventory_hostname}}/minio
       devices:
         - "/dev/fuse"
