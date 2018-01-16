@@ -113,7 +113,10 @@
        state: present
 
    - name: Auto launch Streamsets
-     lineinfile: path=/etc/rc.d/rc.local line='service sdc start' state=present
+     lineinfile: path=/etc/rc.d/rc.local line='service sdc restart' state=present
 
    - name: Auto launch Streamsets
      file: path=/etc/rc.d/rc.local mode=755
+
+   - name: Configure Streamsets and restart it
+     shell: bash /etc/rc.d/rc.local
