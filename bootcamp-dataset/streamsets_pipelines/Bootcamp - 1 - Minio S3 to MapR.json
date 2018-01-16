@@ -2,10 +2,10 @@
   "pipelineConfig" : {
     "schemaVersion" : 5,
     "version" : 7,
-    "pipelineId" : "Bootcamp1MinioS3toMapR7f5d08f8-51df-4880-92a8-2a3185623e51",
+    "pipelineId" : "Bootcamp1MinioS3toMapR858c33a2-12fe-46ce-9f29-871f2323226c",
     "title" : "Bootcamp - 1 - Minio S3 to MapR",
     "description" : "",
-    "uuid" : "9e7d43dd-b4ee-46a7-80c8-909128430ff3",
+    "uuid" : "ab6141f8-babe-4399-b1a0-33f234f48607",
     "configuration" : [ {
       "name" : "executionMode",
       "value" : "STANDALONE"
@@ -383,10 +383,10 @@
         "value" : "/images"
       }, {
         "name" : "s3ConfigBean.s3Config.awsConfig.awsAccessKeyId",
-        "value" : "myminioaccesskey"
+        "value" : "maprbootcamp"
       }, {
         "name" : "s3ConfigBean.s3Config.awsConfig.awsSecretAccessKey",
-        "value" : "myminiosecretkey"
+        "value" : "maprbootcamp"
       }, {
         "name" : "s3ConfigBean.s3Config.region",
         "value" : "OTHER"
@@ -877,22 +877,22 @@
       "services" : [ ]
     },
     "info" : {
-      "pipelineId" : "Bootcamp1MinioS3toMapR7f5d08f8-51df-4880-92a8-2a3185623e51",
+      "pipelineId" : "Bootcamp1MinioS3toMapR858c33a2-12fe-46ce-9f29-871f2323226c",
       "title" : "Bootcamp - 1 - Minio S3 to MapR",
       "description" : "",
-      "created" : 1516026243050,
-      "lastModified" : 1516026603561,
+      "created" : 1516106135454,
+      "lastModified" : 1516106150067,
       "creator" : "admin",
       "lastModifier" : "admin",
       "lastRev" : "0",
-      "uuid" : "9e7d43dd-b4ee-46a7-80c8-909128430ff3",
+      "uuid" : "ab6141f8-babe-4399-b1a0-33f234f48607",
       "valid" : true,
       "metadata" : {
         "labels" : [ ]
       },
-      "name" : "Bootcamp1MinioS3toMapR7f5d08f8-51df-4880-92a8-2a3185623e51",
+      "name" : "Bootcamp1MinioS3toMapR858c33a2-12fe-46ce-9f29-871f2323226c",
       "sdcVersion" : "3.0.0.0",
-      "sdcId" : "3b3856d8-f6b9-11e7-9f4b-a17fb88459b4"
+      "sdcId" : "5a9502b9-fa97-11e7-85e9-a34948a1ce65"
     },
     "metadata" : {
       "labels" : [ ]
@@ -1020,7 +1020,7 @@
     } ],
     "dataRuleDefinitions" : [ ],
     "driftRuleDefinitions" : [ ],
-    "uuid" : "bd911776-82af-4119-a4a4-37df5d8eabc6",
+    "uuid" : "1292fa15-6e28-4aff-b50e-d4e8765104ca",
     "configuration" : [ {
       "name" : "emailIDs",
       "value" : [ ]
