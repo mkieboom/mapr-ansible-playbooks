@@ -20,7 +20,7 @@
 
   # Store IP address in text file for later usage
   - name: Store IP address in text file for later usage
-    lineinfile: path=/myip.txt line='{{ansible_default_ipv4.address}}' state=present
+    shell: echo "{{ansible_default_ipv4.address}}" > /myip.txt
 
   - name: Restart NFS
     get_url:
