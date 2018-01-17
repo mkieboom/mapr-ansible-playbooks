@@ -10,7 +10,7 @@ demo02.mapr.com ansible_host=10.0.0.177 ansible_user=root ansible_become=yes ans
 demo03.mapr.com ansible_host=10.0.0.85 ansible_user=root ansible_become=yes ansible_become_method=sudo
 demo04.mapr.com ansible_host=10.0.0.224 ansible_user=root ansible_become=yes ansible_become_method=sudo
 demo05.mapr.com ansible_host=10.0.0.140 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo06.mapr.com ansible_host=10.0.0.58 ansible_user=root ansible_become=yes ansible_become_method=sudo
+#demo06.mapr.com ansible_host=10.0.0.58 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 
 # MapR Installer - probe
