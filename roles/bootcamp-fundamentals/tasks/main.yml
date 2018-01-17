@@ -18,6 +18,10 @@
   - name: Set MAPR_SUBNETS
     lineinfile: path=/opt/mapr/conf/env.sh line='export MAPR_SUBNETS={{ansible_default_ipv4.address}}/24' state=present
 
+  # Store IP address in text file for later usage
+  - name: Store IP address in text file for later usage
+    lineinfile: path=/myip.txt line='{{ansible_default_ipv4.address}}' state=present
+
   - name: Restart NFS
     get_url:
       url: http://s3-eu-west-1.amazonaws.com/mkieboom/mapr-nfs.sh
