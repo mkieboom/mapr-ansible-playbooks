@@ -2,10 +2,10 @@
   "pipelineConfig" : {
     "schemaVersion" : 5,
     "version" : 7,
-    "pipelineId" : "Bootcamp2MapRStreamstoDockeryololarge54f1570a-1782-4fbd-a972-37e95a17938e",
+    "pipelineId" : "Bootcamp2MapRStreamstoDockeryololarge7bcf1b1c-e908-401a-923f-a170f277b554",
     "title" : "Bootcamp - 2 - MapR Streams to Docker (yolo-large)",
     "description" : "",
-    "uuid" : "266e77cf-4596-4b5c-bc83-a79a84abd0fb",
+    "uuid" : "461d3af5-fa46-4bb0-8356-5fb375062372",
     "configuration" : [ {
       "name" : "executionMode",
       "value" : "STANDALONE"
@@ -352,7 +352,7 @@
         "value" : "1000"
       }, {
         "name" : "config.script",
-        "value" : "if [ \"$(sudo docker ps|grep mapr-pacc-image-classification|wc -l)\" -eq 1 ]; then\n  \techo \"$(date) - Docker Image Classification already running\" >> /tmp/sdc_docker.txt\nelse\n  \techo \"$(date) - Docker Image Classification not running, starting it now\" >> /tmp/sdc_docker.txt\n\n    # Get the MapR Cluster name\n    MAPR_CLUSTER_NAME=`head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'`\n\n    # Get the CLDB hostname\n    MAPR_CLDB_HOST_NAME=`head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'`\n    MAPR_CLDB_HOST_NAME=${MAPR_CLDB_HOST_NAME%:7222}\n\n    # Get the mapr uid and gid\n    MAPR_UID=`id -u mapr`\n    MAPR_GID=`id -g mapr`\n\n    # File paths\n    IMAGE_INPUT_PATH=/mapr/$MAPR_CLUSTER_NAME/image-classification/input/images/\n    IMAGE_OUTPUT_PATH=/mapr/$MAPR_CLUSTER_NAME/image-classification/output/images/\n    JSON_OUTPUT_PATH=/mapr/$MAPR_CLUSTER_NAME/image-classification/output/json/\n\n    echo \"Starting classification for image: $IMAGE_INPUT_PATH$IMAGE_FILENAME\" >> /tmp/sdc_docker.txt\n    \n    # Run the Docker container to classify the image\nflock -n /tmp/sdc_docker.lock -c \"\\\n\tsudo docker run -i \\\n\t--cap-add SYS_ADMIN \\\n\t--cap-add SYS_RESOURCE \\\n\t--device /dev/fuse \\\n\t-e MAPR_CLUSTER=$MAPR_CLUSTER_NAME \\\n\t-e MAPR_CLDB_HOSTS=$MAPR_CLDB_HOST_NAME \\\n\t-e MAPR_CONTAINER_USER=mapr \\\n\t-e MAPR_CONTAINER_GROUP=mapr \\\n\t-e MAPR_CONTAINER_UID=$MAPR_UID \\\n\t-e MAPR_CONTAINER_GID=$MAPR_GID \\\n\t-e MAPR_MOUNT_PATH=/mapr \\\n\t-e YOLO_IMAGE_FILENAME=$IMAGE_FILENAME \\\n\t-e YOLO_INPUT=$IMAGE_INPUT_PATH \\\n\t-e YOLO_OUTPUT_IMAGE=$IMAGE_OUTPUT_PATH \\\n\t-e YOLO_OUTPUT_JSON=$JSON_OUTPUT_PATH \\\n\t-e YOLO_CONFIG=/mapr/$MAPR_CLUSTER_NAME/yolo/yolo.cfg \\\n\t-e YOLO_WEIGHTS=/mapr/$MAPR_CLUSTER_NAME/yolo/yolo.weights \\\n\t-e YOLO_THRESHOLD=0.1 \\\n\tmkieboom/mapr-pacc-image-classification >> /tmp/sdc_docker.txt &\"\nfi\n\ndocker rm $(docker ps -q -f status=exited) &"
+        "value" : "if [ \"$(sudo docker ps|grep mapr-pacc-image-classification|wc -l)\" -eq 1 ]; then\n  \techo \"$(date) - Docker Image Classification already running\" >> /tmp/sdc_docker.txt\nelse\n  \techo \"$(date) - Docker Image Classification not running, starting it now\" >> /tmp/sdc_docker.txt\n\n    # Get the MapR Cluster name\n    MAPR_CLUSTER_NAME=`head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $1}'`\n\n    # Get the CLDB hostname\n    MAPR_CLDB_HOST_NAME=`head -n 1 /opt/mapr/conf/mapr-clusters.conf | awk '{print $3}'`\n    MAPR_CLDB_HOST_NAME=${MAPR_CLDB_HOST_NAME%:7222}\n\n    # Get the CLDB IP\n    MAPR_CLDB_HOST_IP=`cat /myip.txt`\n\n    # Get the mapr uid and gid\n    MAPR_UID=`id -u mapr`\n    MAPR_GID=`id -g mapr`\n\n    # File paths\n    IMAGE_INPUT_PATH=/mapr/$MAPR_CLUSTER_NAME/image-classification/input/images/\n    IMAGE_OUTPUT_PATH=/mapr/$MAPR_CLUSTER_NAME/image-classification/output/images/\n    JSON_OUTPUT_PATH=/mapr/$MAPR_CLUSTER_NAME/image-classification/output/json/\n\n    echo \"Starting classification for image: $IMAGE_INPUT_PATH$IMAGE_FILENAME\" >> /tmp/sdc_docker.txt\n    \n    # Run the Docker container to classify the image\nflock -n /tmp/sdc_docker.lock -c \"\\\n\tsudo docker run -i \\\n\t--cap-add SYS_ADMIN \\\n\t--cap-add SYS_RESOURCE \\\n\t--device /dev/fuse \\\n\t-e MAPR_CLUSTER=$MAPR_CLUSTER_NAME \\\n\t-e MAPR_CLDB_HOSTS=$MAPR_CLDB_HOST_IP \\\n\t-e MAPR_CONTAINER_USER=mapr \\\n\t-e MAPR_CONTAINER_GROUP=mapr \\\n\t-e MAPR_CONTAINER_UID=$MAPR_UID \\\n\t-e MAPR_CONTAINER_GID=$MAPR_GID \\\n\t-e MAPR_MOUNT_PATH=/mapr \\\n\t-e YOLO_IMAGE_FILENAME=$IMAGE_FILENAME \\\n\t-e YOLO_INPUT=$IMAGE_INPUT_PATH \\\n\t-e YOLO_OUTPUT_IMAGE=$IMAGE_OUTPUT_PATH \\\n\t-e YOLO_OUTPUT_JSON=$JSON_OUTPUT_PATH \\\n\t-e YOLO_CONFIG=/mapr/$MAPR_CLUSTER_NAME/yolo/yolo.cfg \\\n\t-e YOLO_WEIGHTS=/mapr/$MAPR_CLUSTER_NAME/yolo/yolo.weights \\\n\t-e YOLO_THRESHOLD=0.1 \\\n\tmkieboom/mapr-pacc-image-classification >> /tmp/sdc_docker.txt &\"\nfi\n\ndocker rm $(docker ps -q -f status=exited) &"
       }, {
         "name" : "stageOnRecordError",
         "value" : "TO_ERROR"
@@ -394,22 +394,22 @@
       "services" : [ ]
     },
     "info" : {
-      "pipelineId" : "Bootcamp2MapRStreamstoDockeryololarge54f1570a-1782-4fbd-a972-37e95a17938e",
+      "pipelineId" : "Bootcamp2MapRStreamstoDockeryololarge7bcf1b1c-e908-401a-923f-a170f277b554",
       "title" : "Bootcamp - 2 - MapR Streams to Docker (yolo-large)",
       "description" : "",
-      "created" : 1515755036659,
-      "lastModified" : 1515756403569,
+      "created" : 1516178080170,
+      "lastModified" : 1516178115748,
       "creator" : "admin",
       "lastModifier" : "admin",
       "lastRev" : "0",
-      "uuid" : "266e77cf-4596-4b5c-bc83-a79a84abd0fb",
+      "uuid" : "461d3af5-fa46-4bb0-8356-5fb375062372",
       "valid" : true,
       "metadata" : {
         "labels" : [ ]
       },
-      "name" : "Bootcamp2MapRStreamstoDockeryololarge54f1570a-1782-4fbd-a972-37e95a17938e",
+      "name" : "Bootcamp2MapRStreamstoDockeryololarge7bcf1b1c-e908-401a-923f-a170f277b554",
       "sdcVersion" : "3.0.0.0",
-      "sdcId" : "6d47206c-f6b9-11e7-bcbf-dbb20ba1be82"
+      "sdcId" : "d2157aef-fb14-11e7-ba79-8b09d9e85b54"
     },
     "metadata" : {
       "labels" : [ ]
@@ -537,7 +537,7 @@
     } ],
     "dataRuleDefinitions" : [ ],
     "driftRuleDefinitions" : [ ],
-    "uuid" : "4b19d54f-0b5a-4aa8-8980-30397969b621",
+    "uuid" : "335138ea-6214-48f2-acd5-5e08ff4d6873",
     "configuration" : [ {
       "name" : "emailIDs",
       "value" : [ ]
