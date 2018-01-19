@@ -1,10 +1,19 @@
 # Bootcamp Cluster Node definition for TRAINER node
 
+########################################################################################################################
+#  NODE DEFINITION - BEGIN
+########################################################################################################################
+
 [bootcamp-trainer-nodes]
 trainer.mapr.com ansible_host=10.0.0.166 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 [bootcamp-attendee-nodes]
 demo01.mapr.com ansible_host=10.0.0.212 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
+########################################################################################################################
+#  NODE DEFINITION - END
+########################################################################################################################
+
 
 # MapR Installer - probe
 [mapr-installer:children]
