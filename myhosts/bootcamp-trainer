@@ -1,16 +1,11 @@
 # Bootcamp Cluster Node definition for TRAINER node
 
-## MAPRSE ##
 [bootcamp-trainer-nodes]
-trainer.mapr.com ansible_host=10.0.0.6 ansible_user=root ansible_become=yes ansible_become_method=sudo
+trainer.mapr.com ansible_host=10.0.0.17 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 [bootcamp-attendee-nodes]
-demo01.mapr.com ansible_host=10.0.0.12 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo02.mapr.com ansible_host=10.0.0.177 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo03.mapr.com ansible_host=10.0.0.85 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo04.mapr.com ansible_host=10.0.0.224 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo05.mapr.com ansible_host=10.0.0.140 ansible_user=root ansible_become=yes ansible_become_method=sudo
-#demo06.mapr.com ansible_host=10.0.0.58 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo01.mapr.com ansible_host=10.0.0.226 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo02.mapr.com ansible_host=10.0.0.14 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 
 # MapR Installer - probe
