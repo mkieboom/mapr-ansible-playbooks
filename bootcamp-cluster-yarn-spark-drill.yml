@@ -38,10 +38,6 @@
   hosts: mapr-nfs
   roles:
     - mapr-nfs
-- name: Install Gateway
-  hosts: mapr-gateway
-  roles:
-    - mapr-gateway
 
 # Install latest MapR Patch EBF
 - name: Install latest MapR Patch EBF
@@ -75,6 +71,14 @@
   roles:
     - bootcamp-mapr-configure-unsecure
 
+############################################
+## Gateway for table replication
+############################################
+
+- name: Install Gateway
+  hosts: mapr-gateway
+  roles:
+    - mapr-gateway
 
 ############################################
 ## cluster-yarn.yml
