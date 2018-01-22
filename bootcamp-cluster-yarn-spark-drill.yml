@@ -96,14 +96,14 @@
 ############################################
 
 ## Install MapR Eco-system components
-- name: Install Spark on YARN
-  hosts: mapr-spark-yarn
-  roles:
-    - mapr-spark-yarn
 - name: Install Spark History Server
   hosts: mapr-spark-historyserver
   roles:
     - mapr-spark-historyserver
+- name: Install Spark on YARN
+  hosts: mapr-spark-yarn
+  roles:
+    - mapr-spark-yarn
 
 
 ############################################
