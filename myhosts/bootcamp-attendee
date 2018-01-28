@@ -1,0 +1,198 @@
+# Bootcamp Cluster Node definition for ATTENDEE nodes
+
+
+########################################################################################################################
+#  NODE DEFINITION - BEGIN
+########################################################################################################################
+
+[bootcamp-trainer-nodes]
+trainer.mapr.com ansible_host=10.0.0.207 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
+[bootcamp-attendee-nodes]
+demo01.mapr.com ansible_host=10.0.0.138 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo02.mapr.com ansible_host=10.0.0.240 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo03.mapr.com ansible_host=10.0.0.144 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo04.mapr.com ansible_host=10.0.0.231 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo05.mapr.com ansible_host=10.0.0.38 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo06.mapr.com ansible_host=10.0.0.41 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo07.mapr.com ansible_host=10.0.0.232 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo08.mapr.com ansible_host=10.0.0.149 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo09.mapr.com ansible_host=10.0.0.117 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo10.mapr.com ansible_host=10.0.0.95 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo11.mapr.com ansible_host=10.0.0.125 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo12.mapr.com ansible_host=10.0.0.211 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo13.mapr.com ansible_host=10.0.0.49 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo14.mapr.com ansible_host=10.0.0.84 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo15.mapr.com ansible_host=10.0.0.19 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo16.mapr.com ansible_host=10.0.0.68 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo17.mapr.com ansible_host=10.0.0.196 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo18.mapr.com ansible_host=10.0.0.102 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo19.mapr.com ansible_host=10.0.0.100 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo20.mapr.com ansible_host=10.0.0.193 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo21.mapr.com ansible_host=10.0.0.161 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo22.mapr.com ansible_host=10.0.0.131 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo23.mapr.com ansible_host=10.0.0.66 ansible_user=root ansible_become=yes ansible_become_method=sudo
+
+########################################################################################################################
+#  NODE DEFINITION - END
+########################################################################################################################
+
+
+# MapR Installer - probe
+[mapr-installer:children]
+bootcamp-attendee-nodes
+
+# Core
+[mapr-core:children]
+bootcamp-attendee-nodes
+
+# Zookeeper
+[mapr-zookeeper:children]
+bootcamp-attendee-nodes
+
+# Container Location Database
+[mapr-cldb:children]
+bootcamp-attendee-nodes
+
+# MapR Control System
+[mapr-mcs:children]
+bootcamp-attendee-nodes
+
+# MapR Fileserver
+[mapr-fileserver:children]
+bootcamp-attendee-nodes
+
+# NFS
+[mapr-nfs:children]
+bootcamp-attendee-nodes
+
+# Apache Drill
+[mapr-drill:children]
+bootcamp-attendee-nodes
+
+# CollectD
+[mapr-collectd:children]
+bootcamp-attendee-nodes
+
+# OpenTSDB
+[mapr-opentsdb:children]
+bootcamp-attendee-nodes
+
+# Grafana
+[mapr-grafana:children]
+bootcamp-attendee-nodes
+
+# FluentD
+[mapr-fluentd:children]
+bootcamp-attendee-nodes
+
+# ElasticSearch
+[mapr-elasticsearch:children]
+bootcamp-attendee-nodes
+
+# Kibana
+[mapr-kibana:children]
+bootcamp-attendee-nodes
+
+###############################################################
+
+
+# Gateway for Streams and MapR-DB
+[mapr-gateway:children]
+bootcamp-attendee-nodes
+
+# YARN resource manager
+[mapr-resourcemanager:children]
+bootcamp-attendee-nodes
+
+# YARN Node Manager
+[mapr-nodemanager:children]
+bootcamp-attendee-nodes
+
+# Job History Server, IMPORTANT: only one
+[mapr-historyserver:children]
+
+# MySQL, required for Hive MetaStore and Oozie, IMPORTANT: only one
+[ext-mysql:children]
+
+# Spark on YARN
+[mapr-spark-yarn:children]
+bootcamp-attendee-nodes
+
+# Spark HistoryServer
+[mapr-spark-historyserver:children]
+bootcamp-attendee-nodes
+
+# Flume
+[mapr-flume:children]
+
+# Hcontrolnodes CLI
+[mapr-hcontrolnodes-cli:children]
+
+# Hcontrolnodes REST and Thrift
+[mapr-hcontrolnodes-thrift-rest:children]
+
+# Hive CLI
+[mapr-hive-cli:children]
+
+# Hive Meta Store
+[mapr-hive-metastore:children]
+
+# Hive Server2
+[mapr-hive-server2:children]
+
+# Hive HCatalog
+[mapr-hive-hcatalog:children]
+
+# Hive WebHCat
+[mapr-hive-webhcat:children]
+
+# HttpFS
+[mapr-httpfs:children]
+bootcamp-attendee-nodes
+
+# Hue, not yet supported
+[mapr-hue:children]
+
+# Mahout
+[mapr-mahout:children]
+
+# Sqoop2 Server
+[mapr-sqoop2-server:children]
+
+# Sqoop2 Client
+[mapr-sqoop2-client:children]
+
+# Pig
+[mapr-pig:children]
+
+# Oozie
+[mapr-oozie:children]
+
+#############################################
+###          Third Party Solutions        ###
+#############################################
+
+# Streamsets
+[thirdparty-streamsets:children]
+bootcamp-attendee-nodes
+
+# Docker
+[thirdparty-docker:children]
+bootcamp-attendee-nodes
+
+#############################################
+###          Bootcamp deployments         ###
+#############################################
+
+# Bootcamp fundamental nodes
+[bootcamp-fundamentals:children]
+bootcamp-attendee-nodes
+
+# Bootcamp trainer nodes
+[bootcamp-trainer:children]
+bootcamp-trainer-nodes
+
+# Bootcamp attendee nodes
+[bootcamp-attendee:children]
+bootcamp-attendee-nodes
