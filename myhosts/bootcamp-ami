@@ -165,6 +165,10 @@ bootcamp-ami-nodes
 bootcamp-ami-nodes
 
 # Bootcamp trainer nodes
+[bootcamp-ami:children]
+bootcamp-ami-nodes
+
+# Bootcamp trainer nodes
 [bootcamp-trainer:children]
 bootcamp-ami-nodes
 
