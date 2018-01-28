@@ -6,32 +6,11 @@
 ########################################################################################################################
 
 [bootcamp-trainer-nodes]
-trainer.mapr.com ansible_host=10.0.0.207 ansible_user=root ansible_become=yes ansible_become_method=sudo
+trainer.mapr.com ansible_host=172.16.4.8 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 [bootcamp-attendee-nodes]
-demo01.mapr.com ansible_host=10.0.0.138 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo02.mapr.com ansible_host=10.0.0.240 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo03.mapr.com ansible_host=10.0.0.144 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo04.mapr.com ansible_host=10.0.0.231 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo05.mapr.com ansible_host=10.0.0.38 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo06.mapr.com ansible_host=10.0.0.41 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo07.mapr.com ansible_host=10.0.0.232 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo08.mapr.com ansible_host=10.0.0.149 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo09.mapr.com ansible_host=10.0.0.117 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo10.mapr.com ansible_host=10.0.0.95 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo11.mapr.com ansible_host=10.0.0.125 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo12.mapr.com ansible_host=10.0.0.211 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo13.mapr.com ansible_host=10.0.0.49 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo14.mapr.com ansible_host=10.0.0.84 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo15.mapr.com ansible_host=10.0.0.19 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo16.mapr.com ansible_host=10.0.0.68 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo17.mapr.com ansible_host=10.0.0.196 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo18.mapr.com ansible_host=10.0.0.102 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo19.mapr.com ansible_host=10.0.0.100 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo20.mapr.com ansible_host=10.0.0.193 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo21.mapr.com ansible_host=10.0.0.161 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo22.mapr.com ansible_host=10.0.0.131 ansible_user=root ansible_become=yes ansible_become_method=sudo
-demo23.mapr.com ansible_host=10.0.0.66 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo01.mapr.com ansible_host=172.16.4.31 ansible_user=root ansible_become=yes ansible_become_method=sudo
+demo02.mapr.com ansible_host=172.16.4.42 ansible_user=root ansible_become=yes ansible_become_method=sudo
 
 ########################################################################################################################
 #  NODE DEFINITION - END
