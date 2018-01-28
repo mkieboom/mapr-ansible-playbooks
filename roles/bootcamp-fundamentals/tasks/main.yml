@@ -236,8 +236,8 @@
     - /tmp/yolo.weights
 
   # Create /zeppelin/shared-notebooks folder (using hadoop fs as /mapr might not be there)
-  - name: Create /zeppelin/shared-notebooks folder (using hadoop fs as /mapr might not be there)
-    shell: hadoop fs -mkdir -p /zeppelin/shared-notebooks
+  #- name: Create /zeppelin/shared-notebooks folder (using hadoop fs as /mapr might not be there)
+  #  shell: hadoop fs -mkdir -p /zeppelin/shared-notebooks
 
   - name: Update Apache Drill DFS storage plugin
     uri:
