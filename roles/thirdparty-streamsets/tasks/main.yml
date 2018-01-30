@@ -22,7 +22,7 @@
       reload: yes
 
    # Check if Streamsets already installed
-   - name: Check if Drill is installed
+   - name: Check if Streamsets is already installed
      stat: path=/usr/bin/streamsets
      register: streamsetsinstalled
 
