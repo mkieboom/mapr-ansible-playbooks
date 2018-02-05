@@ -16,6 +16,3 @@
 
 - name: Configure.sh
   shell: /opt/mapr/server/configure.sh -N {{ inventory_hostname }} -Z {{ansible_hostname}} -C {{ansible_hostname}}
-
-# Wait for the cluster to come up as otherwise later hadoop fs commands will fail
-- pause: seconds=120
