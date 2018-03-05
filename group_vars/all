@@ -62,3 +62,14 @@ streamsets_download_url: http://archives.streamsets.com/datacollector/{{streamse
 
 streamsets_repo_url: empty
 streamsets_repo_url_local: http://192.168.168.254:1234/archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/
+
+# Zeppelin
+zeppelin_version: 0.7.3
+zeppelin_port: 8181
+zeppelin_download_location: /tmp/
+zeppelin_install_location: /opt/
+zeppelin_download_url: http://ftp.tudelft.nl/apache/zeppelin/zeppelin-{{zeppelin_version}}/zeppelin-{{zeppelin_version}}-bin-all.tgz
+
+# Zeppelin notebooks for hands-on labs
+zeppelin_notebook_1: labs_zeppelin_notebooks/Lab2-Zeppelin_ETL_and_Dataframes.json
+zeppelin_notebook_2: labs_zeppelin_notebooks/Lab6-Zeppelin_Recommendations.json
