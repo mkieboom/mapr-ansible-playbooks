@@ -71,5 +71,5 @@ zeppelin_install_location: /opt/
 zeppelin_download_url: http://ftp.tudelft.nl/apache/zeppelin/zeppelin-{{zeppelin_version}}/zeppelin-{{zeppelin_version}}-bin-all.tgz
 
 # Zeppelin notebooks for hands-on labs
-zeppelin_notebook_1: labs_zeppelin_notebooks/Lab2-Zeppelin_ETL_and_Dataframes.json
-zeppelin_notebook_2: labs_zeppelin_notebooks/Lab6-Zeppelin_Recommendations.json
+zeppelin_notebook_1: bootcamp-dataset/zeppelin_notebook_in_dsr/Bootcamp-3-Spark_Introduction.json
+#zeppelin_notebook_2
