@@ -15,7 +15,7 @@
      lineinfile: dest=/{{zeppelin_install_location}}/zeppelin-{{zeppelin_version}}-bin-all/conf/zeppelin-site.xml regexp="^  <value>8080</value>" line="  <value>{{zeppelin_port}}</value>"
 
    - name: Launch Zeppelin on system start
-     lineinfile: dest=/etc/rc.d/rc.local line="/{{zeppelin_install_location}}/zeppelin-{{zeppelin_version}}-bin-all/bin/zeppelin-daemon.sh restart" state=present
+     lineinfile: dest=/etc/rc.d/rc.local line="su mapr -c '/{{zeppelin_install_location}}/zeppelin-{{zeppelin_version}}-bin-all/bin/zeppelin-daemon.sh restart'" state=present
 
    - name: Delete all existing Zeppelin notebooks
      shell: "rm -rf /{{zeppelin_install_location}}/zeppelin-{{zeppelin_version}}-bin-all/notebook/*"
