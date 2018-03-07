@@ -20,8 +20,11 @@
    - name: Delete all existing Zeppelin notebooks
      shell: "rm -rf /{{zeppelin_install_location}}/zeppelin-{{zeppelin_version}}-bin-all/notebook/*"
 
+   - name: Chown mapr:mapr Zeppelin
+     shell: "chown -R mapr:mapr /{{zeppelin_install_location}}/zeppelin-{{zeppelin_version}}-bin-all/"
+
    - name: Start Zeppelin
-     shell: "/{{zeppelin_install_location}}/zeppelin-{{zeppelin_version}}-bin-all/bin/zeppelin-daemon.sh restart"
+     shell: "su mapr -c '/{{zeppelin_install_location}}/zeppelin-{{zeppelin_version}}-bin-all/bin/zeppelin-daemon.sh restart'"
 
    - name: Wait for Zeppelin to come up
      wait_for:
