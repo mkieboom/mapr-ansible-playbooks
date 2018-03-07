@@ -14,8 +14,11 @@
   when: ansible_os_family == 'Suse'
 
 # Other actions
-- name: Set SPARK_HOME
+- name: Set SPARK_HOME for user root
   shell: export SPARK_HOME=/opt/mapr/spark/$(ls /opt/mapr/spark/|grep spark-)/
+- name: Set SPARK_HOME for user mapr
+  shell: su mapr -c "export SPARK_HOME=/opt/mapr/spark/$(ls /opt/mapr/spark/|grep spark-)/"
+
 - name: Create maprfs:///apps/spark
   shell: hadoop fs -mkdir -p /apps/spark
 - name: Owner maprfs:///apps/spark
