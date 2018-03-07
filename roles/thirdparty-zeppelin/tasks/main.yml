@@ -28,13 +28,13 @@
        port: "{{zeppelin_port}}"
        delay: 5
 
-   # - name: Import lab notebooks into Zeppelin
-   #   uri:
-   #     url: "http://localhost:{{zeppelin_port}}/api/notebook/import"
-   #     method: POST
-   #     body: "{{ lookup('file' , '{{item}}') }}"
-   #     status_code: 201
-   #     body_format: json
-   #   with_items:
-   #   - "{{zeppelin_notebook_1}}"
-   #   - "{{zeppelin_notebook_2}}"
+   - name: Import lab notebooks into Zeppelin
+     uri:
+       url: "http://localhost:{{zeppelin_port}}/api/notebook/import"
+       method: POST
+       body: "{{ lookup('file' , '{{item}}') }}"
+       status_code: 201
+       body_format: json
+     with_items:
+     - "{{zeppelin_notebook_1}}"
+#     - "{{zeppelin_notebook_2}}"
