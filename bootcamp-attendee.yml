@@ -13,6 +13,7 @@
     - mapr-opentsdb
     - mapr-configure-monitoring-opentsdb
     - bootcamp-attendee
+    - thirdparty-zeppelin
 
 ## Configure warden and drill for limited memory consumption
 - name: Configure and restart warden
