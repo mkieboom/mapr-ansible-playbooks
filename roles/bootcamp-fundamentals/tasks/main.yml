@@ -56,6 +56,8 @@
         MAPR_CONTAINER_UID={{mapr_user_uid}}
         MAPR_CONTAINER_GID={{mapr_group_gid}}
         MAPR_MOUNT_PATH=/mapr
+      security_opts:
+        - "apparmor:unconfined"
       devices:
         - "/dev/fuse"
       capabilities:
@@ -74,6 +76,18 @@
         - "10008:10008"
         - "10009:10009"
         - "10010:10010"
+        - "11000:11000"
+        - "11001:11001"
+        - "11002:11002"
+        - "11003:11003"
+        - "11004:11004"
+        - "11005:11005"
+        - "11006:11006"
+        - "11007:11007"
+        - "11008:11008"
+        - "11009:11009"
+        - "11010:11010"
+
 
   # Download the MapR PACC Image Classification Docker container
   - name: Download the mapr-pacc-image-classification container
