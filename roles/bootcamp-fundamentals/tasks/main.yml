@@ -134,29 +134,29 @@
         - "8080:9000"
 
 
-  # Install the Portainer Docker container
-  - name: Remove the Portainer container if it is already running
-    docker_container:
-      image: portainer/portainer
-      name: portainer
-      restart_policy: always
-      state: present
-      recreate: yes
-      force_kill: yes
+  # # Install the Portainer Docker container
+  # - name: Remove the Portainer container if it is already running
+  #   docker_container:
+  #     image: portainer/portainer
+  #     name: portainer
+  #     restart_policy: always
+  #     state: present
+  #     recreate: yes
+  #     force_kill: yes
 
-  - name: Launch the Portainer container
-    docker_container:
-      image: portainer/portainer
-      name: portainer
-      restart_policy: always
-      state: started
-      recreate: yes
-      force_kill: yes
-      volumes:
-        - "/var/run/docker.sock:/var/run/docker.sock"
-        - "/portainer:/data"
-      ports:
-        - "9000:9000"
+  # - name: Launch the Portainer container
+  #   docker_container:
+  #     image: portainer/portainer
+  #     name: portainer
+  #     restart_policy: always
+  #     state: started
+  #     recreate: yes
+  #     force_kill: yes
+  #     volumes:
+  #       - "/var/run/docker.sock:/var/run/docker.sock"
+  #       - "/portainer:/data"
+  #     ports:
+  #       - "9000:9000"
 
   # Install the Jumpbox Docker container
   - name: Remove the mapr-bootcamp-jumpbox container if it is already running
