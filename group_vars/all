@@ -17,7 +17,7 @@ memory: normal
 
 # JDK choose: open-jdk or oracle-jdk
 jdk: open-jdk
-oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm
+oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.rpm
 
 # MapR Repository
 mapr_repository_url: http://package.mapr.com/releases
