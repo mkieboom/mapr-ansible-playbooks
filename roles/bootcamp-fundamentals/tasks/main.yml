@@ -14,6 +14,13 @@
       minute: "*/2"
       job: "docker rm $(docker ps -q -f status=exited) > /tmp/bootcamp-docker-cleanup-cron.log"
 
+  # Set MAPR_EXTERNAL
+  - name: Set MAPR_EXTERNAL
+    lineinfile:
+      path: /etc/rc.local
+      line: 'grep -q "^MAPR_EXTERNAL" /opt/mapr/conf/env.sh && sed -i "s/^MAPR_EXTERNAL=.*/MAPR_EXTERNAL=$(curl -s http://whatismyip.akamai.com/)/" /opt/mapr/conf/env.sh || echo MAPR_EXTERNAL=$(curl -s http://whatismyip.akamai.com/) >> /opt/mapr/conf/env.sh'
+      state: present
+
   # Set MAPR_SUBNETS
   - name: Set MAPR_SUBNETS
     lineinfile: path=/opt/mapr/conf/env.sh line='export MAPR_SUBNETS={{ansible_default_ipv4.address}}/24' state=present
