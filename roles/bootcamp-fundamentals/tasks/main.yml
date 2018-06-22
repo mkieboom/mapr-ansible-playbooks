@@ -18,7 +18,7 @@
   - name: Set MAPR_EXTERNAL
     lineinfile:
       path: /etc/rc.local
-      line: 'grep -q "^MAPR_EXTERNAL" /opt/mapr/conf/env.sh && sed -i "s/^MAPR_EXTERNAL=.*/MAPR_EXTERNAL=$(curl -s http://whatismyip.akamai.com/)/" /opt/mapr/conf/env.sh || echo MAPR_EXTERNAL=$(curl -s http://whatismyip.akamai.com/) >> /opt/mapr/conf/env.sh'
+      line: 'grep -q "^export MAPR_EXTERNAL" /opt/mapr/conf/env.sh && sed -i "s/^export MAPR_EXTERNAL=.*/export MAPR_EXTERNAL=$(curl -s http://whatismyip.akamai.com/)/" /opt/mapr/conf/env.sh || echo export MAPR_EXTERNAL=$(curl -s http://whatismyip.akamai.com/) >> /opt/mapr/conf/env.sh'
       state: present
 
   # Set MAPR_SUBNETS
