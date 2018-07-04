@@ -64,7 +64,7 @@ streamsets_repo_url: empty
 streamsets_repo_url_local: http://192.168.168.254:1234/archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/
 
 # Zeppelin
-zeppelin_version: 0.7.3
+zeppelin_version: 0.8.0
 zeppelin_port: 8181
 zeppelin_download_location: /tmp/
 zeppelin_install_location: /opt/
