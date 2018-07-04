@@ -36,7 +36,7 @@
        url: "http://localhost:{{zeppelin_port}}/api/notebook/import"
        method: POST
        body: "{{ lookup('file' , '{{item}}') }}"
-       status_code: 201
+       status_code: 200, 201
        body_format: json
      with_items:
      - "{{zeppelin_notebook_1}}"
