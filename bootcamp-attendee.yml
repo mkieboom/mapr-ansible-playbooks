@@ -13,7 +13,7 @@
     - mapr-opentsdb
     - mapr-configure-monitoring-opentsdb
     - bootcamp-attendee
-    - thirdparty-zeppelin
+    #- thirdparty-zeppelin    # removed zeppelin as the DSR can run both Drill & Spark labs
 
 ## Configure warden and drill for limited memory consumption
 - name: Configure and restart warden
