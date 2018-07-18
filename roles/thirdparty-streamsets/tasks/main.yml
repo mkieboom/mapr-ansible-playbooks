@@ -21,27 +21,15 @@
       state: present
       reload: yes
 
-   # # Check if Streamsets already installed
-   # - name: Check if Streamsets is already installed
-   #   stat: path=/usr/bin/streamsets
-   #   register: streamsetsinstalled
-
-   # Download Streamsets from local repo (using wget as get_url doesn't support recursive downloads)
-   - name: Download Streamsets RPM's from local repo
-     shell: wget -r -nc --no-parent -nH --cut-dirs=100 {{ streamsets_repo_url }} -P {{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/
-     when: streamsets_repo_url != 'empty'
-
    # Download Streamsets tarbal
    - name: Download Streamsets (might take some time as it is a 3GB download)
      get_url:
        url: "{{streamsets_download_url}}"
        dest: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
        timeout: 900
-     when: streamsets_repo_url == 'empty'
 
    - name: Extract Streamsets
      unarchive: src="{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz" dest="{{streamsets_download_location}}" copy=no
-     when: streamsets_repo_url == 'empty'
 
    - name: Remove all non-relevant Streamsets origins/destinations
      #file: path="{{item}}" state=absent
@@ -56,7 +44,6 @@
        - "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka_1*.rpm"
        #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/streamsets-datacollector-apache-kafka*.rpm"
        #- "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz"
-     #when: streamsetsinstalled.stat.exists == false
 
    - name: Install Streamsets Datacollector
      yum:
@@ -68,14 +55,12 @@
        paths: "{{streamsets_download_location}}/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/"
        patterns: "*.rpm"
      register: rpm_result
-     #when: streamsetsinstalled.stat.exists == false
 
    - name: Install Streamsets Datacollector origins/destinations - install all RPM's
      yum:
        name: "{{ item.path }}"
        state: present
      with_items: "{{ rpm_result.files }}"
-     #when: streamsetsinstalled.stat.exists == false
 
    # Once installed, configure Streamsets for use with MapR
    - name: Configure Streamsets for use with MapR v{{mapr_version}} and MEP v{{mapr_mep_version[:1]}}
