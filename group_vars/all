@@ -29,11 +29,6 @@ mapr_gpg_url:        http://package.mapr.com/releases/pub/maprgpg.key
 
 mapr_patch_ebf_url:  http://package.mapr.com/patches/releases/v{{mapr_version}}/redhat/mapr-patch-{{mapr_version}}.{{mapr_patch_ebf_version}}.x86_64.rpm
 
-# Local MapR Repository
-mapr_repository_url_local: http://192.168.168.254:1234/package.mapr.com/releases
-mapr_release_url_local:    http://192.168.168.254:1234/package.mapr.com/releases/v{{mapr_version}}
-mapr_mep_url_local:        http://192.168.168.254:1234/package.mapr.com/releases/MEP/MEP-{{mapr_mep_version}}
-
 # Are we behind a proxy
 proxy: no
 proxy_url: 172.16.4.20
@@ -59,9 +54,6 @@ streamsets_port: 18630
 streamsets_download_location: /tmp/
 streamsets_install_location: /opt/
 streamsets_download_url: http://archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms.tgz
-
-streamsets_repo_url: empty
-streamsets_repo_url_local: http://192.168.168.254:1234/archives.streamsets.com/datacollector/{{streamsets_version}}/rpm/streamsets-datacollector-{{streamsets_version}}-el7-all-rpms/
 
 # Zeppelin
 zeppelin_version: 0.8.0
