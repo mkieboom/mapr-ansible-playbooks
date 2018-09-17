@@ -1,10 +1,16 @@
 ---
-  # Set pre-requisites for Streamsets
+  # Set pre-requisites for Docker
   - name: Install Docker
     package: name={{item}} state=present
     with_items:
       - docker
-      - docker-compose
+      - python2-pip
+  #    - docker-compose
+
+  # Install docker compose using pip
+  - name: Install docker-compose
+    pip:
+      name: docker-compose
 
   # Configure http proxy for Docker if required
   # doc: https://docs.docker.com/engine/admin/systemd/#httphttps-proxy
