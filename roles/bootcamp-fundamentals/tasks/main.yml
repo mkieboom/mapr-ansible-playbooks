@@ -46,7 +46,7 @@
 
   - name: Launch the data-science-refinery container
     docker_container:
-      image: maprtech/data-science-refinery
+      image: maprtech/data-science-refinery:v1.1_6.0.0_4.1.0_centos7
       name: data-science-refinery
       restart_policy: always
       state: started

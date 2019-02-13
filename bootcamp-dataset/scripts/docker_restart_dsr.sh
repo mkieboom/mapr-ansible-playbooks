@@ -35,4 +35,4 @@ docker run -it \
 -e MAPR_MOUNT_PATH=/mapr \
 -p 9995:9995 \
 -p 10000-10010:10000-10010 \
-maprtech/data-science-refinery &
+maprtech/data-science-refinery:v1.1_6.0.0_4.1.0_centos7 &
